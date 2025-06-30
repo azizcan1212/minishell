@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
+#include <stdio.h>
+#include <unistd.h>
 
 int is_meta(const char *s, int *len)
 
@@ -28,72 +29,6 @@ int is_meta(const char *s, int *len)
     return 0;
 }
 
-char	*ft_strcpy(char *dst, const char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
-}
-char *strjoin_free(char *s1, const char *s2)
-{
-    char *result;
-    size_t len1;
-    size_t len2;
-
-    if (!s1 && !s2)
-        return NULL;
-    if (!s1)
-        return ft_strdup(s2);
-    if (!s2)
-        return s1;
-
-    len1 = ft_strlen(s1);
-    len2 = ft_strlen(s2);
-    result = malloc(len1 + len2 + 1);
-    if (!result)
-        return NULL;
-
-    ft_strcpy(result, s1);
-    ft_strcpy(result + len1, s2);
-    free(s1);
-    return result;
-}
-
-char *close_single_quote(char *result, int *len)
-{
-    char *line ;
-    int i ;
-    char *part;
-    char *joined;
-
-    i = 0;
-    line = readline("> "); // yeni satırdan devam et
-    if (!line)
-        return result;
-    while (line[i] && line[i] != '\'')
-        i++;
-    part = ft_substr(line, 0, i);
-    joined = strjoin_free(result, "\n"); // yeni satıra geçildiği için \n ekle
-    result = strjoin_free(joined, part);
-    free(part);
-    if (line[i] == '\'') // kapanma oldu
-    {
-        free(line);
-        *len += i + 1; // tırnağı da atla
-        return result;
-    }
-    free(line);
-    *len += i;
-    return close_single_quote(result, len); // recursive
-}
-
 char *parse_single_quote(const char **s)
 {
     char *result;
@@ -109,43 +44,21 @@ char *parse_single_quote(const char **s)
         result[j++] = (*s)[i++];
     result[j] = '\0';
     if((*s)[i] != '\'') // Check for closing single quote
-        result = close_single_quote(result, &i);
+        {
+            free(result);
+            write(2, "Error: Unmatched single quote\n", 30);
+            exit(EXIT_FAILURE);
+
+        }
     *s += i + 1; // Move past the closing quote
     return result;
 
 }
 
 
-char *close_double_quote(char *result, int *len)
-{
-    char *line ;
-    int i ;
-    char *part;
-    char *joined;
-
-    i = 0;
-    line = readline("> "); // yeni satırdan devam et
-    if (!line)
-        return result;
-    while (line[i] && line[i] != '"')
-        i++;
-    part = ft_substr(line, 0, i);
-    joined = strjoin_free(result, "\n"); // yeni satıra geçildiği için \n ekle
-    result = strjoin_free(joined, part);
-    free(part);
-    if (line[i] == '"') // kapanma oldu
-    {
-        free(line);
-        *len += i + 1; // tırnağı da atla
-        return result;
-    }
-    free(line);
-    *len += i;
-    return close_double_quote(result, len); // recursive
-}
 
 
-char *parse_double_quote_one_line(const char **s)
+char *parse_double_quote(const char **s)
 {
     char *result;
     int i;
@@ -161,7 +74,11 @@ char *parse_double_quote_one_line(const char **s)
         result[j++] = (*s)[i++];
     result[j] = '\0';
     if((*s)[i] != '"') 
-        result = close_double_quote(result, &i);
+    {
+        free(result);
+        write(2, "Error: Unmatched double quote\n", 31);
+        exit(EXIT_FAILURE);
+    }
 
     *s += i + 1; // Move past the closing quote
     return result;
@@ -222,7 +139,7 @@ t_token *tokenize(const char *input)
             if (*p == '\'')
                 val = parse_single_quote(&p);
             else if (*p == '"')
-                val = parse_double_quote_one_line(&p);
+                val = parse_double_quote(&p);
             else
                 val = parse_word(&p); // Meta karakterleri de işler
             if (val)
