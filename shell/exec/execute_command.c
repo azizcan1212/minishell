@@ -17,7 +17,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 
-int	execute_command(t_command *cmd, char **envp)
+int	execute_command(t_command *cmd, char **envp,t_shell_val *val)
 {
 	pid_t	pid;
 	int		status;
@@ -36,7 +36,13 @@ int	execute_command(t_command *cmd, char **envp)
 		_exit(127);
 	}
 	waitpid(pid, &status, 0);
-	return (WEXITSTATUS(status));
+	if (WIFEXITED(status))
+    	val->last_exit_status = WEXITSTATUS(status);
+    else if (WIFSIGNALED(status))
+        val->last_exit_status = 128 + WTERMSIG(status);
+    else
+        val->last_exit_status = 1;
+    return val->last_exit_status;
 }
 
 int	redirect_input(const char *file)

@@ -10,8 +10,14 @@ HEADERS = minishell.h
 SRCS = \
 	parse/parse.c \
 	parse/shell.c \
+	parse/parse_helper.c \
+	parse/parse_to_command.c \
+	parse/expansion.c \
 	utils/utils.c \
-	utils/token.c
+	utils/free.c \
+	utils/token.c \
+	exec/execute_command.c \
+	
 
 OBJS = $(SRCS:.c=.o)
 
