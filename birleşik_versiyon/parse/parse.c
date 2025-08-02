@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:01 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/02 12:07:14 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/02 15:52:06 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,13 @@ char *parse_single_quote(const char **s)
         result[j++] = (*s)[i++];
     result[j] = '\0';
     if((*s)[i] != '\'') // Check for closing single quote
-        {
-            free(result);
-            write(2, "Error: Unmatched single quote\n", 30);
-            exit(EXIT_FAILURE);
-
-        }
+    {
+        free(result);
+        write(2, "Error: Unmatched single quote\n", 30);
+        return NULL; // Hata durumunda NULL dön
+    }
     *s += i + 1; // Move past the closing quote
     return result;
-
 }
 
 

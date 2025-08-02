@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:47 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/02 13:07:23 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/02 18:55:58 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,135 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 
-int execute_command(t_command *cmd, char **envp, t_shell_val *val)
+static void	close_pipes(int *pipes, int count)
 {
-	int n = 0, i, s = 0; t_command *t = cmd;
-	while (t) { n++; t = t->next; }
-	int p[2 * (n - 1)]; pid_t ids[n];
-	for (i = 0; i < n - 1; i++) pipe(p + i * 2);
-	t = cmd;
-	for (i = 0; i < n; i++) {
-		ids[i] = fork();
-		if (!ids[i]) {
-			if (i > 0) dup2(p[(i - 1) * 2], 0);
-			if (i < n - 1) dup2(p[i * 2 + 1], 1);
-			for (int j = 0; j < 2 * (n - 1); j++) close(p[j]);
-			if (t->input_file && redirect_input(t->input_file) < 0) exit(1);
-			if (t->output_file && redirect_output(t->output_file, t->append) < 0) exit(1);
-			if (t->heredoc_delim && setup_heredoc(t->heredoc_delim) < 0) exit(1);
-			char *f = find_command_path(t->cmd, envp);
-			if (f) { execve(f, t->args, envp); free(f); }
-			write(2, "minishell: command not found\n", 29); exit(127);
-		}
-		t = t->next;
+	int i;
+
+	i = 0;
+	while (i < count)
+	{
+		close(pipes[i]);
+		i++;
 	}
-	for (i = 0; i < 2 * (n - 1); i++) close(p[i]);
-	for (i = 0; i < n; i++) waitpid(ids[i], &s, 0);
-	val->last_exit_status = WIFEXITED(s) ? WEXITSTATUS(s) : 128 + WTERMSIG(s);
-	return 0;
+}
+
+static void	setup_child_io(int i, int n, int *pipes)
+{
+	if (i > 0)
+		dup2(pipes[(i - 1) * 2], 0);
+	if (i < n - 1)
+		dup2(pipes[i * 2 + 1], 1);
+}
+
+static int	get_heredoc_fd(const char *delim)
+{
+	int	fd[2];
+	char	*line;
+
+	if (pipe(fd) == -1)
+		return (-1);
+	while (1)
+	{
+		line = readline("> ");
+		if (!line || !ft_strcmp(line, delim))
+			break;
+		write(fd[1], line, ft_strlen(line));
+		write(fd[1], "\n", 1);
+		free(line);
+	}
+	free(line);
+	close(fd[1]);
+	return (fd[0]);
+}
+
+static void	exec_child(t_command *cur, char **envp)
+{
+	if (cur->heredoc_fd != -1)
+	{
+		dup2(cur->heredoc_fd, 0);
+		close(cur->heredoc_fd);
+	}
+	if (cur->input_file && redirect_input(cur->input_file) < 0)
+		exit(1);
+	if (cur->output_file && redirect_output(cur->output_file, cur->append) < 0)
+		exit(1);
+	char *f = find_command_path(cur->cmd, envp);
+	if (f)
+	{
+		execve(f, cur->args, envp);
+		free(f);
+	}
+	write(2, "minishell: command not found\n", 29);
+	exit(127);
+}
+
+static void	fork_and_exec(t_command *cmd, char **envp, int *pipes, pid_t *pids, int n)
+{
+	int i;
+	t_command *cur;
+
+	i = 0;
+	cur = cmd;
+	while (i < n)
+	{
+		pids[i] = fork();
+		if (pids[i] == 0)
+		{
+			setup_child_io(i, n, pipes);
+			close_pipes(pipes, 2 * (n - 1));
+			exec_child(cur, envp);
+		}
+		cur = cur->next;
+		i++;
+	}
+}
+
+int	execute_command(t_command *cmd, char **envp, t_shell_val *val)
+{
+	int n;
+	int i;
+	int pipes[512];
+	pid_t pids[256];
+	int status;
+	t_command *cur;
+
+	n = 0;
+	cur = cmd;
+	while (cur)
+	{
+		if (cur->heredoc_delim)
+			cur->heredoc_fd = get_heredoc_fd(cur->heredoc_delim);
+		else
+			cur->heredoc_fd = -1;
+		n++;
+		cur = cur->next;
+	}
+	i = 0;
+	while (i < n - 1)
+	{
+		pipe(pipes + i * 2);
+		i++;
+	}
+	fork_and_exec(cmd, envp, pipes, pids, n);
+	close_pipes(pipes, 2 * (n - 1));
+	i = 0;
+	while (i < n)
+	{
+		waitpid(pids[i], &status, 0);
+		i++;
+	}
+	cur = cmd;
+	while (cur)
+	{
+		if (cur->heredoc_fd != -1)
+			close(cur->heredoc_fd);
+		cur = cur->next;
+	}
+	if (WIFEXITED(status))
+		val->last_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		val->last_exit_status = 128 + WTERMSIG(status);
+	return (0);
 }
 
 int	redirect_input(const char *file)
@@ -72,28 +175,5 @@ int	redirect_output(const char *file, int append)
 		return (-1);
 	dup2(fd, 1);
 	close(fd);
-	return (0);
-}
-
-int	setup_heredoc(const char *delim)
-{
-	int		fd[2];
-	char	*line;
-
-	if (pipe(fd) == -1)
-		return (-1);
-	while (1)
-	{
-		line = readline("> ");
-		if (!line || !ft_strcmp(line, delim))
-			break;
-		write(fd[1], line, ft_strlen(line));
-		write(fd[1], "\n", 1);
-		free(line);
-	}
-	free(line);
-	close(fd[1]);
-	dup2(fd[0], 0);
-	close(fd[0]);
 	return (0);
 }

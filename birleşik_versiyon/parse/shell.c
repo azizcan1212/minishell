@@ -7,7 +7,6 @@
 #include "../minishell.h"
 #include <sys/types.h>
 
-
 volatile sig_atomic_t g_signal_num = 0;// bunu ilerde kullanabiliriz diye yazdım kullanmazsak sileriz
 
 void signal_handler(int signum) 
@@ -31,7 +30,6 @@ void manage_signal()
     signal(SIGINT,signal_handler); // ctrl + C
 }
 
-
 void print_tokens(t_token *head)
 {
     //int i = 0;
@@ -43,7 +41,6 @@ void print_tokens(t_token *head)
         head = head->next;
     }
 }
-
 
 int main(int ac, char **av, char **envp)
 {
@@ -60,7 +57,10 @@ int main(int ac, char **av, char **envp)
     {
         input = readline("minishell>> ");
         if (!input) // CTRL + D
+        {
+            printf("exit\n");
             break;
+        }
         if (*input)
             add_history(input);
         tokens = tokenize(input);     // Burada tokenize et

@@ -18,11 +18,11 @@ typedef enum e_token_type
 } t_token_type;
 typedef struct s_token
 {
-    char *value;
-    struct s_token *next;
-    struct s_token *prev;  // Yeni eklenen
-    t_token_type type;
-    int space_next_status;
+	char *value;
+	struct s_token *next;
+	struct s_token *prev;  // Yeni eklenen
+	t_token_type type;
+	int space_next_status;
 } t_token;
 
 typedef struct s_expansıon
@@ -47,6 +47,7 @@ typedef struct s_command
 	char	*output_file;
 	int		append;
 	char	*heredoc_delim;
+	int		heredoc_fd;
 	struct s_command *next;
 }   t_command;
 
