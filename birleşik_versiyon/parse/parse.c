@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:01 by muharsla          #+#    #+#             */
-/*   Updated: 2025/07/29 15:38:44 by atam             ###   ########.fr       */
+/*   Updated: 2025/08/02 12:07:14 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char *parse_double_quote(const char **s)
     {
         free(result);
         write(2, "Error: Unmatched double quote\n", 31);
-        exit(EXIT_FAILURE);
+        return NULL; // Hata durumunda NULL dön
     }
 
     *s += i + 1; // Move past the closing quote

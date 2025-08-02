@@ -31,17 +31,19 @@ void manage_signal()
     signal(SIGINT,signal_handler); // ctrl + C
 }
 
+
 void print_tokens(t_token *head)
 {
-    int i = 0;
+    //int i = 0;
     while (head)
     {
-        printf("Token[%d]: \"%s\"\n", i++, head->value);
-        printf("Type: %d\n", head->type);
-        printf("space status : %d\n",head ->space_next_status);
+        //("Token[%d]: \"%s\"\n", i++, head->value);
+        //printf("Type: %d\n", head->type);
+        //printf("space status : %d\n",head ->space_next_status);
         head = head->next;
     }
 }
+
 
 int main(int ac, char **av, char **envp)
 {

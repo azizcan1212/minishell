@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:16 by muharsla          #+#    #+#             */
-/*   Updated: 2025/07/29 13:48:27 by atam             ###   ########.fr       */
+/*   Updated: 2025/07/31 18:10:29 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,23 +101,23 @@ void	print_command_debug(t_command *cmd)
 {
 	int	i;
 
-	printf("=== Command Debug ===\n");
+	//printf("=== Command Debug ===\n");
 	while (cmd)
 	{
-		printf("Command: %s\n", cmd->cmd ? cmd->cmd : "(null)");
-		printf("Args: ");
+		//printf("Command: %s\n", cmd->cmd ? cmd->cmd : "(null)");
+		//printf("Args: ");
 		i = 0;
 		while (cmd->args && cmd->args[i])
 		{
 			printf("[%s] ", cmd->args[i]);
 			i++;
 		}
-		printf("\n");
-		printf("Input: %s\n", cmd->input_file ? cmd->input_file : "(none)");
-		printf("Output: %s\n", cmd->output_file ? cmd->output_file : "(none)");
-		printf("Append: %s\n", cmd->append ? "yes" : "no");
-		printf("Heredoc: %s\n", cmd->heredoc_delim ? cmd->heredoc_delim : "(none)");
-		printf("----\n");
+		//printf("\n");
+		//printf("Input: %s\n", cmd->input_file ? cmd->input_file : "(none)");
+		//printf("Output: %s\n", cmd->output_file ? cmd->output_file : "(none)");
+		//printf("Append: %s\n", cmd->append ? "yes" : "no");
+		//printf("Heredoc: %s\n", cmd->heredoc_delim ? cmd->heredoc_delim : "(none)");
+		//printf("----\n");
 		cmd = cmd->next;
 	}
 }
