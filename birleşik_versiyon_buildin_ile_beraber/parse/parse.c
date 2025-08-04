@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:01 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/02 15:52:06 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/04 14:39:13 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,11 +267,5 @@ void delete_dollars(t_token *token)
             cur = cur->next;
     }
 }
-
-
-
-
-
-
 
 

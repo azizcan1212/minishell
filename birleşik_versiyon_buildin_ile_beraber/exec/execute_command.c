@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:47 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/02 18:55:58 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/04 14:39:25 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	is_builtin(char *cmd)
 	if (!cmd)
 		return (0);
 	if (!ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "cd") || 
-		!ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "exit"))
+		!ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "exit") || !ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset"))
 		return (1);
 	return (0);
 }
@@ -112,6 +112,8 @@ int	execute_builtin(char *cmd, char **args)
 		return (builtin_pwd());
 	else if (!ft_strcmp(cmd, "exit"))
 		return (builtin_exit(args));
+	else if (!ft_strcmp(cmd, "unset"))
+		return (builtin_unset(args, NULL));
 	return (1);
 }
 
@@ -135,20 +137,28 @@ static void	setup_child_io(int i, int n, int *pipes)
 		dup2(pipes[i * 2 + 1], 1);
 }
 
-static int	get_heredoc_fd(const char *delim)
+static int	get_heredoc_fd(const char *delim, t_shell_val *shell_val)
 {
-	int	fd[2];
+	int		fd[2];
 	char	*line;
+	char	*expanded;
+	int		delimiter_quoted;
 
 	if (pipe(fd) == -1)
 		return (-1);
+	delimiter_quoted = is_quoted(delim);
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || !ft_strcmp(line, delim))
+		if (!line || ft_strcmp(line, delim) == 0)
 			break;
-		write(fd[1], line, ft_strlen(line));
+		if (!delimiter_quoted)
+			expanded = heredoc_expand(line, shell_val);
+		else
+			expanded = ft_strdup(line);
+		write(fd[1], expanded, ft_strlen(expanded));
 		write(fd[1], "\n", 1);
+		free(expanded);
 		free(line);
 	}
 	free(line);
@@ -218,7 +228,6 @@ int	execute_command(t_command *cmd, char **envp, t_shell_val *val)
 	int status;
 	t_command *cur;
 
-	// Handle built-ins that must run in parent process
 	if (cmd && cmd->cmd && !cmd->next)
 	{
 		if (!ft_strcmp(cmd->cmd, "cd"))
@@ -238,7 +247,7 @@ int	execute_command(t_command *cmd, char **envp, t_shell_val *val)
 	while (cur)
 	{
 		if (cur->heredoc_delim)
-			cur->heredoc_fd = get_heredoc_fd(cur->heredoc_delim);
+			cur->heredoc_fd = get_heredoc_fd(cur->heredoc_delim, val);
 		else
 			cur->heredoc_fd = -1;
 		n++;
@@ -299,5 +308,18 @@ int	redirect_output(const char *file, int append)
 		return (-1);
 	dup2(fd, 1);
 	close(fd);
+	return (0);
+}
+
+int	is_quoted(const char *str)
+{
+	size_t	len;
+
+	if (!str)
+		return (0);
+	len = ft_strlen(str);
+	if ((str[0] == '\'' && str[len - 1] == '\'') ||
+		(str[0] == '"' && str[len - 1] == '"'))
+		return (1);
 	return (0);
 }

@@ -18,6 +18,8 @@ SRCS = \
 	utils/token.c \
 	utils/find_command_path.c \
 	exec/execute_command.c \
+	builtin/export.c \
+	builtin/unset.c \
 	
 
 OBJS = $(SRCS:.c=.o)

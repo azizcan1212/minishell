@@ -168,6 +168,57 @@ void parse_one_dollar(t_token *token,t_shell_val *val)
 	}
 }
 
+char	*heredoc_expand(const char *line, t_shell_val *val)
+{
+	int		i;
+	int		j;
+	char	*result;
+	int		skip;
+
+	result = malloc(4096);
+	if (!result)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (line[i] == '$')
+		{
+			i++;
+			skip = handle_dollar(line + i, result, &j, val);
+			i += skip;
+		}
+		else
+			result[j++] = line[i++];
+	}
+	result[j] = '\0';
+	return (result);
+}
+
+int	handle_dollar(const char *line, char *result, int *j, t_shell_val *val)
+{
+	int		k;
+	char	key[128];
+	char	*valstr;
+
+	k = 0;
+	while (line[k] && (ft_isalnum(line[k]) || line[k] == '_'))
+	{
+		key[k] = line[k];
+		k++;
+	}	
+
+	key[k] = '\0';
+	valstr = dollar_value(key, val);
+	if (valstr)
+	{
+		k = 0;
+		while (valstr[k])
+			result[(*j)++] = valstr[k++];
+	}
+	return (ft_strlen(key));
+}
+
 
 
 

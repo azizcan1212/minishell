@@ -7,8 +7,6 @@
 #include <signal.h>
 
 
-
-
 typedef enum e_token_type
 {
 	WORD,
@@ -16,11 +14,12 @@ typedef enum e_token_type
 	DOUBLE_QUOTE,
 	META,
 } t_token_type;
+
 typedef struct s_token
 {
 	char *value;
 	struct s_token *next;
-	struct s_token *prev;  // Yeni eklenen
+	struct s_token *prev;
 	t_token_type type;
 	int space_next_status;
 } t_token;
@@ -52,13 +51,16 @@ typedef struct s_command
 }   t_command;
 
 
+
+int			handle_dollar(const char *line, char *result, int *j, t_shell_val *val);
+int			is_quoted(const char *str);
+char		*heredoc_expand(const char *line, t_shell_val *val);
 t_command	*parse_tokens_to_commands(t_token *tokens);
 t_command	*new_command(void);
 void		free_commands(t_command *cmd);
 void		free_args(char **args);
 int			redirect_input(const char *file);
 int			redirect_output(const char *file, int append);
-int			setup_heredoc(const char *delimiter);
 int			execute_command(t_command *cmd, char **envp,t_shell_val *val);
 int			token_is_pipe(t_token *tk);
 void		handle_redirection(t_token **tk, t_command *cmd);
@@ -67,7 +69,6 @@ void		process_one_token(t_token **tokens, t_command **cur, t_command **head, int
 char		*ft_strndup(const char *s, unsigned int n);
 int			ft_isspace(char c);
 t_token		*new_token(char *val);
-void		add_token_back(t_token **head, t_token *new);
 void 		free_tokens(t_token *head);
 t_token		*tokenize(const char *input);
 char 		*parse_word(const char **s);
@@ -81,7 +82,7 @@ void		add_token_with_type(t_token **list, char *value, const char *i,const char 
 void		token_type(const char *index, t_token *token);
 char 	*	ft_strdup_dollar(const char *s);
 unsigned int	ft_strlen_dollar(const char *s);
-void		parse_dollar(t_token *token);
+
 void		set_environment(t_token *token, t_expansıon **expansion,int a);
 void        parse_one_dollar(t_token *token,t_shell_val *val);
 char 		*dollar_value(char *key,t_shell_val *val);
@@ -89,8 +90,7 @@ t_shell_val	*new_shell_val();
 void		set_env(t_token *new_token, t_expansıon **expansion,int *i);
 void 		free_expansion(t_expansıon *head);
 t_token 	*merge_token(t_token *head);
-t_token 	*merge_equal(t_token *head);
-t_token 	*merge_before_equal(t_token *equal_token);
+
 int 		control_equal(t_token *head);
 void		free_split(char **arr);
 char		*find_path_env(char **envp);
@@ -105,7 +105,7 @@ int			builtin_pwd(void);
 int			builtin_exit(char **args);
 int			is_builtin(char *cmd);
 int			execute_builtin(char *cmd, char **args);
-int			main();
-
+int			builtin_export(char **args, t_expansıon **env);
+int			builtin_unset(char **args, t_expansıon **env);
 #endif
 
