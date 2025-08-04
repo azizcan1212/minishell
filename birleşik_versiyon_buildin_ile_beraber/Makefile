@@ -20,6 +20,7 @@ SRCS = \
 	exec/execute_command.c \
 	builtin/export.c \
 	builtin/unset.c \
+	builtin/env.c \
 	
 
 OBJS = $(SRCS:.c=.o)

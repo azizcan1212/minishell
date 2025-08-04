@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:47 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/04 14:39:25 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/04 16:43:19 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,14 @@ int	is_builtin(char *cmd)
 	if (!cmd)
 		return (0);
 	if (!ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "cd") || 
-		!ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "exit") || !ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset"))
+		!ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "exit") ||
+		!ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset") ||
+		!ft_strcmp(cmd, "env"))
 		return (1);
 	return (0);
 }
 
-int	execute_builtin(char *cmd, char **args)
+int	execute_builtin(char *cmd, char **args, char **envp)
 {
 	if (!ft_strcmp(cmd, "echo"))
 		return (builtin_echo(args));
@@ -114,6 +116,11 @@ int	execute_builtin(char *cmd, char **args)
 		return (builtin_exit(args));
 	else if (!ft_strcmp(cmd, "unset"))
 		return (builtin_unset(args, NULL));
+	else if (!ft_strcmp(cmd, "export"))
+		return (builtin_export(args, NULL));
+	else if (!ft_strcmp(cmd, "env"))
+		return (builtin_env(envp));
+	write(2, "minishell: command not found\n", 29);
 	return (1);
 }
 
@@ -179,15 +186,11 @@ static void	exec_child(t_command *cur, char **envp)
 		exit(1);
 	if (cur->output_file && redirect_output(cur->output_file, cur->append) < 0)
 		exit(1);
-	
-	// Check for built-in commands
 	if (is_builtin(cur->cmd))
 	{
-		exit_code = execute_builtin(cur->cmd, cur->args);
+		exit_code = execute_builtin(cur->cmd, cur->args, envp);
 		exit(exit_code);
 	}
-	
-	// External commands
 	char *f = find_command_path(cur->cmd, envp);
 	if (f)
 	{

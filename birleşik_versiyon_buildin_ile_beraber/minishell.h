@@ -51,7 +51,8 @@ typedef struct s_command
 }   t_command;
 
 
-
+int			builtin_exit(char **args);
+int			builtin_env(char **envp);
 int			handle_dollar(const char *line, char *result, int *j, t_shell_val *val);
 int			is_quoted(const char *str);
 char		*heredoc_expand(const char *line, t_shell_val *val);
@@ -104,7 +105,7 @@ int			builtin_cd(char **args);
 int			builtin_pwd(void);
 int			builtin_exit(char **args);
 int			is_builtin(char *cmd);
-int			execute_builtin(char *cmd, char **args);
+int			execute_builtin(char *cmd, char **args, char **envp);
 int			builtin_export(char **args, t_expansıon **env);
 int			builtin_unset(char **args, t_expansıon **env);
 #endif

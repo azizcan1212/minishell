@@ -219,6 +219,3 @@ int	handle_dollar(const char *line, char *result, int *j, t_shell_val *val)
 	return (ft_strlen(key));
 }
 
-
-
-
