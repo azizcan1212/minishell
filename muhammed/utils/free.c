@@ -1,0 +1,39 @@
+#include "minishell.h"
+#include <stdlib.h>
+
+void	free_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	if (!args)
+		return ;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
+
+void	free_commands(t_command *cmd)
+{
+	t_command	*tmp;
+
+	while (cmd)
+	{
+		tmp = cmd->next;
+		if (cmd->cmd)
+			free(cmd->cmd);
+		free_args(cmd->args);
+		if (cmd->input_file)
+			free(cmd->input_file);
+		if (cmd->output_file)
+			free(cmd->output_file);
+		if (cmd->heredoc_delim)
+			free(cmd->heredoc_delim);
+		free(cmd);
+		cmd = tmp;
+	}
+}
