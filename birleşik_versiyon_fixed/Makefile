@@ -8,16 +8,26 @@ LIBFT = $(LIBFT_DIR)/libft.a
 HEADERS = minishell.h
 
 SRCS = \
-	main.c \
 	parse/parse.c \
+	parse/shell.c \
 	parse/parse_helper.c \
 	parse/parse_to_command.c \
+	parse/expansion.c \
+	parse/token.c \
 	utils/utils.c \
 	utils/free.c \
 	utils/token.c \
+	utils/parse_helper.c \
+	utils/main_func.c \
+	utils/main_func_two.c \
+	utils/utils_expansion.c \
 	utils/find_command_path.c \
 	exec/execute_command.c \
-
+	exec/buildin.c \
+	exec/export.c \
+	exec/env.c \
+	exec/unset.c \
+	
 
 OBJS = $(SRCS:.c=.o)
 

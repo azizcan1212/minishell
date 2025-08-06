@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 17:23:34 by atam              #+#    #+#             */
-/*   Updated: 2024/11/06 15:28:19 by atam             ###   ########.fr       */
+/*   Created: 2025/07/29 14:00:00 by atam              #+#    #+#             */
+/*   Updated: 2025/07/29 13:58:06 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	char	*str;
-	int		len;
+	int	i;
 
-	len = ft_strlen(s1);
-	str = (char *)malloc(len +1);
-	if (str == NULL)
+	i = 0;
+	while (src[i])
 	{
-		return (NULL);
+		dst[i] = src[i];
+		i++;
 	}
-	ft_strlcpy(str, s1, len + 1);
-	return (str);
+	dst[i] = '\0';
+	return (dst);
 }

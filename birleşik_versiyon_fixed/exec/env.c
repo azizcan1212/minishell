@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/20 17:22:07 by atam              #+#    #+#             */
-/*   Updated: 2024/11/06 15:24:57 by atam             ###   ########.fr       */
+/*   Created: 2025/08/04 15:57:23 by muharsla          #+#    #+#             */
+/*   Updated: 2025/08/04 16:34:04 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_bzero(void *s, size_t n)
+int	builtin_env(char **envp)
 {
-	ft_memset(s, '\0', n);
+	int		i;
+
+	i = 0;
+	while (envp[i])
+	{
+		printf("%s\n", envp[i]);
+		i++;
+	}
+	return (0);
 }

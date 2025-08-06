@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:51 by muharsla          #+#    #+#             */
-/*   Updated: 2025/07/11 16:43:52 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/02 16:32:40 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	process_one_token(
 		*cur = (*cur)->next;
 		*argc = 0;
 	}
-	else if ((*tokens)->value[0] == '<' || (*tokens)->value[0] == '>')
+	else if (((*tokens)->value[0] == '<' || (*tokens)->value[0] == '>') && (*tokens)->type == META)
 		handle_redirection(tokens, *cur);
 	else
 		handle_normal_token(*tokens, *cur, argc);

@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 13:27:44 by muharsla          #+#    #+#             */
-/*   Updated: 2025/07/23 13:27:56 by muharsla         ###   ########.fr       */
+/*   Created: 2024/10/20 17:22:07 by atam              #+#    #+#             */
+/*   Updated: 2025/08/02 16:33:05 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dst, const char *src)
-{
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	while (src && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
+void	ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, '\0', n);
 }

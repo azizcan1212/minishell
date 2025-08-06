@@ -35,12 +35,12 @@ SRCS =	ft_atoi.c \
 		ft_strmapi.c \
 		ft_strncmp.c \
 		ft_strcmp.c \
+		ft_strcpy.c \
 		ft_strnstr.c \
 		ft_strrchr.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
-		ft_strcpy.c \
 		ft_toupper.c
 OBJS=$(SRCS:.c=.o)
 

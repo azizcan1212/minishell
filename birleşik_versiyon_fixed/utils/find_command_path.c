@@ -40,7 +40,12 @@ char	*find_command_path(const char *cmd, char **envp)
 	if (!cmd || !*cmd)
 		return (NULL);
 	if (ft_strchr(cmd, '/'))
-		return (access(cmd, X_OK) == 0 ? ft_strdup(cmd) : NULL);
+	{
+		// Dosya var mı kontrol et (executable olması şart değil)
+		if (access(cmd, F_OK) == 0)
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
 	paths = find_path_env(envp);
 	if (!paths)
 		return (NULL);

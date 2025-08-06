@@ -38,13 +38,30 @@ void	free_commands(t_command *cmd)
 	}
 }
 
-void	free_split(char **arr)
-{
-	int	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+void free_tokens(t_token *head) {
+	t_token *tmp;
+
+	while (head) {
+		tmp = head;
+		head = head->next;
+		if (tmp->value)
+			free(tmp->value);
+		free(tmp);
+	}
 }
 
+void free_expansion(t_expansıon *head) {
+	t_expansıon *tmp;
+
+	while (head) {
+		tmp = head;
+		head = head->next;
+		if (tmp->value)
+			free(tmp->value);
+		if (tmp->key)
+			free(tmp->key);
+		if(tmp)
+			free(tmp);
+		tmp = NULL;
+	}
+}

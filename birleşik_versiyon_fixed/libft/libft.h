@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 01:36:12 by atam              #+#    #+#             */
-/*   Updated: 2025/07/23 13:28:29 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/02 16:34:29 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		ft_tolower(int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_atoi(const char *str);
+int		ft_strcmp(const char *s1, const char *s2);
 
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
@@ -46,10 +47,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int     ft_strcmp(const char *s1, const char *s2);
+char	*ft_strcpy(char *dst, const char *src);
 char	*ft_itoa(int n);
 char	**ft_split(char const *word, char c);
-char	*ft_strcpy(char *dst, const char *src);
 
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dest, const char *src, size_t n);
