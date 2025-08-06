@@ -51,7 +51,7 @@ int  set_environment(t_token *token, t_expansıon **expansion, t_equal_status eq
 
 
 
-static char *get_new_value(char *value, int i,t_shell_val *val)
+char *get_new_value(char *value, int i,t_shell_val *val)
 {
 	char *new_value;
 	char *ex;

@@ -40,23 +40,80 @@ static void	setup_child_io(int i, int n, int *pipes)
 		dup2(pipes[i * 2 + 1], 1);
 }
 
-static int	get_heredoc_fd(const char *delim)
+static char	*expand_heredoc_line(char *line, t_shell_val *val)
 {
-	int	fd[2];
-	char	*line;
+	char	*expanded_line;
+	int		i;
 
-	if (pipe(fd) == -1)
-		return (-1);
+	if (!line)
+		return (NULL);
+	expanded_line = ft_strdup(line);
+	i = 0;
+	while (expanded_line[i])
+	{
+		if (expanded_line[i] == '$' && is_valid_var_start(&expanded_line[i]))
+		{
+			expanded_line = get_new_value(expanded_line, i, val);
+			i = 0;
+		}
+		else
+			i++;
+	}
+	return (expanded_line);
+}
+static int	should_stop_heredoc(char *line, const char *delim, int line_number)
+{
+	if (!line || !ft_strcmp(line, delim))
+	{
+		if (!line)
+			printf("minishell: warning: here-document at line %d "
+				"delimited by end-of-file (wanted `%s')\n", 
+				line_number, delim);
+		return (1);
+	}
+	return (0);
+}
+
+static void	process_heredoc_line(char *line, int write_fd, t_shell_val *val)
+{
+	char	*expanded_line;
+
+	expanded_line = expand_heredoc_line(line, val);
+	if (expanded_line)
+	{
+		write(write_fd, expanded_line, ft_strlen(expanded_line));
+		free(expanded_line);
+	}
+	write(write_fd, "\n", 1);
+}
+
+static void	read_heredoc_lines(int write_fd, const char *delim, t_shell_val *val)
+{
+	char	*line;
+	int		line_number;
+
+	line_number = 1;
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || !ft_strcmp(line, delim))
+		if (should_stop_heredoc(line, delim, line_number))
+		{
+			free(line);
 			break;
-		write(fd[1], line, ft_strlen(line));
-		write(fd[1], "\n", 1);
+		}
+		process_heredoc_line(line, write_fd, val);
 		free(line);
+		line_number++;
 	}
-	free(line);
+}
+
+static int	get_heredoc_fd(const char *delim, t_shell_val *val)
+{
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+		return (-1);
+	read_heredoc_lines(fd[1], delim, val);
 	close(fd[1]);
 	return (fd[0]);
 }
@@ -159,7 +216,7 @@ int	execute_command(t_command *cmd, char **envp, t_shell_val *val)
 	while (cur)
 	{
 		if (cur->heredoc_delim)
-			cur->heredoc_fd = get_heredoc_fd(cur->heredoc_delim);
+			cur->heredoc_fd = get_heredoc_fd(cur->heredoc_delim, val);
 		else
 			cur->heredoc_fd = -1;
 		n++;

@@ -139,6 +139,7 @@ int 		process_commands(t_shell_state *state);
 int			builtin_env(char **envp);
 int			builtin_export(char **args, t_expansıon **env);
 int			builtin_unset(char **args, t_expansıon **env);
+char 		*get_new_value(char *value, int i, t_shell_val *val);
 int			main();
 
 #endif
