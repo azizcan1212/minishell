@@ -107,7 +107,7 @@ int	handle_builtin_commands(t_command *cmd, t_shell_val *val,char **envp)
 		}
 		if (!ft_strcmp(cmd->cmd, "export"))
 		{
-			val->last_exit_status = builtin_export(cmd->args, NULL);
+			val->last_exit_status = builtin_export(envp);
 			return (val->last_exit_status);
 		}
 		if (!ft_strcmp(cmd->cmd, "unset"))
