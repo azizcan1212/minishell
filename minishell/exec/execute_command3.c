@@ -6,12 +6,13 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 15:18:12 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/07 15:50:10 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:00:34 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+#include "gc.h"
 
 void	close_pipes(int *pipes, int count)
 {
@@ -20,28 +21,45 @@ void	close_pipes(int *pipes, int count)
 	i = 0;
 	while (i < count)
 	{
-		close(pipes[i]);
+		if (pipes[i] >= 0)
+			close(pipes[i]);
 		i++;
 	}
 }
 
 void	setup_child_io(int i, int n, int *pipes)
 {
+	int	rfd;
+	int	wfd;
+
+	rfd = -1;
+	wfd = -1;
 	if (i > 0)
-		dup2(pipes[(i - 1) * 2], 0);
+	{
+		rfd = pipes[2 * (i - 1)];
+		if (dup2(rfd, STDIN_FILENO) == -1)
+			_exit(1);
+	}
 	if (i < n - 1)
-		dup2(pipes[i * 2 + 1], 1);
+	{
+		wfd = pipes[2 * i + 1];
+		if (dup2(wfd, STDOUT_FILENO) == -1)
+			_exit(1);
+	}
 }
 
-static char	*expand_heredoc_line(char *line, t_shell_val *val)
+static char	*expand_heredoc_line(char *line,
+	t_shell_val *val, int expandable_fd)
 {
 	char	*expanded_line;
 	int		i;
 
 	if (!line)
 		return (NULL);
-	expanded_line = ft_strdup(line);
+	expanded_line = gc_strdup(line);
 	i = 0;
+	if (expandable_fd == 1)
+		return (expanded_line);
 	while (expanded_line[i])
 	{
 		if (expanded_line[i] == '$' && is_valid_var_start(&expanded_line[i]))
@@ -68,15 +86,15 @@ int	should_stop_heredoc(char *line, const char *delim, int line_number)
 	return (0);
 }
 
-void	process_heredoc_line(char *line, int write_fd, t_shell_val *val)
+void	process_heredoc_line(char *line,
+	int write_fd, t_shell_val *val, int expandable_fd)
 {
 	char	*expanded_line;
 
-	expanded_line = expand_heredoc_line(line, val);
+	expanded_line = expand_heredoc_line(line, val, expandable_fd);
 	if (expanded_line)
 	{
 		write(write_fd, expanded_line, ft_strlen(expanded_line));
-		free(expanded_line);
 	}
 	write(write_fd, "\n", 1);
 }

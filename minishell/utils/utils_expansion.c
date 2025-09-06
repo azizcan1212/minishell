@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_expansion.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: expansion_utils                             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/30 00:00:00 by gc                #+#    #+#             */
+/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "libft/libft.h"
+#include "gc.h"
 
 t_shell_val	*new_shell_val(void)
 {
 	t_shell_val	*shell_val;
 
-	shell_val = malloc(sizeof(t_shell_val));
+	shell_val = gc_malloc(sizeof(t_shell_val));
 	if (!shell_val)
 		return (NULL);
 	shell_val->last_exit_status = 0;
@@ -17,13 +30,14 @@ t_expansion	*new_expansion(char *value, char *key)
 {
 	t_expansion	*expansion;
 
-	expansion = malloc(sizeof(t_expansion));
+	expansion = gc_malloc(sizeof(t_expansion));
 	if (!expansion)
 		return (NULL);
 	expansion->value = value;
 	expansion->key = key;
 	expansion->next = NULL;
-	expansion -> export = 0; // Initialize export status
+	expansion->export = 0;
+	expansion->up = 0;
 	return (expansion);
 }
 
@@ -51,19 +65,4 @@ int	is_valid_var_start(char *s)
 	if (ft_isspace(s[0]))
 		return (0);
 	return (1);
-}
-
-void	free_split(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
 }

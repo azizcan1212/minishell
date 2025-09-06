@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:13 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/07 17:19:20 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "../libft/libft.h"
+#include "gc.h"
 
 t_token	*new_token(char *val)
 {
 	t_token	*tok;
 
-	tok = malloc(sizeof(t_token));
+	tok = gc_malloc(sizeof(t_token));
 	if (!tok)
 		return (NULL);
 	tok->value = val;
@@ -26,6 +27,7 @@ t_token	*new_token(char *val)
 	tok->type = WORD;
 	tok->equal_status = NO_EQUAL;
 	tok->space_next_status = 0;
+	tok->expandable_fd = 0;
 	return (tok);
 }
 
@@ -52,9 +54,15 @@ void	token_type(const char *index, t_token *token)
 
 	len = 0;
 	if (index[0] == '\'')
+	{
 		token->type = SINGLE_QUOTE;
+		token->expandable_fd = 1;
+	}
 	else if (index[0] == '\"')
+	{
 		token->type = DOUBLE_QUOTE;
+		token->expandable_fd = 1;
+	}
 	else if (is_meta(index, &len))
 		token->type = META;
 	else
@@ -94,3 +102,4 @@ int	check_tokens_is_null(t_token *token)
 	}
 	return (1);
 }
+

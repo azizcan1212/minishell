@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_func_two.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: main_func_two                               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/30 00:00:00 by gc                #+#    #+#             */
+/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "libft/libft.h"
+#include "gc.h"
 #include <stdio.h>
 
 static t_token	*find_invalid_token(t_token *head)
@@ -20,7 +33,6 @@ t_token	*remove_tokens_before_invalid(t_token *head)
 {
 	t_token		*cur;
 	t_token		*invalid_token;
-	t_token		*temp;
 
 	invalid_token = find_invalid_token(head);
 	if (!invalid_token)
@@ -28,15 +40,36 @@ t_token	*remove_tokens_before_invalid(t_token *head)
 	cur = head;
 	while (cur && cur != invalid_token)
 	{
-		temp = cur;
 		cur = cur->next;
-		if (temp->value)
-			free(temp->value);
-		free(temp);
+		/* With GC, no need to manually free tokens */
 	}
 	if (invalid_token)
 		invalid_token->prev = NULL;
 	return (invalid_token);
+}
+
+t_token *remove_empty_tokens(t_token *head)
+{
+    t_token *current = head;
+    t_token *prev = NULL;
+    while (current)
+    {
+        if ((!current->value && current->type == WORD) || (ft_strlen(current->value) == 0 && current->type == WORD))
+        {
+            if (prev)
+                prev->next = current->next;
+            else
+                head = current->next;
+            current = current->next;
+            /* With GC, no need to manually free token and its value */
+        }
+        else
+        {
+            prev = current;
+            current = current->next;
+        }
+    }
+    return head;
 }
 
 int	is_export_command(t_token *head)
@@ -51,16 +84,14 @@ int	process_commands(t_shell_state *state)
 	expand_dollar(state->tokens, state->val);
 	state->token_check = check_tokens_is_null(state->tokens);
 	delete_dollars(state->tokens);
+	remove_empty_tokens(state->tokens);
 	state->tokens = merge_token(state->tokens);
-	
-	// Export komutu ise invalid token'ları kaldırma
+
 	if (state->equal_status == INVALID && !is_export_command(state->tokens))
 		state->tokens = remove_tokens_before_invalid(state->tokens);
 		
 	state->cmds = parse_tokens_to_commands(state->tokens);
 
-	//printf("Commands after parsing:\n");
-	print_tokens(state->tokens);
 	if (!state->cmds)
 	{
 		cleanup_memory(state->tokens, state->val, state->input);
@@ -88,6 +119,9 @@ void	handle_execution(t_shell_state *state, char **envp)
 
 void	cleanup_state(t_shell_state *state)
 {
-	free_commands(state->cmds);
-	cleanup_memory(state->tokens, state->val, state->input);
+	/*
+	 * With GC, individual cleanup is not needed
+	 * All will be cleaned up by gc_cleanup() at program end
+	 */
+	(void)state;
 }

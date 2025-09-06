@@ -6,19 +6,31 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:13:03 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/27 15:22:43 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/06 16:47:57 by muharsla         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/19 18:13:03 by muharsla          #+#    #+#             */
+/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+#include "gc.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
 
 static void	exp_append(t_expansion **head, t_expansion *node);
-static void env_bootstrap_once(t_shell_val *val, char **envp);
-
+static void	env_bootstrap_once(t_shell_val *val, char **envp);
 
 static int	print_env_from_exp(t_expansion *exp)
 {
@@ -138,7 +150,7 @@ int	exec_builtin_single(t_command *cmd, t_shell_val *val, char **envp)
 	else if (!ft_strcmp(cmd->cmd, "env"))
 		st = bi_env_single(cmd, val, envp);
 	else if (!ft_strcmp(cmd->cmd, "export"))
-		st = builtin_export(cmd->args, (val->expansion));
+		st = builtin_export(cmd->args, &(val->expansion), envp);
 	else if (!ft_strcmp(cmd->cmd, "unset"))
 		st = builtin_unset(cmd->args, &(val->expansion));
 	else
@@ -155,7 +167,7 @@ int	bi_env_single(t_command *cmd, t_shell_val *val, char **envp)
 		return (1);
 	}
 	env_bootstrap_once(val, envp);
-	return (print_env_from_exp(val->expansion)); /* key && value bas */
+	return (print_env_from_exp(val->expansion));
 }
 
 int	is_valid_identifier(const char *s)
@@ -205,7 +217,7 @@ static void	env_bootstrap_once(t_shell_val *val, char **envp)
 	i = 0;
 	while ((s = envp[i++]))
 	{
-		e = (t_expansion *)malloc(sizeof(*e));
+		e = (t_expansion *)gc_malloc(sizeof(*e));
 		if (!e)
 			return ;
 		e->key = NULL;
@@ -215,11 +227,11 @@ static void	env_bootstrap_once(t_shell_val *val, char **envp)
 		eq = ft_strchr(s, '=');
 		if (eq)
 		{
-			e->key = ft_substr(s, 0, eq - s);
-			e->value = ft_strdup(eq + 1);
+			e->key = gc_substr(s, 0, eq - s);
+			e->value = gc_strdup(eq + 1);
 		}
 		else
-			e->key = ft_strdup(s);
+			e->key = gc_strdup(s);
 		exp_append(&val->expansion, e);
 	}
 }

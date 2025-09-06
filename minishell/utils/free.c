@@ -51,6 +51,7 @@ void	free_tokens(t_token *head)
 	}
 }
 
+
 void	free_expansion(t_expansion *head)
 {
 	t_expansion	*tmp;

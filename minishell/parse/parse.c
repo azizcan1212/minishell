@@ -6,12 +6,13 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:01 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/07 16:48:37 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:09:42 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "minishell.h"
+#include "gc.h"
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -51,10 +52,7 @@ t_token	*tokenize(const char *input)
 			index = p;
 			val = value(&p);
 			if (!val)
-			{
-				free_tokens(list);
 				return (NULL);
-			}
 			add_token_with_type(&list, val, index, p);
 		}
 	}
@@ -74,9 +72,12 @@ static void	merge_current_with_next(t_token *current)
 	char		*merged_value;
 
 	next_token = current->next;
-	merged_value = ft_strjoin(current->value, next_token->value);
+	merged_value = gc_strjoin(current->value, next_token->value);
+	if (current->type == SINGLE_QUOTE || next_token->type == SINGLE_QUOTE)
+		current->expandable_fd = 1;
+	else if (current->type == DOUBLE_QUOTE || next_token->type == DOUBLE_QUOTE)
+		current->expandable_fd = 1;
 	current->type = WORD;
-	free(current->value);
 	current->value = merged_value;
 	current->space_next_status = next_token->space_next_status;
 	if (current->equal_status == INVALID || next_token->equal_status == INVALID)
@@ -86,8 +87,6 @@ static void	merge_current_with_next(t_token *current)
 	current->next = next_token->next;
 	if (next_token->next)
 		next_token->next->prev = current;
-	free(next_token->value);
-	free(next_token);
 }
 
 t_token	*merge_token(t_token *head)

@@ -6,12 +6,13 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:00:00 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/20 16:16:28 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/06 16:41:20 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+#include "gc.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -53,9 +54,6 @@ static void	remove_key(t_expansion **head, const char *key)
 				prev->next = cur->next;
 			else
 				*head = cur->next;
-			free(cur->key);
-			free(cur->value);
-			free(cur);
 			return ;
 		}
 		prev = cur;

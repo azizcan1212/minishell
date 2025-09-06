@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_helper_two.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: parse_helper_two                            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/30 00:00:00 by gc                #+#    #+#             */
+/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "../libft/libft.h"
+#include "gc.h"
 
 void	delete_dollars(t_token *token)
 {
@@ -15,15 +28,13 @@ void	delete_dollars(t_token *token)
 			&& (cur->next->type == SINGLE_QUOTE
 				|| cur->next->type == DOUBLE_QUOTE))
 		{
-			new_value = ft_strdup(cur->next->value);
-			free(cur->value);
-			cur->value = new_value;
+			new_value = gc_strdup(cur->next->value);
+			cur->value = new_value; // Old value will be cleaned by GC
 			to_delete = cur->next;
 			cur->next = to_delete->next;
 			if (to_delete->next)
 				to_delete->next->prev = cur;
-			free(to_delete->value);
-			free(to_delete);
+			/* With GC, no need to manually free to_delete and its value */
 		}
 		else
 			cur = cur->next;
@@ -46,7 +57,6 @@ int	is_token_invalid_before_equal(t_token *equal_token)
 	}
 	return (0);
 }
-
 
 void	control_equal(t_token *head)
 {

@@ -6,13 +6,14 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:05:27 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/27 17:08:52 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/06 16:47:07 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "minishell.h"
 #include "libft.h"
+#include "gc.h"
 
 int	builtin_echo(char **args)
 {
@@ -113,10 +114,14 @@ int	builtin_exit(char **args)
 
 	write(1, "exit\n", 5);
 	if (!args[1])
+	{
+		gc_cleanup();
 		exit(0);
+	}
 	if (args[2])
 	{
 		write(2, "bash: exit: too many arguments\n", 32);
+		gc_cleanup();
 		exit(1);
 	}
 	if (!is_numeric(args[1]))
@@ -124,12 +129,14 @@ int	builtin_exit(char **args)
 		write(2, "bash: exit: ", 12);
 		write(2, args[1], ft_strlen(args[1]));
 		write(2, ": numeric argument required\n", 28);
+		gc_cleanup();
 		exit(2);
 	}
 	result = ft_atoi(args[1]);
 	exit_code = (unsigned char)(result % 256);
 	if (result < 0)
 		exit_code = 256 + (result % 256);
+	gc_cleanup();
 	exit(exit_code);
 }
 
@@ -181,36 +188,3 @@ int	is_parent_builtin(const char *s)
 		return (1);
 	return (0);
 }
-
-//static void	env_bootstrap_once(t_shell_val *val, char **envp)
-//{
-//	int			i;
-//	const char	*s;
-//	t_expansion	*e;
-//	char		*eq;
-
-//	if (val->expansion || !envp)
-//		return ;
-//	i = 0;
-//	while ((s = envp[i++]))
-//	{
-//		e = (t_expansion *)malloc(sizeof(*e));
-//		if (!e)
-//			return ;
-//		e->key = NULL;
-//		e->value = NULL;
-//		e->export = 1;
-//		e->next = NULL;
-//		eq = ft_strchr(s, '=');
-//		if (eq)
-//		{
-//			e->key = ft_substr(s, 0, eq - s);
-//			e->value = ft_strdup(eq + 1);
-//		}
-//		else
-//			e->key = ft_strdup(s);
-//		exp_append(&val->expansion, e);
-//	}
-//}
-
-//ve bu fonksiyona neden ihtiyacımız var

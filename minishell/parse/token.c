@@ -30,7 +30,7 @@ char	*parse_single_quote(const char **s)
 
 	i = 1;
 	j = 0;
-	result = malloc(ft_strlen(*s) + 1);
+	result = gc_malloc(ft_strlen(*s) + 1);
 	if (!result)
 		return (NULL);
 	while ((*s)[i] && (*s)[i] != '\'')
@@ -38,7 +38,6 @@ char	*parse_single_quote(const char **s)
 	result[j] = '\0';
 	if ((*s)[i] != '\'')
 	{
-		free(result);
 		write(2, "Error: Unmatched single quote\n", 30);
 		return (NULL);
 	}
@@ -54,7 +53,7 @@ char	*parse_double_quote(const char **s)
 
 	i = 1;
 	j = 0;
-	result = malloc(ft_strlen(*s) + 1);
+	result = gc_malloc(ft_strlen(*s) + 1);
 	if (!result)
 		return (NULL);
 	while ((*s)[i] && (*s)[i] != '"')
@@ -62,7 +61,6 @@ char	*parse_double_quote(const char **s)
 	result[j] = '\0';
 	if ((*s)[i] != '"')
 	{
-		free(result);
 		write(2, "Error: Unmatched double quote\n", 31);
 		return (NULL);
 	}
@@ -79,7 +77,7 @@ char	*parse_word(const char **s)
 
 	i = 0;
 	j = 0;
-	result = malloc(ft_strlen(*s) + 1);
+	result = gc_malloc(ft_strlen(*s) + 1);
 	if (!result)
 		return (NULL);
 	while ((*s)[i] && !ft_isspace((*s)[i]) && (*s)[i] != '\'' &&
@@ -94,7 +92,7 @@ char	*parse_meta(const char **s, int *meta_len)
 {
 	char	*result;
 
-	result = ft_strndup(*s, *meta_len);
+	result = gc_strndup(*s, *meta_len);
 	*s += *meta_len;
 	return (result);
 }

@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: expansion                                   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/30 00:00:00 by gc                #+#    #+#             */
+/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "libft.h"
-#include  <sys/types.h>
+#include "gc.h"
+#include <sys/types.h>
 
 int	set_env(t_token *new_token, t_expansion **expansion, int *i)
 {
@@ -11,8 +24,8 @@ int	set_env(t_token *new_token, t_expansion **expansion, int *i)
 	int			result;
 
 	end = ft_strlen(new_token->value) - *i - 1;
-	key = ft_substr(new_token->value, 0, *i);
-	value = ft_substr(new_token->value, *i + 1, end);
+	key = gc_substr(new_token->value, 0, *i);
+	value = gc_substr(new_token->value, *i + 1, end);
 	ex = new_expansion(value, key);
 	add_expansion_back(expansion, ex);
 	result = setenv(key, value, 1);
@@ -52,23 +65,17 @@ char	*get_new_value(char *value, int i, t_shell_val *val)
 	char	*key;
 	char	*temp;
 
-	ex = ft_substr(value, 0, i);
+	ex = gc_substr(value, 0, i);
 	key = ft_strdup_dollar(value + i + 1);
 	new_value = dollar_value(key, val);
 	if (!new_value)
-		new_value = ft_strdup("");
+		new_value = gc_strdup("");
 	i += ft_strlen(key) + 1;
-	temp = ft_strjoin(ex, new_value);
-	free(ex);
-	ex = ft_substr(value, i, ft_strlen(value) - i);
-	free(key);
-	free(value);
-	free(new_value);
+	temp = gc_strjoin(ex, new_value);
+	ex = gc_substr(value, i, ft_strlen(value) - i);
 	if (!ex)
 		return (temp);
-	new_value = ft_strjoin(temp, ex);
-	free(temp);
-	free(ex);
+	new_value = gc_strjoin(temp, ex);
 	return (new_value);
 }
 
@@ -80,20 +87,20 @@ char	*dollar_value(char *key, t_shell_val *val)
 
 	pid = getpid();
 	if (key[0] == '$')
-		return (ft_itoa(pid));
+		return (gc_itoa(pid));
 	else if (key[0] == '?')
 	{
 		last_exit_status = val->last_exit_status;
-		return (ft_itoa(last_exit_status));
+		return (gc_itoa(last_exit_status));
 	}
 	else if (ft_isdigit(key[0]))
-		return (ft_strdup(&key[1]));
+		return (gc_strdup(&key[1]));
 	else
 	{
 		temp_value = getenv(key);
 		if (temp_value == NULL)
-			return (ft_strdup(""));
-		return (ft_strdup(temp_value));
+			return (gc_strdup(""));
+		return (gc_strdup(temp_value));
 	}
 }
 

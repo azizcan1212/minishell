@@ -18,10 +18,13 @@ SRCS = \
 	utils/utils.c \
 	utils/free.c \
 	utils/token.c \
+	utils/gc.c \
 	utils/parse_helper.c \
 	utils/main_func.c \
 	utils/main_func_two.c \
 	utils/utils_expansion.c \
+	utils/utils_export.c \
+	utils/utils_export_env.c \
 	utils/find_command_path.c \
 	exec/execute_command.c \
 	exec/execute_command2.c \

@@ -6,29 +6,18 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:16 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/07 17:11:33 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../libft/libft.h"
 #include "minishell.h"
+#include "gc.h"
 
 char	*ft_strndup(const char *s, unsigned int n)
 {
-	unsigned int	len;
-	char			*dup;
-
-	if (!s)
-		return (NULL);
-	len = ft_strlen(s);
-	if (len > n)
-		len = n;
-	dup = (char *)malloc(len + 1);
-	if (!dup)
-		return (NULL);
-	ft_strlcpy(dup, s, len + 1);
-	return (dup);
+	return (gc_strndup(s, n));
 }
 
 int	ft_isspace(char c)
@@ -67,7 +56,7 @@ char	*ft_strdup_dollar(const char *s)
 	if (!s)
 		return (NULL);
 	len = ft_strlen_dollar(s);
-	dup = (char *)malloc(len + 1);
+	dup = gc_malloc(len + 1);
 	if (!dup)
 		return (NULL);
 	ft_strlcpy(dup, s, len + 1);
@@ -78,23 +67,23 @@ void	print_command_debug(t_command *cmd)
 {
 	int		i;
 
-	//printf("=== Command Debug ===\n");
 	while (cmd)
 	{
-		//printf("Command: %s\n", cmd->cmd ? cmd->cmd : "(null)");
-		//printf("Args: ");
 		i = 0;
 		while (cmd->args && cmd->args[i])
 		{
 			printf("[%s] ", cmd->args[i]);
 			i++;
 		}
-		//printf("\n");
-		//printf("Input: %s\n", cmd->input_file ? cmd->input_file : "(none)");
-		//printf("Output: %s\n", cmd->output_file ? cmd->output_file : "(none)");
-		//printf("Append: %s\n", cmd->append ? "yes" : "no");
-		//printf("Heredoc: %s\n", cmd->heredoc_delim ? cmd->heredoc_delim : "(none)");
-		//printf("----\n");
 		cmd = cmd->next;
 	}
+}
+
+void	free_split(char **arr)
+{
+	/*
+	 * With GC, manual freeing is not needed
+	 * This function is kept for compatibility
+	 */
+	(void)arr;
 }

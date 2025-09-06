@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   find_command_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:58:29 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/07 17:36:22 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+#include "gc.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -23,7 +24,7 @@ char	*join_path_dir(const char *dir, const char *cmd)
 
 	ld = ft_strlen(dir);
 	lc = ft_strlen(cmd);
-	full = malloc(ld + lc + 2);
+	full = gc_malloc(ld + lc + 2);
 	if (!full)
 		return (NULL);
 	ft_strcpy(full, dir);
@@ -39,17 +40,16 @@ char	*find_command_path(const char *cmd, char **envp)
 
 	if (!cmd || !*cmd)
 		return (NULL);
-	if (ft_strchr(cmd, '/'))
+	if (ft_strchr(cmd, '/') )
 	{
 		if (access(cmd, F_OK) == 0)
-			return (ft_strdup(cmd));
+			return (gc_strdup(cmd));
 		return (NULL);
 	}
 	paths = find_path_env(envp);
 	if (!paths)
 		return (NULL);
 	res = try_in_paths(cmd, paths);
-	free(paths);
 	return (res);
 }
 
@@ -61,7 +61,7 @@ char	*find_path_env(char **envp)
 	while (envp && envp[i])
 	{
 		if (!ft_strncmp(envp[i], "PATH=", 5))
-			return (ft_strdup(envp[i] + 5));
+			return (gc_strdup(envp[i] + 5));
 		i++;
 	}
 	return (NULL);
@@ -73,19 +73,16 @@ char	*try_in_paths(const char *cmd, char *paths)
 	int		i;
 	char	*full;
 
-	dirs = ft_split(paths, ':');
+	dirs = gc_split(paths, ':');
 	i = 0;
 	while (dirs && dirs[i])
 	{
 		full = join_path_dir(dirs[i], cmd);
 		if (access(full, X_OK) == 0)
 		{
-			free_split(dirs);
 			return (full);
 		}
-		free(full);
 		i++;
 	}
-	free_split(dirs);
 	return (NULL);
 }
