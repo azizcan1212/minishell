@@ -3,19 +3,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_gc	*g_gc = NULL;
+static t_gc *get_gc_instance(void)
+{
+	static t_gc gc_instance = {0};
+	static int initialized = 0;
+	
+	if (!initialized)
+	{
+		gc_instance.head = NULL;
+		gc_instance.total_allocated = 0;
+		gc_instance.allocation_count = 0;
+		initialized = 1;
+	}
+	
+	return (&gc_instance);
+}
 
 t_gc	*gc_init(void)
 {
-	if (g_gc)
-		return (g_gc);
-	g_gc = malloc(sizeof(t_gc));
-	if (!g_gc)
-		return (NULL);
-	g_gc->head = NULL;
-	g_gc->total_allocated = 0;
-	g_gc->allocation_count = 0;
-	return (g_gc);
+	return (get_gc_instance());
 }
 
 static t_gc_node	*gc_create_node(void *ptr, size_t size)
@@ -34,25 +40,25 @@ static t_gc_node	*gc_create_node(void *ptr, size_t size)
 
 static void	gc_add_node(void *ptr, size_t size)
 {
+	t_gc		*gc;
 	t_gc_node	*node;
 	t_gc_node	*current;
 
-	if (!g_gc)
-		gc_init();
+	gc = get_gc_instance();
 	node = gc_create_node(ptr, size);
 	if (!node)
 		return ;
-	if (!g_gc->head)
-		g_gc->head = node;
+	if (!gc->head)
+		gc->head = node;
 	else
 	{
-		current = g_gc->head;
+		current = gc->head;
 		while (current->next)
 			current = current->next;
 		current->next = node;
 	}
-	g_gc->total_allocated += size;
-	g_gc->allocation_count++;
+	gc->total_allocated += size;
+	gc->allocation_count++;
 }
 
 static void	*gc_copy_and_free(t_gc_node *node, void *ptr, size_t new_size)
@@ -77,6 +83,7 @@ static void	*gc_copy_and_free(t_gc_node *node, void *ptr, size_t new_size)
 
 static void	*ft_realloc(void *ptr, size_t new_size)
 {
+	t_gc		*gc;
 	t_gc_node	*node;
 
 	if (!ptr)
@@ -88,7 +95,8 @@ static void	*ft_realloc(void *ptr, size_t new_size)
 	}
 	else
 	{
-		node = g_gc ? g_gc->head : NULL;
+		gc = get_gc_instance();
+		node = gc->head;
 		while (node && node->ptr != ptr)
 			node = node->next;
 		if (!node)
@@ -97,7 +105,6 @@ static void	*ft_realloc(void *ptr, size_t new_size)
 			return (gc_copy_and_free(node, ptr, new_size));
 	}
 }
-
 
 void	*gc_malloc(size_t size)
 {
@@ -122,6 +129,7 @@ void	*gc_calloc(size_t count, size_t size)
 
 void	*gc_realloc(void *ptr, size_t new_size)
 {
+	t_gc		*gc;
 	t_gc_node	*node;
 	void		*new_ptr;
 
@@ -129,7 +137,8 @@ void	*gc_realloc(void *ptr, size_t new_size)
 		return (gc_malloc(new_size));
 	if (!new_size)
 		return (NULL);
-	node = g_gc->head;
+	gc = get_gc_instance();
+	node = gc->head;
 	while (node && node->ptr != ptr)
 		node = node->next;
 	if (!node)
@@ -137,7 +146,7 @@ void	*gc_realloc(void *ptr, size_t new_size)
 	new_ptr = ft_realloc(ptr, new_size);
 	if (!new_ptr)
 		return (NULL);
-	g_gc->total_allocated = g_gc->total_allocated - node->size + new_size;
+	gc->total_allocated = gc->total_allocated - node->size + new_size;
 	node->ptr = new_ptr;
 	node->size = new_size;
 	return (new_ptr);
@@ -278,7 +287,6 @@ char	**gc_split(const char *s, char c)
 	return (result);
 }
 
-/* gc_itoa: integer -> GC-managed string */
 char	*gc_itoa(int n)
 {
 	long tmp;
@@ -289,7 +297,7 @@ char	*gc_itoa(int n)
 	tmp = n;
 	len = 0;
 	if (tmp <= 0)
-		len = 1; /* for '-' or '0' */
+		len = 1;
 	t = tmp;
 	while (t != 0)
 	{
@@ -321,11 +329,13 @@ char	*gc_itoa(int n)
 
 void	gc_mark_ptr(void *ptr)
 {
+	t_gc		*gc;
 	t_gc_node	*node;
 
-	if (!g_gc || !ptr)
+	if (!ptr)
 		return ;
-	node = g_gc->head;
+	gc = get_gc_instance();
+	node = gc->head;
 	while (node)
 	{
 		if (node->ptr == ptr)
@@ -339,11 +349,11 @@ void	gc_mark_ptr(void *ptr)
 
 void	gc_mark_all(void)
 {
+	t_gc		*gc;
 	t_gc_node	*node;
 
-	if (!g_gc)
-		return ;
-	node = g_gc->head;
+	gc = get_gc_instance();
+	node = gc->head;
 	while (node)
 	{
 		node->marked = 1;
@@ -353,14 +363,14 @@ void	gc_mark_all(void)
 
 void	gc_sweep(void)
 {
+	t_gc		*gc;
 	t_gc_node	*node;
 	t_gc_node	*prev;
 	t_gc_node	*temp;
 
-	if (!g_gc)
-		return ;
+	gc = get_gc_instance();
 	prev = NULL;
-	node = g_gc->head;
+	node = gc->head;
 	while (node)
 	{
 		if (!node->marked)
@@ -369,10 +379,10 @@ void	gc_sweep(void)
 			if (prev)
 				prev->next = node->next;
 			else
-				g_gc->head = node->next;
+				gc->head = node->next;
 			node = node->next;
-			g_gc->total_allocated -= temp->size;
-			g_gc->allocation_count--;
+			gc->total_allocated -= temp->size;
+			gc->allocation_count--;
 			free(temp->ptr);
 			free(temp);
 		}
@@ -392,12 +402,12 @@ void	gc_collect(void)
 
 void	gc_cleanup(void)
 {
+	t_gc		*gc;
 	t_gc_node	*node;
 	t_gc_node	*temp;
 
-	if (!g_gc)
-		return ;
-	node = g_gc->head;
+	gc = get_gc_instance();
+	node = gc->head;
 	while (node)
 	{
 		temp = node;
@@ -405,25 +415,27 @@ void	gc_cleanup(void)
 		free(temp->ptr);
 		free(temp);
 	}
-	free(g_gc);
-	g_gc = NULL;
+	
+	/* Reset the static instance */
+	gc->head = NULL;
+	gc->total_allocated = 0;
+	gc->allocation_count = 0;
 }
 
 void	gc_print_stats(void)
 {
-	if (!g_gc)
-	{
-		printf("GC: Not initialized\n");
-		return ;
-	}
+	t_gc	*gc;
+
+	gc = get_gc_instance();
 	printf("GC Stats:\n");
-	printf("  Total allocated: %zu bytes\n", g_gc->total_allocated);
-	printf("  Active allocations: %zu\n", g_gc->allocation_count);
+	printf("  Total allocated: %zu bytes\n", gc->total_allocated);
+	printf("  Active allocations: %zu\n", gc->allocation_count);
 }
 
 size_t	gc_get_allocated_memory(void)
 {
-	if (!g_gc)
-		return (0);
-	return (g_gc->total_allocated);
+	t_gc	*gc;
+
+	gc = get_gc_instance();
+	return (gc->total_allocated);
 }

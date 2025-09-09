@@ -60,6 +60,8 @@ static int	export_manage_equal(char *arg, t_expansion **expansion, int *j)
 		return (1);
 	n_expansion->export = 1;
 	add_expansion_back(expansion, n_expansion);
+	// sync process environment for immediate $VAR expansion
+	setenv(key, value, 1);
 	return (0);
 }
 
@@ -93,6 +95,8 @@ void	equal_dup_export(t_expansion *expansion, char *key, char *value)
 				gc_cleanup();
 				exit(EXIT_FAILURE);
 			}
+			// sync process environment for immediate $VAR expansion
+			setenv(key, value, 1);
 		}
 		current = current->next;
 	}
@@ -128,6 +132,9 @@ static int	process_export_equal(char *arg, t_expansion **expansion)
 	key = gc_substr(arg, 0, j);
 	if (!key)
 		return (1);
+	// '_' degiskenine atama ("_=" gibi) yok say
+	if (!ft_strcmp(key, "_"))
+		return (0);
 	if (!control_duplicate_export(*expansion, key))
 		export_manage_equal(arg, expansion, &j);
 	else
@@ -137,33 +144,37 @@ static int	process_export_equal(char *arg, t_expansion **expansion)
 
 static int	process_export_no_equal(char *arg, t_expansion **expansion)
 {
+	// '_' tek basina export edilmesin
+	if (!ft_strcmp(arg, "_"))
+		return (0);
 	return (handle_no_equal(arg, expansion));
 }
 
 int	set_export(char **arg, t_expansion **expansion)
 {
-	int	i;
+	int i;
+	int status;
 
 	i = 1;
+	status = 0;
 	while (arg[i])
 	{
 		if (!is_valid_export(arg[i]))
 		{
-			printf("minishell: export: `%s': not a valid identifier\n",
-				arg[i]);
-			return (1);
+			fprintf(stderr, "minishell: export: `%s': not a valid identifier\n", arg[i]);
+			status = 1; // keep processing others
 		}
-		if (check_include_equal(arg, &(int){0}, &i))
+		else if (check_include_equal(arg, &(int){0}, &i))
 		{
 			if (process_export_equal(arg[i], expansion))
-				return (1);
+				status = 1;
 		}
 		else
 		{
 			if (process_export_no_equal(arg[i], expansion))
-				return (1);
+				status = 1;
 		}
 		i++;
 	}
-	return (0);
+	return (status);
 }

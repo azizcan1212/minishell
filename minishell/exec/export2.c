@@ -1,93 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 13:40:29 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/06 17:01:10 by muharsla         ###   ########.fr       */
+/*   Created: 2025/09/09 17:50:11 by muharsla          #+#    #+#             */
+/*   Updated: 2025/09/09 17:51:04 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
-#include "gc.h"
-
-int	count_exported_entries(t_expansion *expansion)
-{
-	t_expansion	*current;
-	int			count;
-
-	current = expansion;
-	count = 0;
-	while (current)
-	{
-		if (current->export == 1)
-			count++;
-		current = current->next;
-	}
-	return (count);
-}
-
-char	**create_exported_keys_array(t_expansion *expansion, int count)
-{
-	char		**keys;
-	t_expansion	*current;
-	int			i;
-
-	keys = gc_malloc(sizeof(char *) * count);
-	if (!keys)
-		return (NULL);
-	current = expansion;
-	i = 0;
-	while (current)
-	{
-		if (current->export == 1)
-			keys[i++] = current->key;
-		current = current->next;
-	}
-	return (keys);
-}
-
-static int	count_new_entries(t_expansion *expansion)
-{
-	t_expansion	*cur;
-	int			new_count;
-
-	cur = expansion;
-	new_count = 0;
-	while (cur)
-	{
-		if (cur->export == 1 && cur->value && cur->up == 0)
-			new_count++;
-		cur = cur->next;
-	}
-	return (new_count);
-}
-
-static void	add_new_entries_to_env_end(t_expansion *expansion, char **envp)
-{
-	t_expansion	*cur;
-	int			i;
-	char		*tmp;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	cur = expansion;
-	while (cur)
-	{
-		if (cur->export == 1 && cur->value && cur->up == 0)
-		{
-			tmp = gc_strjoin(cur->key, "=");
-			envp[i++] = gc_strjoin(tmp, cur->value);
-			cur->up = 1;
-		}
-		cur = cur->next;
-	}
-	envp[i] = NULL;
-}
 
 void	copy_to_env_end(t_expansion *expansion, char **envp)
 {
@@ -163,13 +86,14 @@ void	print_export(t_expansion *expansion)
 
 int	builtin_export(char **args, t_expansion **expansion, char **envp)
 {
+	int	status;
+
 	if (!args[1])
 	{
 		print_export(*expansion);
 		return (0);
 	}
-	if (set_export(args, expansion) != 0)
-		return (1);
+	status = set_export(args, expansion);
 	copy_to_env_end(*expansion, envp);
-	return (0);
+	return (status);
 }

@@ -72,14 +72,34 @@ static void	process_pending_signal(t_shell_state *state)
 	}
 }
 
+static void init_minimal_env_shlvl(void)
+{
+	char *pwd;
+
+	if (!getenv("PWD"))
+	{
+		pwd = getcwd(NULL, 0);
+		if (pwd)
+		{
+			setenv("PWD", pwd, 1);
+			free(pwd);
+		}
+	}
+	/* SHLVL başlangıcını 2 olarak ayarla (env -i) */
+	if (!getenv("SHLVL") || !*getenv("SHLVL"))
+		setenv("SHLVL", "1", 1);
+	if (!getenv("_"))
+		setenv("_", "/usr/bin/env", 1);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_shell_state	state;
 
 	(void)ac;
 	(void)av;
-	gc_init();
 	init_shell_state(&state);
+	init_minimal_env_shlvl();
 	update_shlvl();
 	setup_signal_handlers();
 	while (1)

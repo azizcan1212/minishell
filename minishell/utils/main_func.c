@@ -52,8 +52,6 @@ void	cleanup_memory(t_token *tokens, t_shell_val *val, char *input)
 
 void	init_shell_state(t_shell_state *state)
 {
-	/* Initialize GC if not already done */
-	if (!g_gc)
 		gc_init();
 		
 	state->input = NULL;

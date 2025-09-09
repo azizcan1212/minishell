@@ -29,11 +29,19 @@ SRCS = \
 	exec/execute_command.c \
 	exec/execute_command2.c \
 	exec/execute_command3.c \
+	exec/execute_command4.c \
+	exec/execute_command5.c \
+	exec/execute_command6.c \
+	exec/execute_command7.c \
 	exec/builtin.c \
 	exec/builtins.c \
+	exec/builtins2.c \
+	exec/builtins3.c \
+	exec/builtins4.c \
 	exec/env.c \
 	exec/unset.c \
 	exec/export.c \
+	exec/export2.c \
 	parse/def_token.c \
 
 	

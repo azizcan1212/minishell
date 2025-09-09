@@ -118,6 +118,8 @@ extern volatile sig_atomic_t	g_signal_num;
 void        signal_handler(int signum);
 void        sigquit_handler(int signum);
 void        update_shlvl(void);
+void        init_minimal_env(void);
+void        ensure_minimal_env(char ***envp_ref);
 
 /* Built-in commands */
 int			builtin_echo(char **args);
@@ -131,6 +133,8 @@ int			handle_builtin_commands(t_command *cmd, t_shell_val *val, char **envp);
 int			is_parent_builtin(const char *s);
 int			exec_builtin_single(t_command *cmd, t_shell_val *val, char **envp);
 int			bi_env_single(t_command *cmd, t_shell_val *val, char **envp);
+void		exp_append(t_expansion **head, t_expansion *node);
+void		env_bootstrap_once(t_shell_val *val, char **envp);
 
 /* Execution functions */
 void		try_exec_resolved_path(t_command *cmd, char **envp);
@@ -145,6 +149,23 @@ int			redirect_output(const char *file, int append);
 void		child_directory(t_command *cur, char *f, char **envp);
 int			is_directory(const char *path);
 void		check_directory(t_command *cur, t_shell_val *val);
+void		child_redirections(t_command *cmd);
+int			build_pipes(int total, int **fds);
+int			count_cmds(t_command *n);
+void		builtin_pwd_and_exit(void);
+void		check_direct_call(t_command *cur);
+void		print_and_exit(const char *name, const char *msg, int code);
+void		handle_exec_error(t_command *cur, int err);
+int			get_heredoc_fd(const char *delim, t_shell_val *val, int expandable_fd);
+void		close_all_heredocs(t_command *head);
+int			prepare_heredocs_all(t_command *head, t_shell_val *val);
+int			open_input_check(t_command *h, t_shell_val *val);
+int			open_output_check(t_command *h, t_shell_val *val);
+int			handle_node_heredoc(t_command *node, t_shell_val *val);
+void		heredoc_child(int *p, const char *delim, t_shell_val *val, int expandable_fd);
+void		heredoc_sigint(int sig);
+void		read_heredoc_lines(int write_fd, const char *delim, t_shell_val *val, int expandable_fd);
+
 
 /* Heredoc functions */
 int			should_stop_heredoc(char *line, const char *delim, int line_number);
@@ -203,6 +224,8 @@ void		add_expansion_back(t_expansion **head, t_expansion *new);
 int			is_valid_var_start(char *s);
 
 /* Export functions */
+int			count_new_entries(t_expansion *expansion);
+void		add_new_entries_to_env_end(t_expansion *expansion, char **envp);
 int			count_exported_entries(t_expansion *expansion);
 char		**create_exported_keys_array(t_expansion *expansion, int count);
 void		copy_to_env_end(t_expansion *expansion, char **envp);
