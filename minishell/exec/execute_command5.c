@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_commands5.c                                :+:      :+:    :+:   */
+/*   execute_command5.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:45:26 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 18:49:41 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/10 08:17:49 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	child_directory(t_command *cur, char *f, char **envp)
 		handle_exec_error(cur, err);
 	}
 	if (!cur->cmd || cur->cmd[0] == '\0')
-		print_and_exit("", ": command not found", 127);
+		print_and_exit("''", ": command not found", 127);
 	if (cur->cmd[0] == '.' || ft_strchr(cur->cmd, '/'))
 		check_direct_call(cur);
 	print_and_exit(cur->cmd, ": command not found", 127);

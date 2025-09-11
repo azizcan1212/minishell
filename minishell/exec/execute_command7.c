@@ -6,11 +6,13 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 19:12:17 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 19:26:42 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:22:14 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <signal.h>
+#include <unistd.h>
 
 static int	run_empty_redirect_only(t_command *h, t_shell_val *val)
 {
@@ -21,6 +23,8 @@ static int	run_empty_redirect_only(t_command *h, t_shell_val *val)
 	if (h->next != NULL)
 		return (-1);
 	if (h->cmd != NULL && h->cmd[0] != '\0')
+		return (-1);
+	if (h->input_file == NULL && h->output_file == NULL && h->heredoc_fd == -1)
 		return (-1);
 	r = open_input_check(h, val);
 	if (r != 0)
@@ -67,13 +71,35 @@ int	execute_command(t_command *head, char **envp, t_shell_val *val)
 	return (fork_and_exec(head, val, envp));
 }
 
+static void	sigpipe_close_all(int sig)
+{
+	int	i;
+
+	(void)sig;
+	i = 0;
+	while (i < 1024)
+	{
+		close(i);
+		i++;
+	}
+	_exit(141);
+}
+
 void	heredoc_child(int *p, const char *delim,
 				t_shell_val *val, int expandable_fd)
 {
 	close(p[0]);
+	signal(SIGPIPE, sigpipe_close_all);
 	signal(SIGINT, heredoc_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	read_heredoc_lines(p[1], delim, val, expandable_fd);
+	if (val != NULL && val->last_exit_status == 130)
+	{
+		sigpipe_close_all(0);
+		close(p[1]);
+		gc_cleanup();
+		_exit(130);
+	}
 	close(p[1]);
 	gc_cleanup();
 	_exit(0);
@@ -85,22 +111,25 @@ int	get_heredoc_fd(const char *delim, t_shell_val *val, int expandable_fd)
 	pid_t	pid;
 	int		st;
 
-	if (delim == NULL || pipe(p) == -1)
-		return (-1);
+	if (delim == NULL) return (-1);
+	if (pipe(p) == -1) return (-1);
 	pid = fork();
 	if (pid == 0)
 		heredoc_child(p, delim, val, expandable_fd);
 	close(p[1]);
-	if (pid < 0 || waitpid(pid, &st, 0) == -1)
-	{
-		close(p[0]);
-		return (-1);
-	}
-	if (WIFSIGNALED(st) && WTERMSIG(st) == SIGINT)
-	{
-		close(p[0]);
+	if (pid < 0) { close(p[0]); return (-1); }
+	if (waitpid(pid, &st, 0) == -1) { close(p[0]); return (-1); }
+
+	/* sadece başarıda bırak */
+	if (WIFEXITED(st) && WEXITSTATUS(st) == 0)
+		return (p[0]);
+
+	/* SIGINT yollarında status 130 yap */
+	if ((WIFSIGNALED(st) && WTERMSIG(st) == SIGINT)
+	 || (WIFEXITED(st) && WEXITSTATUS(st) == 130))
 		val->last_exit_status = 130;
-		return (-1);
-	}
-	return (p[0]);
+
+	/* diğer tüm durumlarda kapat */
+	close(p[0]);
+	return (-1);
 }

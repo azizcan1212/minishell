@@ -21,6 +21,7 @@ typedef struct s_gc
 
 /* Core GC functions */
 t_gc	*gc_init(void);
+t_gc	*get_gc_instance(void);
 void	*gc_malloc(size_t size);
 void	*gc_calloc(size_t count, size_t size);
 void	*gc_realloc(void *ptr, size_t new_size);
@@ -30,6 +31,12 @@ char	*gc_substr(const char *s, unsigned int start, size_t len);
 char	*gc_strjoin(const char *s1, const char *s2);
 char	**gc_split(const char *s, char c);
 char	*gc_itoa(int n);
+
+/* Node management functions */
+t_gc_node	*gc_create_node(void *ptr, size_t size);
+void		gc_add_node(void *ptr, size_t size);
+t_gc_node	*find_gc_node(void *ptr);
+void		*gc_copy_and_free(t_gc_node *node, void *ptr, size_t new_size);
 
 /* GC management */
 void	gc_mark_ptr(void *ptr);

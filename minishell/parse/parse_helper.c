@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:51 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/06 20:58:12 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/10 03:44:59 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ t_command	*new_command(void)
 	cmd = gc_malloc(sizeof(t_command));
 	if (!cmd)
 		return (NULL);
+	init_command_fields(cmd);
+	return (cmd);
+}
+
+void	init_command_fields(t_command *cmd)
+{
 	cmd->cmd = NULL;
-	cmd -> heredoc_list = NULL;
+	cmd->heredoc_list = NULL;
 	cmd->args = gc_malloc(sizeof(char *) * 100);
 	cmd->input_file = NULL;
 	cmd->output_file = NULL;
@@ -32,7 +38,6 @@ t_command	*new_command(void)
 	cmd->append = 0;
 	cmd->next = NULL;
 	cmd->expandable_fd = 0;
-	return (cmd);
 }
 
 int	token_is_pipe(t_token *tk)
@@ -42,131 +47,33 @@ int	token_is_pipe(t_token *tk)
 	return (!ft_strcmp(tk->value, "|"));
 }
 
-void	handle_redirection(t_token **tk, t_command *cmd)
+int	should_touch_file(t_command *cmd)
 {
-	t_token	*next;
-	int		fd;
-	int		block_touch;
+	int	fd;
 
-	next = (*tk)->next;
-	if (!next || !next->value)
-		return ;
-	if (!ft_strcmp((*tk)->value, "<"))
+	if (cmd->cmd && cmd->cmd[0] != '\0')
+		return (0);
+	if (cmd->input_file)
 	{
-		cmd->input_file = gc_strdup(next->value);
+		fd = open(cmd->input_file, O_RDONLY);
+		if (fd < 0)
+			return (0);
+		close(fd);
 	}
-	else if (!ft_strcmp((*tk)->value, ">") || !ft_strcmp((*tk)->value, ">>"))
-	{
-		cmd->output_file = gc_strdup(next->value);
-		cmd->append = ((*tk)->value[1] == '>');
-		if (!cmd->cmd || cmd->cmd[0] == '\0')
-		{
-			block_touch = 0;
-			if (cmd->input_file)
-			{
-				fd = open(cmd->input_file, O_RDONLY);
-				if (fd < 0)
-					block_touch = 1;
-				else
-					close(fd);
-			}
-			if (!block_touch)
-			{
-				fd = open(cmd->output_file,
-						O_CREAT | O_WRONLY
-						| (cmd->append ? O_APPEND : O_TRUNC), 0644);
-				if (fd >= 0)
-					close(fd);
-			}
-		}
-	}
-	else if (!ft_strcmp((*tk)->value, "<<"))
-	{
-		t_hdoc *n, *it;
-
-		if (next->expandable_fd == 1)
-			cmd->expandable_fd = 1;
-		cmd->heredoc_delim = gc_strdup(next->value);  /* geriye uyumluluk */
-
-		/* YENİ: bu heredoc’u listeye push-back */
-		n = gc_malloc(sizeof(*n));
-		n->delim = gc_strdup(next->value);
-		n->expandable = next->expandable_fd;   /* heredoc’a özel expand bilgisi */
-		n->next = NULL;
-		if (!cmd->heredoc_list)
-			cmd->heredoc_list = n;
-		else
-		{
-			it = cmd->heredoc_list;
-			while (it->next)
-				it = it->next;
-			it->next = n;
-		}
-	}
-
-	*tk = next;
+	return (1);
 }
 
-void	handle_normal_token(t_token *tk, t_command *cmd, int *argc)
+void	touch_output_file(char *filename, int append)
 {
-	if (!cmd->cmd)
-		cmd->cmd = gc_strdup(tk->value);
-	cmd->args[*argc] = gc_strdup(tk->value);
-	(*argc)++;
-}
+	int	fd;
+	int	flags;
 
-void	process_one_token(
-	t_token **tokens, t_command **cur, t_command **head, int *argc)
-{
-	int		is_out;
-	int		is_append;
-	int		block_touch;
-	char	*fname;
-
-	if (!*cur)
-	{
-		*cur = new_command();
-		if (!*head)
-			*head = *cur;
-		*argc = 0;
-	}
-	if (token_is_pipe(*tokens))
-	{
-		(*cur)->args[*argc] = NULL;
-		(*cur)->next = new_command();
-		*cur = (*cur)->next;
-		*argc = 0;
-	}
-	else if (((*tokens)->value[0] == '<'
-			|| (*tokens)->value[0] == '>') && (*tokens)->type == META)
-	{
-		is_out = ((*tokens)->value[0] == '>');
-		is_append = (is_out && (*tokens)->value[1] == '>');
-		fname = ((*tokens)->next) ? (*tokens)->next->value : NULL;
-		block_touch = 0;
-		if (!(*cur)->cmd || (*cur)->cmd[0] == '\0')
-		{
-			if ((*cur)->input_file)
-			{
-				int t = open((*cur)->input_file, O_RDONLY);
-				if (t < 0)
-					block_touch = 1;
-				else
-					close(t);
-			}
-		}
-		handle_redirection(tokens, *cur);
-		if (is_out && !block_touch
-			&& (!(*cur)->cmd || (*cur)->cmd[0] == '\0') && fname)
-		{
-			int	t = open(fname,
-					O_CREAT | O_WRONLY
-					| (is_append ? O_APPEND : O_TRUNC), 0644);
-			if (t >= 0)
-				close(t);
-		}
-	}
+	flags = O_CREAT | O_WRONLY;
+	if (append)
+		flags |= O_APPEND;
 	else
-		handle_normal_token(*tokens, *cur, argc);
-	*tokens = (*tokens)->next;
+		flags |= O_TRUNC;
+	fd = open(filename, flags, 420);
+	if (fd >= 0)
+		close(fd);
 }

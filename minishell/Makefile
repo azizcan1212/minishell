@@ -11,20 +11,33 @@ SRCS = \
 	parse/parse.c \
 	parse/shell.c \
 	parse/parse_helper.c \
+	parse/parse_helper_two.c \
+	parse/parse_helper_three.c \
+	parse/parse_helper_four.c \
+	parse/shell_helper.c \
+	parse/env_variable.c \
 	parse/parse_to_command.c \
 	parse/expansion.c \
 	parse/token.c \
 	parse/syntax_validation.c \
 	utils/utils.c \
-	utils/free.c \
 	utils/token.c \
 	utils/gc.c \
+	utils/gc_two.c \
+	utils/gc_three.c \
+	utils/gc_four.c \
+	utils/gc_five.c \
+	utils/gc_six.c \
+	utils/gc_seven.c \
+	utils/gc_last.c \
 	utils/parse_helper.c \
 	utils/main_func.c \
 	utils/main_func_two.c \
 	utils/utils_expansion.c \
 	utils/utils_export.c \
 	utils/utils_export_env.c \
+	utils/utils_export_two.c \
+	utils/ms_env.c \
 	utils/find_command_path.c \
 	exec/execute_command.c \
 	exec/execute_command2.c \

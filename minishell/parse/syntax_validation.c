@@ -1,14 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax_validation.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/10 04:17:35 by atam              #+#    #+#             */
+/*   Updated: 2025/09/10 04:19:38 by atam             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "libft.h"
-
-static int	is_redirect_token(t_token *token)
-{
-	if (!token || !token->value)
-		return (0);
-	return (token->type == META && (!ft_strcmp(token->value, "<")
-			|| !ft_strcmp(token->value, ">") || !ft_strcmp(token->value, ">>")
-			|| !ft_strcmp(token->value, "<<")));
-}
 
 static int	is_pipe_token(t_token *token)
 {

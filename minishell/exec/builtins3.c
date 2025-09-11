@@ -28,7 +28,7 @@ int	handle_builtin_commands(t_command *cmd, t_shell_val *val, char **envp)
 			(void)!write(STDOUT_FILENO, "exit\n", 5);
 		close(sv_in);
 		close(sv_out);
-		builtin_exit(cmd->args);
+		builtin_exit(cmd->args, cmd);
 		return (0);
 	}
 	if (apply_in_parent(cmd) || apply_out_parent(cmd))
@@ -76,7 +76,7 @@ void	exp_append(t_expansion **head, t_expansion *node)
 	cur->next = node;
 }
 
-static t_expansion	*make_exp_from_str(const char *s)
+t_expansion	*make_exp_from_str(const char *s)
 {
 	char		*eq;
 	int			klen;
@@ -122,6 +122,7 @@ void	env_bootstrap_once(t_shell_val *val, char **envp)
 		e = make_exp_from_str(s);
 		if (!e)
 			return ;
+		e->export = 1; 
 		add_expansion_back(&val->expansion, e);
 		i++;
 	}

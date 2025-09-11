@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:00:00 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/06 16:41:20 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:15:54 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,31 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static int	valid_ident(const char *s)
-{
-	int	i;
-
-	if (!s || !(ft_isalpha((unsigned char)s[0]) || s[0] == '_'))
-		return (0);
-	i = 1;
-	while (s[i])
-	{
-		if (!ft_isalnum((unsigned char)s[i]) && s[i] != '_')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-static void	err_unset_ident(const char *arg)
-{
-	write(2, "minishell: unset: `", 20);
-	write(2, arg, ft_strlen(arg));
-	write(2, "': not a valid identifier\n", 26);
-}
-
 static void	remove_key(t_expansion **head, const char *key)
 {
 	t_expansion	*cur;
 	t_expansion	*prev;
+	t_expansion	*next;
 
+	if (head == NULL || *head == NULL || key == NULL)
+		return;
 	prev = NULL;
 	cur = *head;
-	while (cur)
+	while (cur != NULL)
 	{
-		if (!ft_strcmp(cur->key, key))
+		next = cur->next;
+		if (cur->key != NULL && ft_strcmp(cur->key, key) == 0)
 		{
-			if (prev)
-				prev->next = cur->next;
+			if (prev != NULL)
+				prev->next = next;
 			else
-				*head = cur->next;
-			return ;
+				*head = next;
+			cur->next = NULL;
+			cur = next;
+			continue;
 		}
 		prev = cur;
-		cur = cur->next;
+		cur = next;
 	}
 }
 
@@ -74,10 +57,7 @@ int	builtin_unset(char **args, t_expansion **head)
 	i = 1;
 	while (args[i])
 	{
-		if (ft_strchr(args[i], '=') || !valid_ident(args[i]))
-			ret = (err_unset_ident(args[i]), 1);
-		else
-			remove_key(head, args[i]);
+		remove_key(head, args[i]);
 		i++;
 	}
 	return (ret);

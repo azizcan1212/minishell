@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: expansion                                   +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 00:00:00 by gc                #+#    #+#             */
-/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
+/*   Created: 2025/09/10 03:29:40 by atam              #+#    #+#             */
+/*   Updated: 2025/09/10 03:29:47 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,14 @@ int	set_env(t_token *new_token, t_expansion **expansion, int *i)
 {
 	char		*key;
 	char		*value;
-	t_expansion	*ex;
 	int			end;
 	int			result;
 
+	(void)expansion;
 	end = ft_strlen(new_token->value) - *i - 1;
 	key = gc_substr(new_token->value, 0, *i);
 	value = gc_substr(new_token->value, *i + 1, end);
-	ex = new_expansion(value, key);
-	add_expansion_back(expansion, ex);
-	result = setenv(key, value, 1);
+	result = ms_set_var(key, value, 1);
 	if (result != 0)
 		return (1);
 	return (0);
@@ -97,7 +95,7 @@ char	*dollar_value(char *key, t_shell_val *val)
 		return (gc_strdup(&key[1]));
 	else
 	{
-		temp_value = getenv(key);
+		temp_value = ms_getenv(key);
 		if (temp_value == NULL)
 			return (gc_strdup(""));
 		return (gc_strdup(temp_value));

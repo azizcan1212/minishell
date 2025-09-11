@@ -21,7 +21,7 @@ static int	print_env_from_exp(t_expansion *exp)
 {
 	while (exp)
 	{
-		if (exp->key && exp->value)
+		if (exp->key && exp->value && exp->export == 1)
 		{
 			write(1, exp->key, ft_strlen(exp->key));
 			write(1, "=", 1);

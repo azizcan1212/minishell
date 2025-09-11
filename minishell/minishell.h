@@ -118,14 +118,13 @@ extern volatile sig_atomic_t	g_signal_num;
 void        signal_handler(int signum);
 void        sigquit_handler(int signum);
 void        update_shlvl(void);
-void        init_minimal_env(void);
-void        ensure_minimal_env(char ***envp_ref);
+
 
 /* Built-in commands */
 int			builtin_echo(char **args);
 int			builtin_cd(char **args);
 int			builtin_pwd(void);
-int			builtin_exit(char **args);
+int			builtin_exit(char **args, t_command *cmd);
 int			builtin_env(char **envp);
 int			builtin_export(char **args, t_expansion **expansion, char **envp);
 int			builtin_unset(char **args, t_expansion **head);
@@ -135,11 +134,10 @@ int			exec_builtin_single(t_command *cmd, t_shell_val *val, char **envp);
 int			bi_env_single(t_command *cmd, t_shell_val *val, char **envp);
 void		exp_append(t_expansion **head, t_expansion *node);
 void		env_bootstrap_once(t_shell_val *val, char **envp);
+t_expansion	*make_exp_from_str(const char *s);
 
 /* Execution functions */
-void		try_exec_resolved_path(t_command *cmd, char **envp);
-int			cmd_count(t_command *head);
-int			wait_and_status(t_shell_val *shell);
+
 int			execute_command(t_command *cmd, char **envp, t_shell_val *val);
 int			fork_and_exec(t_command *first_cmd, t_shell_val *shell, char **envp);
 void		close_pipes(int *pipes, int count);
@@ -209,6 +207,12 @@ int			token_is_pipe(t_token *tk);
 void		handle_redirection(t_token **tk, t_command *cmd);
 void		handle_normal_token(t_token *tk, t_command *cmd, int *argc);
 void		process_one_token(t_token **tokens, t_command **cur, t_command **head, int *argc);
+void		handle_pipe_token(t_command **cur, int *argc);
+int			is_redirection_token(t_token *token);
+void		handle_redirection_with_touch(t_token **tokens, t_command *cur);
+void		handle_input_redirection(t_token *next, t_command *cmd);
+void		handle_output_redirection(t_token *tk, t_token *next, t_command *cmd);
+void		handle_heredoc_redirection(t_token *next, t_command *cmd);
 
 /* Environment expansion */
 int			set_env(t_token *new_token, t_expansion **expansion, int *i);
@@ -237,6 +241,7 @@ int			is_valid_export(char *str);
 int			control_duplicate_export(t_expansion *expansion, char *key);
 void		equal_dup_export(t_expansion *expansion, char *key, char *value);
 int			set_export(char **arg, t_expansion **expansion);
+int			export_manage_equal(char *arg, t_expansion **expansion, int *j);
 
 /* Export environment utilities */
 void		reset_updated_flag(t_expansion *expansion);
@@ -268,13 +273,6 @@ char		*ft_strdup_dollar(const char *s);
 void		print_command_debug(t_command *cmd);
 void		free_split(char **arr);
 
-/* Memory management (GC compatible) */
-void		free_args(char **args);
-void		free_commands(t_command *cmd);
-void		free_tokens(t_token *head);
-void		free_expansion(t_expansion *head);
-void		gc_collect_if_needed(void);
-
 /* Shell state management */
 void		init_shell_state(t_shell_state *state);
 int			process_tokens(t_shell_state *state);
@@ -291,6 +289,33 @@ void		print_tokens(t_token *tokens);
 /* Signal handling */
 void		signal_handler(int signum);
 void		sigquit_handler(int signum);
-void		manage_signal(t_shell_state *state);
+
+
+void		update_shlvl(void);
+int			process_input_line(t_shell_state *state, char **envp);
+void		setup_pwd_env(void);
+void		setup_shlvl_env(void);
+void		setup_underscore_env(void);
+void		init_minimal_env_shlvl(void);
+void		init_shell_environment(t_shell_state *state);
+void		main_shell_loop(t_shell_state *state, char **envp);
+void		process_pending_signal(t_shell_state *state);
+void		setup_signal_handlers(void);
+void		init_command_fields(t_command *cmd);
+int			should_touch_file(t_command *cmd);
+void		touch_output_file(char *filename, int append);
+void		init_current_command(t_command **cur, t_command **head, int *argc);
+void    	handle_redirection(t_token **tk, t_command *cmd);
+int			is_redirect_token(t_token *token);
+
+/* Custom environment management (setenv replacement) */
+void		ms_setenv_init(t_shell_val *shell_val);
+int			ms_setenv(const char *name, const char *value, int overwrite);
+int			ms_set_var(const char *name, const char *value, int overwrite);
+char		*ms_getenv(const char *name);
+char		**build_envp_from_expansion(t_expansion *expansion);
+
+
+
 
 #endif

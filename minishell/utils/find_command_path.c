@@ -6,7 +6,7 @@
 /*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:58:29 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
+/*   Updated: 2025/09/10 04:23:30 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*find_command_path(const char *cmd, char **envp)
 
 	if (!cmd || !*cmd)
 		return (NULL);
-	if (ft_strchr(cmd, '/') )
+	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, F_OK) == 0)
 			return (gc_strdup(cmd));

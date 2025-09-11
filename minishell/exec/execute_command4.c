@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:44:26 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 19:16:11 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/10 08:14:00 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	exec_child(t_command *cmd, char **envp)
 	signal(SIGQUIT, SIG_DFL);
 	child_redirections(cmd);
 	if (cmd->cmd && !ft_strcmp(cmd->cmd, "exit"))
-		builtin_exit(cmd->args);
+		builtin_exit(cmd->args, cmd);
 	if (cmd->cmd && !ft_strcmp(cmd->cmd, "pwd"))
 		builtin_pwd_and_exit();
 	path = find_command_path(cmd->cmd, envp);

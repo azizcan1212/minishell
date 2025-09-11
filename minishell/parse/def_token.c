@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   def_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:44:45 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/06 17:14:17 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/10 04:20:32 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,13 @@ int	has_whitespace(const char *str)
 		|| ft_strchr(str, '\f') || ft_strchr(str, '\v'))
 		return (1);
 	return (0);
+}
+
+int	is_redirect_token(t_token *token)
+{
+	if (!token || !token->value)
+		return (0);
+	return (token->type == META && (!ft_strcmp(token->value, "<")
+			|| !ft_strcmp(token->value, ">") || !ft_strcmp(token->value, ">>")
+			|| !ft_strcmp(token->value, "<<")));
 }

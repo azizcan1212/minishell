@@ -25,13 +25,21 @@ static void	exit_with_msg(const char *pfx,
 	exit(code);
 }
 
-int	builtin_exit(char **args)
+int	builtin_exit(char **args,t_command *cmd)
 {
 	long	result;
 	int		exit_code;
+	int		i;
 
 	if (!args[1])
 	{
+		close_all_heredocs(cmd);
+		i = 3;
+		while (i < 1024)
+		{
+			close(i);
+			i++;
+		}
 		gc_cleanup();
 		exit(0);
 	}
@@ -44,6 +52,13 @@ int	builtin_exit(char **args)
 	exit_code = (unsigned char)(result % 256);
 	if (result < 0)
 		exit_code = 256 + (result % 256);
+	close_all_heredocs(cmd);
+	i = 3;
+	while (i < 1024)
+	{
+		close(i);
+		i++;
+	}
 	gc_cleanup();
 	exit(exit_code);
 }

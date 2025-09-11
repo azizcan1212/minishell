@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_helper_two.c                                 :+:      :+:    :+:   */
+/*   parse_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parse_helper_two                            +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 00:00:00 by gc                #+#    #+#             */
-/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
+/*   Created: 2025/09/10 05:15:59 by atam              #+#    #+#             */
+/*   Updated: 2025/09/10 05:18:27 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ void	delete_dollars(t_token *token)
 				|| cur->next->type == DOUBLE_QUOTE))
 		{
 			new_value = gc_strdup(cur->next->value);
-			cur->value = new_value; // Old value will be cleaned by GC
+			cur->value = new_value;
 			to_delete = cur->next;
 			cur->next = to_delete->next;
 			if (to_delete->next)
 				to_delete->next->prev = cur;
-			/* With GC, no need to manually free to_delete and its value */
 		}
 		else
 			cur = cur->next;

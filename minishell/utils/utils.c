@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:16 by muharsla          #+#    #+#             */
-/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
+/*   Updated: 2025/09/10 05:34:40 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,29 +61,4 @@ char	*ft_strdup_dollar(const char *s)
 		return (NULL);
 	ft_strlcpy(dup, s, len + 1);
 	return (dup);
-}
-
-void	print_command_debug(t_command *cmd)
-{
-	int		i;
-
-	while (cmd)
-	{
-		i = 0;
-		while (cmd->args && cmd->args[i])
-		{
-			printf("[%s] ", cmd->args[i]);
-			i++;
-		}
-		cmd = cmd->next;
-	}
-}
-
-void	free_split(char **arr)
-{
-	/*
-	 * With GC, manual freeing is not needed
-	 * This function is kept for compatibility
-	 */
-	(void)arr;
 }

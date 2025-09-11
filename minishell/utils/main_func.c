@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: main_func                                   +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 00:00:00 by gc                #+#    #+#             */
-/*   Updated: 2025/08/30 00:00:00 by gc               ###   ########.fr       */
+/*   Created: 2025/09/10 05:38:57 by atam              #+#    #+#             */
+/*   Updated: 2025/09/10 06:57:48 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,18 @@ char	*read_input_with_history(void)
 	if (*input)
 	{
 		add_history(input);
-		gc_input = gc_strdup(input); // Copy to GC managed memory
+		gc_input = gc_strdup(input);
 		free(input);
 		return (gc_input);
 	}
 	gc_input = gc_strdup(input);
-	free(input); 
+	free(input);
 	return (gc_input);
-}
-
-void	cleanup_memory(t_token *tokens, t_shell_val *val, char *input)
-{
-	/* 
-	 * With GC, individual cleanup is not needed
-	 * All will be cleaned up by gc_cleanup() at program end
-	 */
-	(void)tokens;
-	(void)val;
-	(void)input;
 }
 
 void	init_shell_state(t_shell_state *state)
 {
-		gc_init();
-		
+	gc_init();
 	state->input = NULL;
 	state->tokens = NULL;
 	state->expansion = NULL;
@@ -71,25 +59,28 @@ int	process_tokens(t_shell_state *state)
 	{
 		return (0);
 	}
-
-
 	if (!validate_syntax(state->tokens))
 	{
 		state->val->last_exit_status = 2;
 		return (0);
 	}
-
 	control_equal(state->tokens);
 	state->equal_status = get_equal_status(state->tokens);
 	return (1);
 }
 
-void print_tokens(t_token *tokens)
+void	handle_execution(t_shell_state *state, char **envp)
 {
-	t_token *cur = tokens;
-	while (cur)
+	state->env_status = set_environment(state->tokens,
+			&state->expansion, state->equal_status);
+	if (is_export_command(state->tokens))
 	{
-		printf("Token: %s, Type: %d, Expandable FD: %d\n", cur->value, cur->type, cur->expandable_fd);
-		cur = cur->next;
+		execute_command(state->cmds, envp, state->val);
+	}
+	else if (state->equal_status != VALID
+		&& !state->token_check && state->env_status == 0)
+	{
+		execute_command(state->cmds, envp, state->val);
 	}
 }
+
