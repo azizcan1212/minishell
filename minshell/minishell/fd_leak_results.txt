@@ -1,0 +1,1516 @@
+=== FD Leak and Memory Leak Test ===
+>>> Testing: env
+==1461498== Memcheck, a memory error detector
+==1461498== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1461498== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1461498== Command: ./minishell
+==1461498== 
+==1461503== 
+==1461503== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461503== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461503==    <inherited from parent>
+==1461503== 
+==1461503== Open AF_UNIX socket 41: <unknown>
+==1461503==    <inherited from parent>
+==1461503== 
+==1461503== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461503==    <inherited from parent>
+==1461503== 
+==1461503== 
+==1461503== HEAP SUMMARY:
+==1461503==     in use at exit: 208,246 bytes in 225 blocks
+==1461503==   total heap usage: 1,049 allocs, 824 frees, 249,616 bytes allocated
+==1461503== 
+==1461503== LEAK SUMMARY:
+==1461503==    definitely lost: 0 bytes in 0 blocks
+==1461503==    indirectly lost: 0 bytes in 0 blocks
+==1461503==      possibly lost: 0 bytes in 0 blocks
+==1461503==    still reachable: 0 bytes in 0 blocks
+==1461503==         suppressed: 208,246 bytes in 225 blocks
+==1461503== 
+==1461503== For lists of detected and suppressed errors, rerun with: -s
+==1461503== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461504== 
+==1461504== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461504== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461504==    <inherited from parent>
+==1461504== 
+==1461504== Open AF_UNIX socket 41: <unknown>
+==1461504==    <inherited from parent>
+==1461504== 
+==1461504== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461504==    <inherited from parent>
+==1461504== 
+==1461504== 
+==1461504== HEAP SUMMARY:
+==1461504==     in use at exit: 208,246 bytes in 225 blocks
+==1461504==   total heap usage: 1,049 allocs, 824 frees, 249,616 bytes allocated
+==1461504== 
+==1461504== LEAK SUMMARY:
+==1461504==    definitely lost: 0 bytes in 0 blocks
+==1461504==    indirectly lost: 0 bytes in 0 blocks
+==1461504==      possibly lost: 0 bytes in 0 blocks
+==1461504==    still reachable: 0 bytes in 0 blocks
+==1461504==         suppressed: 208,246 bytes in 225 blocks
+==1461504== 
+==1461504== For lists of detected and suppressed errors, rerun with: -s
+==1461504== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461505== 
+==1461505== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461505== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461505==    <inherited from parent>
+==1461505== 
+==1461505== Open AF_UNIX socket 41: <unknown>
+==1461505==    <inherited from parent>
+==1461505== 
+==1461505== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461505==    <inherited from parent>
+==1461505== 
+==1461505== 
+==1461505== HEAP SUMMARY:
+==1461505==     in use at exit: 208,246 bytes in 225 blocks
+==1461505==   total heap usage: 1,049 allocs, 824 frees, 249,616 bytes allocated
+==1461505== 
+==1461505== LEAK SUMMARY:
+==1461505==    definitely lost: 0 bytes in 0 blocks
+==1461505==    indirectly lost: 0 bytes in 0 blocks
+==1461505==      possibly lost: 0 bytes in 0 blocks
+==1461505==    still reachable: 0 bytes in 0 blocks
+==1461505==         suppressed: 208,246 bytes in 225 blocks
+==1461505== 
+==1461505== For lists of detected and suppressed errors, rerun with: -s
+==1461505== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461498== 
+==1461498== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461498== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461498==    <inherited from parent>
+==1461498== 
+==1461498== Open AF_UNIX socket 41: <unknown>
+==1461498==    <inherited from parent>
+==1461498== 
+==1461498== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461498==    <inherited from parent>
+==1461498== 
+==1461498== 
+==1461498== HEAP SUMMARY:
+==1461498==     in use at exit: 208,266 bytes in 225 blocks
+==1461498==   total heap usage: 1,044 allocs, 819 frees, 249,639 bytes allocated
+==1461498== 
+==1461498== LEAK SUMMARY:
+==1461498==    definitely lost: 0 bytes in 0 blocks
+==1461498==    indirectly lost: 0 bytes in 0 blocks
+==1461498==      possibly lost: 0 bytes in 0 blocks
+==1461498==    still reachable: 0 bytes in 0 blocks
+==1461498==         suppressed: 208,266 bytes in 225 blocks
+==1461498== 
+==1461498== For lists of detected and suppressed errors, rerun with: -s
+==1461498== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+=============================
+
+>>> Testing: unset FOO
+==1461512== Memcheck, a memory error detector
+==1461512== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1461512== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1461512== Command: ./minishell
+==1461512== 
+==1461526== 
+==1461526== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461526== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461526==    <inherited from parent>
+==1461526== 
+==1461526== Open AF_UNIX socket 41: <unknown>
+==1461526==    <inherited from parent>
+==1461526== 
+==1461526== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461526==    <inherited from parent>
+==1461526== 
+==1461526== 
+==1461526== HEAP SUMMARY:
+==1461526==     in use at exit: 208,252 bytes in 225 blocks
+==1461526==   total heap usage: 1,056 allocs, 831 frees, 249,869 bytes allocated
+==1461526== 
+==1461526== LEAK SUMMARY:
+==1461526==    definitely lost: 0 bytes in 0 blocks
+==1461526==    indirectly lost: 0 bytes in 0 blocks
+==1461526==      possibly lost: 0 bytes in 0 blocks
+==1461526==    still reachable: 0 bytes in 0 blocks
+==1461526==         suppressed: 208,252 bytes in 225 blocks
+==1461526== 
+==1461526== For lists of detected and suppressed errors, rerun with: -s
+==1461526== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461527== 
+==1461527== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461527== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461527==    <inherited from parent>
+==1461527== 
+==1461527== Open AF_UNIX socket 41: <unknown>
+==1461527==    <inherited from parent>
+==1461527== 
+==1461527== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461527==    <inherited from parent>
+==1461527== 
+==1461527== 
+==1461527== HEAP SUMMARY:
+==1461527==     in use at exit: 208,252 bytes in 225 blocks
+==1461527==   total heap usage: 1,056 allocs, 831 frees, 249,869 bytes allocated
+==1461527== 
+==1461527== LEAK SUMMARY:
+==1461527==    definitely lost: 0 bytes in 0 blocks
+==1461527==    indirectly lost: 0 bytes in 0 blocks
+==1461527==      possibly lost: 0 bytes in 0 blocks
+==1461527==    still reachable: 0 bytes in 0 blocks
+==1461527==         suppressed: 208,252 bytes in 225 blocks
+==1461527== 
+==1461527== For lists of detected and suppressed errors, rerun with: -s
+==1461527== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461528== 
+==1461528== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461528== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461528==    <inherited from parent>
+==1461528== 
+==1461528== Open AF_UNIX socket 41: <unknown>
+==1461528==    <inherited from parent>
+==1461528== 
+==1461528== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461528==    <inherited from parent>
+==1461528== 
+==1461528== 
+==1461528== HEAP SUMMARY:
+==1461528==     in use at exit: 208,252 bytes in 225 blocks
+==1461528==   total heap usage: 1,056 allocs, 831 frees, 249,869 bytes allocated
+==1461528== 
+==1461528== LEAK SUMMARY:
+==1461528==    definitely lost: 0 bytes in 0 blocks
+==1461528==    indirectly lost: 0 bytes in 0 blocks
+==1461528==      possibly lost: 0 bytes in 0 blocks
+==1461528==    still reachable: 0 bytes in 0 blocks
+==1461528==         suppressed: 208,252 bytes in 225 blocks
+==1461528== 
+==1461528== For lists of detected and suppressed errors, rerun with: -s
+==1461528== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+minishell: unset: command not found
+==1461531== 
+==1461531== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461531== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461531==    <inherited from parent>
+==1461531== 
+==1461531== Open AF_UNIX socket 41: <unknown>
+==1461531==    <inherited from parent>
+==1461531== 
+==1461531== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461531==    <inherited from parent>
+==1461531== 
+==1461531== 
+==1461531== HEAP SUMMARY:
+==1461531==     in use at exit: 208,272 bytes in 225 blocks
+==1461531==   total heap usage: 1,100 allocs, 875 frees, 251,481 bytes allocated
+==1461531== 
+==1461531== LEAK SUMMARY:
+==1461531==    definitely lost: 0 bytes in 0 blocks
+==1461531==    indirectly lost: 0 bytes in 0 blocks
+==1461531==      possibly lost: 0 bytes in 0 blocks
+==1461531==    still reachable: 0 bytes in 0 blocks
+==1461531==         suppressed: 208,272 bytes in 225 blocks
+==1461531== 
+==1461531== For lists of detected and suppressed errors, rerun with: -s
+==1461531== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461512== 
+==1461512== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461512== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461512==    <inherited from parent>
+==1461512== 
+==1461512== Open AF_UNIX socket 41: <unknown>
+==1461512==    <inherited from parent>
+==1461512== 
+==1461512== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461512==    <inherited from parent>
+==1461512== 
+==1461512== 
+==1461512== HEAP SUMMARY:
+==1461512==     in use at exit: 208,272 bytes in 225 blocks
+==1461512==   total heap usage: 1,051 allocs, 826 frees, 249,892 bytes allocated
+==1461512== 
+==1461512== LEAK SUMMARY:
+==1461512==    definitely lost: 0 bytes in 0 blocks
+==1461512==    indirectly lost: 0 bytes in 0 blocks
+==1461512==      possibly lost: 0 bytes in 0 blocks
+==1461512==    still reachable: 0 bytes in 0 blocks
+==1461512==         suppressed: 208,272 bytes in 225 blocks
+==1461512== 
+==1461512== For lists of detected and suppressed errors, rerun with: -s
+==1461512== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+=============================
+
+>>> Testing: pwd
+==1461535== Memcheck, a memory error detector
+==1461535== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1461535== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1461535== Command: ./minishell
+==1461535== 
+==1461537== 
+==1461537== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461537== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461537==    <inherited from parent>
+==1461537== 
+==1461537== Open AF_UNIX socket 41: <unknown>
+==1461537==    <inherited from parent>
+==1461537== 
+==1461537== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461537==    <inherited from parent>
+==1461537== 
+==1461537== 
+==1461537== HEAP SUMMARY:
+==1461537==     in use at exit: 208,246 bytes in 225 blocks
+==1461537==   total heap usage: 1,049 allocs, 824 frees, 249,616 bytes allocated
+==1461537== 
+==1461537== LEAK SUMMARY:
+==1461537==    definitely lost: 0 bytes in 0 blocks
+==1461537==    indirectly lost: 0 bytes in 0 blocks
+==1461537==      possibly lost: 0 bytes in 0 blocks
+==1461537==    still reachable: 0 bytes in 0 blocks
+==1461537==         suppressed: 208,246 bytes in 225 blocks
+==1461537== 
+==1461537== For lists of detected and suppressed errors, rerun with: -s
+==1461537== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461538== 
+==1461538== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461538== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461538==    <inherited from parent>
+==1461538== 
+==1461538== Open AF_UNIX socket 41: <unknown>
+==1461538==    <inherited from parent>
+==1461538== 
+==1461538== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461538==    <inherited from parent>
+==1461538== 
+==1461538== 
+==1461538== HEAP SUMMARY:
+==1461538==     in use at exit: 208,246 bytes in 225 blocks
+==1461538==   total heap usage: 1,049 allocs, 824 frees, 249,616 bytes allocated
+==1461538== 
+==1461538== LEAK SUMMARY:
+==1461538==    definitely lost: 0 bytes in 0 blocks
+==1461538==    indirectly lost: 0 bytes in 0 blocks
+==1461538==      possibly lost: 0 bytes in 0 blocks
+==1461538==    still reachable: 0 bytes in 0 blocks
+==1461538==         suppressed: 208,246 bytes in 225 blocks
+==1461538== 
+==1461538== For lists of detected and suppressed errors, rerun with: -s
+==1461538== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461539== 
+==1461539== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461539== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461539==    <inherited from parent>
+==1461539== 
+==1461539== Open AF_UNIX socket 41: <unknown>
+==1461539==    <inherited from parent>
+==1461539== 
+==1461539== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461539==    <inherited from parent>
+==1461539== 
+==1461539== 
+==1461539== HEAP SUMMARY:
+==1461539==     in use at exit: 208,246 bytes in 225 blocks
+==1461539==   total heap usage: 1,049 allocs, 824 frees, 249,616 bytes allocated
+==1461539== 
+==1461539== LEAK SUMMARY:
+==1461539==    definitely lost: 0 bytes in 0 blocks
+==1461539==    indirectly lost: 0 bytes in 0 blocks
+==1461539==      possibly lost: 0 bytes in 0 blocks
+==1461539==    still reachable: 0 bytes in 0 blocks
+==1461539==         suppressed: 208,246 bytes in 225 blocks
+==1461539== 
+==1461539== For lists of detected and suppressed errors, rerun with: -s
+==1461539== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461542== 
+==1461542== Process terminating with default action of signal 13 (SIGPIPE)
+==1461542==    at 0x49DB887: write (write.c:26)
+==1461542==    by 0x4951EEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==1461542==    by 0x49539E0: new_do_write (fileops.c:448)
+==1461542==    by 0x49539E0: _IO_new_do_write (fileops.c:425)
+==1461542==    by 0x49539E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==1461542==    by 0x49526D4: _IO_new_file_xsputn (fileops.c:1243)
+==1461542==    by 0x49526D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==1461542==    by 0x493CFC9: outstring_func (vfprintf-internal.c:239)
+==1461542==    by 0x493CFC9: __vfprintf_internal (vfprintf-internal.c:1593)
+==1461542==    by 0x492779E: printf (printf.c:33)
+==1461542==    by 0x407C27: builtin_pwd_and_exit (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4073D3: exec_child (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4077E5: fork_prev_children (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40764E: spawn_pipeline (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407479: fork_and_exec (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4082FC: execute_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461542== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461542==    <inherited from parent>
+==1461542== 
+==1461542== Open AF_UNIX socket 41: <unknown>
+==1461542==    <inherited from parent>
+==1461542== 
+==1461542== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461542==    <inherited from parent>
+==1461542== 
+==1461542== 
+==1461542== HEAP SUMMARY:
+==1461542==     in use at exit: 235,104 bytes in 857 blocks
+==1461542==   total heap usage: 1,043 allocs, 186 frees, 253,738 bytes allocated
+==1461542== 
+==1461542== 2 bytes in 1 blocks are still reachable in loss record 1 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40449B: gc_itoa (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4020EA: update_shlvl (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402310: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 2 bytes in 1 blocks are still reachable in loss record 2 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4062A8: update_existing_var (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4061CF: ms_setenv (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402111: update_shlvl (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402310: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 9 bytes in 3 blocks are still reachable in loss record 6 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401C34: handle_heredoc_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4020AC: handle_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401E64: handle_redirection_with_touch (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F74: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 9 bytes in 3 blocks are still reachable in loss record 7 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401B5D: create_heredoc_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401C52: handle_heredoc_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4020AC: handle_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401E64: handle_redirection_with_touch (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F74: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 12 bytes in 3 blocks are still reachable in loss record 13 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401CAE: handle_normal_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F90: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 12 bytes in 3 blocks are still reachable in loss record 14 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401CC5: handle_normal_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F90: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 16 bytes in 1 blocks are still reachable in loss record 20 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405521: new_shell_val (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405008: init_shell_state (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4022E4: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 16 bytes in 1 blocks are still reachable in loss record 22 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407A11: build_pipes (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407441: fork_and_exec (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4082FC: execute_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4051AB: handle_execution (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021F2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 17 bytes in 7 blocks are still reachable in loss record 23 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403E7D: gc_strndup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402E92: parse_meta (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401372: value (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401411: tokenize (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405067: process_tokens (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021B2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 21 bytes in 2 blocks are still reachable in loss record 25 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401ABF: handle_output_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402078: handle_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401E64: handle_redirection_with_touch (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F74: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 32 bytes in 1 blocks are still reachable in loss record 31 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405521: new_shell_val (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405008: init_shell_state (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4022E4: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 32 bytes in 1 blocks are still reachable in loss record 32 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40449B: gc_itoa (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4020EA: update_shlvl (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402310: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 32 bytes in 1 blocks are still reachable in loss record 33 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4062A8: update_existing_var (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4061CF: ms_setenv (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402111: update_shlvl (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402310: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 32 bytes in 1 blocks are still reachable in loss record 36 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401821: new_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401EC6: init_current_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F28: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 32 bytes in 1 blocks are still reachable in loss record 37 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40188C: init_command_fields (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401846: new_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401EC6: init_current_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F28: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 32 bytes in 1 blocks are still reachable in loss record 38 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4049F7: fd_gc_add (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40801F: get_heredoc_fd (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407D65: handle_node_heredoc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x406CD6: prepare_heredocs_all (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x408270: execute_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4051AB: handle_execution (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021F2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 32 bytes in 1 blocks are still reachable in loss record 39 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4049F7: fd_gc_add (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40801F: get_heredoc_fd (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407D65: handle_node_heredoc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x406CD6: prepare_heredocs_all (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x408270: execute_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4051AB: handle_execution (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021F2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 32 bytes in 1 blocks are still reachable in loss record 40 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407A11: build_pipes (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407441: fork_and_exec (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4082FC: execute_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4051AB: handle_execution (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021F2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 32 bytes in 1 blocks are still reachable in loss record 41 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4049F7: fd_gc_add (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407AA5: build_pipes (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407441: fork_and_exec (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4082FC: execute_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4051AB: handle_execution (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021F2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 37 bytes in 1 blocks are still reachable in loss record 42 of 127
+==1461542==    at 0x484DCD3: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x49DC7BC: getcwd (getcwd.c:86)
+==1461542==    by 0x407C03: builtin_pwd_and_exit (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4073D3: exec_child (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4077E5: fork_prev_children (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40764E: spawn_pipeline (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407479: fork_and_exec (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4082FC: execute_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4051AB: handle_execution (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021F2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 64 bytes in 1 blocks are still reachable in loss record 48 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4049F7: fd_gc_add (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407AA5: build_pipes (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x407441: fork_and_exec (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4082FC: execute_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4051AB: handle_execution (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021F2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 64 bytes in 2 blocks are still reachable in loss record 49 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401ABF: handle_output_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402078: handle_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401E64: handle_redirection_with_touch (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F74: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 64 bytes in 2 blocks are still reachable in loss record 50 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401821: new_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401D1E: handle_pipe_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F4A: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 64 bytes in 2 blocks are still reachable in loss record 51 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40188C: init_command_fields (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401846: new_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401D1E: handle_pipe_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F4A: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 72 bytes in 1 blocks are still reachable in loss record 52 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401821: new_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401EC6: init_current_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F28: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 72 bytes in 3 blocks are still reachable in loss record 53 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401B38: create_heredoc_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401C52: handle_heredoc_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4020AC: handle_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401E64: handle_redirection_with_touch (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F74: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 96 bytes in 3 blocks are still reachable in loss record 58 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401CAE: handle_normal_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F90: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 96 bytes in 3 blocks are still reachable in loss record 59 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401CC5: handle_normal_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F90: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 96 bytes in 3 blocks are still reachable in loss record 60 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401C34: handle_heredoc_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4020AC: handle_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401E64: handle_redirection_with_touch (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F74: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 96 bytes in 3 blocks are still reachable in loss record 61 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401B38: create_heredoc_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401C52: handle_heredoc_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4020AC: handle_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401E64: handle_redirection_with_touch (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F74: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 96 bytes in 3 blocks are still reachable in loss record 62 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401B5D: create_heredoc_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401C52: handle_heredoc_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4020AC: handle_redirection (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401E64: handle_redirection_with_touch (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F74: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 144 bytes in 2 blocks are still reachable in loss record 64 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401821: new_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401D1E: handle_pipe_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F4A: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 224 bytes in 7 blocks are still reachable in loss record 70 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403E7D: gc_strndup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402E92: parse_meta (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401372: value (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401411: tokenize (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405067: process_tokens (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021B2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 256 bytes in 8 blocks are still reachable in loss record 72 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402D31: parse_word (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401384: value (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401411: tokenize (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405067: process_tokens (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021B2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 277 bytes in 8 blocks are still reachable in loss record 73 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402D31: parse_word (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401384: value (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401411: tokenize (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405067: process_tokens (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021B2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 480 bytes in 15 blocks are still reachable in loss record 74 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403555: new_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40373B: add_token_with_type (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401442: tokenize (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405067: process_tokens (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021B2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 600 bytes in 15 blocks are still reachable in loss record 75 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403555: new_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40373B: add_token_with_type (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401442: tokenize (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x405067: process_tokens (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021B2: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 800 bytes in 1 blocks are still reachable in loss record 80 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40188C: init_command_fields (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401846: new_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401EC6: init_current_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F28: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 1,150 bytes in 81 blocks are still reachable in loss record 91 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403FAE: gc_substr (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4093B7: make_exp_from_str (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402287: load_system_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402306: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 1,600 bytes in 2 blocks are still reachable in loss record 93 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40188C: init_command_fields (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401846: new_command (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401D1E: handle_pipe_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x401F4A: process_one_token (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402512: parse_tokens_to_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4054D7: process_commands (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4021D0: process_input_line (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x40236C: main_shell_loop (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017EF: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 2,592 bytes in 81 blocks are still reachable in loss record 97 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x409381: make_exp_from_str (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402287: load_system_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402306: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 2,592 bytes in 81 blocks are still reachable in loss record 98 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x409381: make_exp_from_str (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402287: load_system_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402306: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 2,592 bytes in 81 blocks are still reachable in loss record 99 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403FAE: gc_substr (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4093B7: make_exp_from_str (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402287: load_system_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402306: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 2,592 bytes in 81 blocks are still reachable in loss record 100 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403899: gc_create_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403995: gc_add_node (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403A8D: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4093CE: make_exp_from_str (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402287: load_system_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402306: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== 3,272 bytes in 81 blocks are still reachable in loss record 101 of 127
+==1461542==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1461542==    by 0x403A64: gc_malloc (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x403DED: gc_strdup (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4093CE: make_exp_from_str (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402287: load_system_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x402306: init_shell_environment (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542==    by 0x4017E2: main (in /home/atam/Masaüstü/ffff/minishell/minishell)
+==1461542== 
+==1461542== LEAK SUMMARY:
+==1461542==    definitely lost: 0 bytes in 0 blocks
+==1461542==    indirectly lost: 0 bytes in 0 blocks
+==1461542==      possibly lost: 0 bytes in 0 blocks
+==1461542==    still reachable: 20,492 bytes in 605 blocks
+==1461542==         suppressed: 214,612 bytes in 252 blocks
+==1461542== 
+==1461542== For lists of detected and suppressed errors, rerun with: -s
+==1461542== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461535== 
+==1461535== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461535== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461535==    <inherited from parent>
+==1461535== 
+==1461535== Open AF_UNIX socket 41: <unknown>
+==1461535==    <inherited from parent>
+==1461535== 
+==1461535== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461535==    <inherited from parent>
+==1461535== 
+==1461535== 
+==1461535== HEAP SUMMARY:
+==1461535==     in use at exit: 208,266 bytes in 225 blocks
+==1461535==   total heap usage: 1,044 allocs, 819 frees, 249,639 bytes allocated
+==1461535== 
+==1461535== LEAK SUMMARY:
+==1461535==    definitely lost: 0 bytes in 0 blocks
+==1461535==    indirectly lost: 0 bytes in 0 blocks
+==1461535==      possibly lost: 0 bytes in 0 blocks
+==1461535==    still reachable: 0 bytes in 0 blocks
+==1461535==         suppressed: 208,266 bytes in 225 blocks
+==1461535== 
+==1461535== For lists of detected and suppressed errors, rerun with: -s
+==1461535== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+=============================
+
+>>> Testing: export FOO=123
+==1461547== Memcheck, a memory error detector
+==1461547== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1461547== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1461547== Command: ./minishell
+==1461547== 
+minishell: hello: command not found
+==1461556== 
+==1461556== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461556== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461556==    <inherited from parent>
+==1461556== 
+==1461556== Open AF_UNIX socket 41: <unknown>
+==1461556==    <inherited from parent>
+==1461556== 
+==1461556== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461556==    <inherited from parent>
+==1461556== 
+==1461556== 
+==1461556== HEAP SUMMARY:
+==1461556==     in use at exit: 208,327 bytes in 228 blocks
+==1461556==   total heap usage: 1,150 allocs, 922 frees, 253,444 bytes allocated
+==1461556== 
+==1461556== LEAK SUMMARY:
+==1461556==    definitely lost: 0 bytes in 0 blocks
+==1461556==    indirectly lost: 0 bytes in 0 blocks
+==1461556==      possibly lost: 0 bytes in 0 blocks
+==1461556==    still reachable: 0 bytes in 0 blocks
+==1461556==         suppressed: 208,327 bytes in 228 blocks
+==1461556== 
+==1461556== For lists of detected and suppressed errors, rerun with: -s
+==1461556== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+minishell: t1: command not found
+==1461557== 
+==1461557== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461557== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461557==    <inherited from parent>
+==1461557== 
+==1461557== Open AF_UNIX socket 41: <unknown>
+==1461557==    <inherited from parent>
+==1461557== 
+==1461557== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461557==    <inherited from parent>
+==1461557== 
+==1461557== 
+==1461557== HEAP SUMMARY:
+==1461557==     in use at exit: 208,366 bytes in 231 blocks
+==1461557==   total heap usage: 1,172 allocs, 941 frees, 254,664 bytes allocated
+==1461557== 
+==1461557== LEAK SUMMARY:
+==1461557==    definitely lost: 0 bytes in 0 blocks
+==1461557==    indirectly lost: 0 bytes in 0 blocks
+==1461557==      possibly lost: 0 bytes in 0 blocks
+==1461557==    still reachable: 0 bytes in 0 blocks
+==1461557==         suppressed: 208,366 bytes in 231 blocks
+==1461557== 
+==1461557== For lists of detected and suppressed errors, rerun with: -s
+==1461557== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+minishell: hello: command not found
+==1461558== 
+==1461558== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461558== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461558==    <inherited from parent>
+==1461558== 
+==1461558== Open AF_UNIX socket 41: <unknown>
+==1461558==    <inherited from parent>
+==1461558== 
+==1461558== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461558==    <inherited from parent>
+==1461558== 
+==1461558== 
+==1461558== HEAP SUMMARY:
+==1461558==     in use at exit: 208,416 bytes in 234 blocks
+==1461558==   total heap usage: 1,206 allocs, 972 frees, 256,297 bytes allocated
+==1461558== 
+==1461558== LEAK SUMMARY:
+==1461558==    definitely lost: 0 bytes in 0 blocks
+==1461558==    indirectly lost: 0 bytes in 0 blocks
+==1461558==      possibly lost: 0 bytes in 0 blocks
+==1461558==    still reachable: 0 bytes in 0 blocks
+==1461558==         suppressed: 208,416 bytes in 234 blocks
+==1461558== 
+==1461558== For lists of detected and suppressed errors, rerun with: -s
+==1461558== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+minishell: t2: command not found
+==1461559== 
+==1461559== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461559== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461559==    <inherited from parent>
+==1461559== 
+==1461559== Open AF_UNIX socket 41: <unknown>
+==1461559==    <inherited from parent>
+==1461559== 
+==1461559== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461559==    <inherited from parent>
+==1461559== 
+==1461559== 
+==1461559== HEAP SUMMARY:
+==1461559==     in use at exit: 208,455 bytes in 237 blocks
+==1461559==   total heap usage: 1,228 allocs, 991 frees, 257,517 bytes allocated
+==1461559== 
+==1461559== LEAK SUMMARY:
+==1461559==    definitely lost: 0 bytes in 0 blocks
+==1461559==    indirectly lost: 0 bytes in 0 blocks
+==1461559==      possibly lost: 0 bytes in 0 blocks
+==1461559==    still reachable: 0 bytes in 0 blocks
+==1461559==         suppressed: 208,455 bytes in 237 blocks
+==1461559== 
+==1461559== For lists of detected and suppressed errors, rerun with: -s
+==1461559== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+minishell: hello: command not found
+==1461560== 
+==1461560== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461560== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461560==    <inherited from parent>
+==1461560== 
+==1461560== Open AF_UNIX socket 41: <unknown>
+==1461560==    <inherited from parent>
+==1461560== 
+==1461560== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461560==    <inherited from parent>
+==1461560== 
+==1461560== 
+==1461560== HEAP SUMMARY:
+==1461560==     in use at exit: 208,505 bytes in 240 blocks
+==1461560==   total heap usage: 1,262 allocs, 1,022 frees, 259,150 bytes allocated
+==1461560== 
+==1461560== LEAK SUMMARY:
+==1461560==    definitely lost: 0 bytes in 0 blocks
+==1461560==    indirectly lost: 0 bytes in 0 blocks
+==1461560==      possibly lost: 0 bytes in 0 blocks
+==1461560==    still reachable: 0 bytes in 0 blocks
+==1461560==         suppressed: 208,505 bytes in 240 blocks
+==1461560== 
+==1461560== For lists of detected and suppressed errors, rerun with: -s
+==1461560== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+minishell: t3: command not found
+==1461561== 
+==1461561== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461561== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461561==    <inherited from parent>
+==1461561== 
+==1461561== Open AF_UNIX socket 41: <unknown>
+==1461561==    <inherited from parent>
+==1461561== 
+==1461561== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461561==    <inherited from parent>
+==1461561== 
+==1461561== 
+==1461561== HEAP SUMMARY:
+==1461561==     in use at exit: 208,544 bytes in 243 blocks
+==1461561==   total heap usage: 1,284 allocs, 1,041 frees, 260,370 bytes allocated
+==1461561== 
+==1461561== LEAK SUMMARY:
+==1461561==    definitely lost: 0 bytes in 0 blocks
+==1461561==    indirectly lost: 0 bytes in 0 blocks
+==1461561==      possibly lost: 0 bytes in 0 blocks
+==1461561==    still reachable: 0 bytes in 0 blocks
+==1461561==         suppressed: 208,544 bytes in 243 blocks
+==1461561== 
+==1461561== For lists of detected and suppressed errors, rerun with: -s
+==1461561== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461547== 
+==1461547== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461547== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461547==    <inherited from parent>
+==1461547== 
+==1461547== Open AF_UNIX socket 41: <unknown>
+==1461547==    <inherited from parent>
+==1461547== 
+==1461547== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461547==    <inherited from parent>
+==1461547== 
+==1461547== 
+==1461547== HEAP SUMMARY:
+==1461547==     in use at exit: 208,544 bytes in 243 blocks
+==1461547==   total heap usage: 1,235 allocs, 992 frees, 258,817 bytes allocated
+==1461547== 
+==1461547== LEAK SUMMARY:
+==1461547==    definitely lost: 0 bytes in 0 blocks
+==1461547==    indirectly lost: 0 bytes in 0 blocks
+==1461547==      possibly lost: 0 bytes in 0 blocks
+==1461547==    still reachable: 0 bytes in 0 blocks
+==1461547==         suppressed: 208,544 bytes in 243 blocks
+==1461547== 
+==1461547== For lists of detected and suppressed errors, rerun with: -s
+==1461547== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+=============================
+
+>>> Testing: exit
+==1461564== Memcheck, a memory error detector
+==1461564== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1461564== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1461564== Command: ./minishell
+==1461564== 
+==1461566== 
+==1461566== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461566== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461566==    <inherited from parent>
+==1461566== 
+==1461566== Open AF_UNIX socket 41: <unknown>
+==1461566==    <inherited from parent>
+==1461566== 
+==1461566== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461566==    <inherited from parent>
+==1461566== 
+==1461566== 
+==1461566== HEAP SUMMARY:
+==1461566==     in use at exit: 208,247 bytes in 225 blocks
+==1461566==   total heap usage: 1,049 allocs, 824 frees, 249,626 bytes allocated
+==1461566== 
+==1461566== LEAK SUMMARY:
+==1461566==    definitely lost: 0 bytes in 0 blocks
+==1461566==    indirectly lost: 0 bytes in 0 blocks
+==1461566==      possibly lost: 0 bytes in 0 blocks
+==1461566==    still reachable: 0 bytes in 0 blocks
+==1461566==         suppressed: 208,247 bytes in 225 blocks
+==1461566== 
+==1461566== For lists of detected and suppressed errors, rerun with: -s
+==1461566== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461567== 
+==1461567== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461567== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461567==    <inherited from parent>
+==1461567== 
+==1461567== Open AF_UNIX socket 41: <unknown>
+==1461567==    <inherited from parent>
+==1461567== 
+==1461567== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461567==    <inherited from parent>
+==1461567== 
+==1461567== 
+==1461567== HEAP SUMMARY:
+==1461567==     in use at exit: 208,247 bytes in 225 blocks
+==1461567==   total heap usage: 1,049 allocs, 824 frees, 249,626 bytes allocated
+==1461567== 
+==1461567== LEAK SUMMARY:
+==1461567==    definitely lost: 0 bytes in 0 blocks
+==1461567==    indirectly lost: 0 bytes in 0 blocks
+==1461567==      possibly lost: 0 bytes in 0 blocks
+==1461567==    still reachable: 0 bytes in 0 blocks
+==1461567==         suppressed: 208,247 bytes in 225 blocks
+==1461567== 
+==1461567== For lists of detected and suppressed errors, rerun with: -s
+==1461567== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461568== 
+==1461568== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461568== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461568==    <inherited from parent>
+==1461568== 
+==1461568== Open AF_UNIX socket 41: <unknown>
+==1461568==    <inherited from parent>
+==1461568== 
+==1461568== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461568==    <inherited from parent>
+==1461568== 
+==1461568== 
+==1461568== HEAP SUMMARY:
+==1461568==     in use at exit: 208,247 bytes in 225 blocks
+==1461568==   total heap usage: 1,049 allocs, 824 frees, 249,626 bytes allocated
+==1461568== 
+==1461568== LEAK SUMMARY:
+==1461568==    definitely lost: 0 bytes in 0 blocks
+==1461568==    indirectly lost: 0 bytes in 0 blocks
+==1461568==      possibly lost: 0 bytes in 0 blocks
+==1461568==    still reachable: 0 bytes in 0 blocks
+==1461568==         suppressed: 208,247 bytes in 225 blocks
+==1461568== 
+==1461568== For lists of detected and suppressed errors, rerun with: -s
+==1461568== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461571== 
+==1461571== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461571== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461571==    <inherited from parent>
+==1461571== 
+==1461571== Open AF_UNIX socket 41: <unknown>
+==1461571==    <inherited from parent>
+==1461571== 
+==1461571== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461571==    <inherited from parent>
+==1461571== 
+==1461571== 
+==1461571== HEAP SUMMARY:
+==1461571==     in use at exit: 208,267 bytes in 225 blocks
+==1461571==   total heap usage: 1,041 allocs, 816 frees, 249,615 bytes allocated
+==1461571== 
+==1461571== LEAK SUMMARY:
+==1461571==    definitely lost: 0 bytes in 0 blocks
+==1461571==    indirectly lost: 0 bytes in 0 blocks
+==1461571==      possibly lost: 0 bytes in 0 blocks
+==1461571==    still reachable: 0 bytes in 0 blocks
+==1461571==         suppressed: 208,267 bytes in 225 blocks
+==1461571== 
+==1461571== For lists of detected and suppressed errors, rerun with: -s
+==1461571== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461564== 
+==1461564== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461564== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461564==    <inherited from parent>
+==1461564== 
+==1461564== Open AF_UNIX socket 41: <unknown>
+==1461564==    <inherited from parent>
+==1461564== 
+==1461564== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461564==    <inherited from parent>
+==1461564== 
+==1461564== 
+==1461564== HEAP SUMMARY:
+==1461564==     in use at exit: 208,267 bytes in 225 blocks
+==1461564==   total heap usage: 1,044 allocs, 819 frees, 249,649 bytes allocated
+==1461564== 
+==1461564== LEAK SUMMARY:
+==1461564==    definitely lost: 0 bytes in 0 blocks
+==1461564==    indirectly lost: 0 bytes in 0 blocks
+==1461564==      possibly lost: 0 bytes in 0 blocks
+==1461564==    still reachable: 0 bytes in 0 blocks
+==1461564==         suppressed: 208,267 bytes in 225 blocks
+==1461564== 
+==1461564== For lists of detected and suppressed errors, rerun with: -s
+==1461564== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+=============================
+
+>>> Testing: echo selam
+==1461576== Memcheck, a memory error detector
+==1461576== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1461576== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1461576== Command: ./minishell
+==1461576== 
+==1461578== 
+==1461578== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461578== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461578==    <inherited from parent>
+==1461578== 
+==1461578== Open AF_UNIX socket 41: <unknown>
+==1461578==    <inherited from parent>
+==1461578== 
+==1461578== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461578==    <inherited from parent>
+==1461578== 
+==1461578== 
+==1461578== HEAP SUMMARY:
+==1461578==     in use at exit: 208,253 bytes in 225 blocks
+==1461578==   total heap usage: 1,056 allocs, 831 frees, 249,879 bytes allocated
+==1461578== 
+==1461578== LEAK SUMMARY:
+==1461578==    definitely lost: 0 bytes in 0 blocks
+==1461578==    indirectly lost: 0 bytes in 0 blocks
+==1461578==      possibly lost: 0 bytes in 0 blocks
+==1461578==    still reachable: 0 bytes in 0 blocks
+==1461578==         suppressed: 208,253 bytes in 225 blocks
+==1461578== 
+==1461578== For lists of detected and suppressed errors, rerun with: -s
+==1461578== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461579== 
+==1461579== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461579== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461579==    <inherited from parent>
+==1461579== 
+==1461579== Open AF_UNIX socket 41: <unknown>
+==1461579==    <inherited from parent>
+==1461579== 
+==1461579== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461579==    <inherited from parent>
+==1461579== 
+==1461579== 
+==1461579== HEAP SUMMARY:
+==1461579==     in use at exit: 208,253 bytes in 225 blocks
+==1461579==   total heap usage: 1,056 allocs, 831 frees, 249,879 bytes allocated
+==1461579== 
+==1461579== LEAK SUMMARY:
+==1461579==    definitely lost: 0 bytes in 0 blocks
+==1461579==    indirectly lost: 0 bytes in 0 blocks
+==1461579==      possibly lost: 0 bytes in 0 blocks
+==1461579==    still reachable: 0 bytes in 0 blocks
+==1461579==         suppressed: 208,253 bytes in 225 blocks
+==1461579== 
+==1461579== For lists of detected and suppressed errors, rerun with: -s
+==1461579== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461580== 
+==1461580== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461580== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461580==    <inherited from parent>
+==1461580== 
+==1461580== Open AF_UNIX socket 41: <unknown>
+==1461580==    <inherited from parent>
+==1461580== 
+==1461580== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461580==    <inherited from parent>
+==1461580== 
+==1461580== 
+==1461580== HEAP SUMMARY:
+==1461580==     in use at exit: 208,253 bytes in 225 blocks
+==1461580==   total heap usage: 1,056 allocs, 831 frees, 249,879 bytes allocated
+==1461580== 
+==1461580== LEAK SUMMARY:
+==1461580==    definitely lost: 0 bytes in 0 blocks
+==1461580==    indirectly lost: 0 bytes in 0 blocks
+==1461580==      possibly lost: 0 bytes in 0 blocks
+==1461580==    still reachable: 0 bytes in 0 blocks
+==1461580==         suppressed: 208,253 bytes in 225 blocks
+==1461580== 
+==1461580== For lists of detected and suppressed errors, rerun with: -s
+==1461580== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461576== 
+==1461576== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461576== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461576==    <inherited from parent>
+==1461576== 
+==1461576== Open AF_UNIX socket 41: <unknown>
+==1461576==    <inherited from parent>
+==1461576== 
+==1461576== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461576==    <inherited from parent>
+==1461576== 
+==1461576== 
+==1461576== HEAP SUMMARY:
+==1461576==     in use at exit: 208,273 bytes in 225 blocks
+==1461576==   total heap usage: 1,051 allocs, 826 frees, 249,902 bytes allocated
+==1461576== 
+==1461576== LEAK SUMMARY:
+==1461576==    definitely lost: 0 bytes in 0 blocks
+==1461576==    indirectly lost: 0 bytes in 0 blocks
+==1461576==      possibly lost: 0 bytes in 0 blocks
+==1461576==    still reachable: 0 bytes in 0 blocks
+==1461576==         suppressed: 208,273 bytes in 225 blocks
+==1461576== 
+==1461576== For lists of detected and suppressed errors, rerun with: -s
+==1461576== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+=============================
+
+>>> Testing: cd .
+==1461587== Memcheck, a memory error detector
+==1461587== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1461587== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1461587== Command: ./minishell
+==1461587== 
+==1461588== 
+==1461588== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461588== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461588==    <inherited from parent>
+==1461588== 
+==1461588== Open AF_UNIX socket 41: <unknown>
+==1461588==    <inherited from parent>
+==1461588== 
+==1461588== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461588==    <inherited from parent>
+==1461588== 
+==1461588== 
+==1461588== HEAP SUMMARY:
+==1461588==     in use at exit: 208,247 bytes in 225 blocks
+==1461588==   total heap usage: 1,055 allocs, 830 frees, 249,787 bytes allocated
+==1461588== 
+==1461588== LEAK SUMMARY:
+==1461588==    definitely lost: 0 bytes in 0 blocks
+==1461588==    indirectly lost: 0 bytes in 0 blocks
+==1461588==      possibly lost: 0 bytes in 0 blocks
+==1461588==    still reachable: 0 bytes in 0 blocks
+==1461588==         suppressed: 208,247 bytes in 225 blocks
+==1461588== 
+==1461588== For lists of detected and suppressed errors, rerun with: -s
+==1461588== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461589== 
+==1461589== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461589== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461589==    <inherited from parent>
+==1461589== 
+==1461589== Open AF_UNIX socket 41: <unknown>
+==1461589==    <inherited from parent>
+==1461589== 
+==1461589== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461589==    <inherited from parent>
+==1461589== 
+==1461589== 
+==1461589== HEAP SUMMARY:
+==1461589==     in use at exit: 208,247 bytes in 225 blocks
+==1461589==   total heap usage: 1,055 allocs, 830 frees, 249,787 bytes allocated
+==1461589== 
+==1461589== LEAK SUMMARY:
+==1461589==    definitely lost: 0 bytes in 0 blocks
+==1461589==    indirectly lost: 0 bytes in 0 blocks
+==1461589==      possibly lost: 0 bytes in 0 blocks
+==1461589==    still reachable: 0 bytes in 0 blocks
+==1461589==         suppressed: 208,247 bytes in 225 blocks
+==1461589== 
+==1461589== For lists of detected and suppressed errors, rerun with: -s
+==1461589== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461590== 
+==1461590== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461590== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461590==    <inherited from parent>
+==1461590== 
+==1461590== Open AF_UNIX socket 41: <unknown>
+==1461590==    <inherited from parent>
+==1461590== 
+==1461590== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461590==    <inherited from parent>
+==1461590== 
+==1461590== 
+==1461590== HEAP SUMMARY:
+==1461590==     in use at exit: 208,247 bytes in 225 blocks
+==1461590==   total heap usage: 1,055 allocs, 830 frees, 249,787 bytes allocated
+==1461590== 
+==1461590== LEAK SUMMARY:
+==1461590==    definitely lost: 0 bytes in 0 blocks
+==1461590==    indirectly lost: 0 bytes in 0 blocks
+==1461590==      possibly lost: 0 bytes in 0 blocks
+==1461590==    still reachable: 0 bytes in 0 blocks
+==1461590==         suppressed: 208,247 bytes in 225 blocks
+==1461590== 
+==1461590== For lists of detected and suppressed errors, rerun with: -s
+==1461590== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+minishell: cd: command not found
+==1461593== 
+==1461593== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461593== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461593==    <inherited from parent>
+==1461593== 
+==1461593== Open AF_UNIX socket 41: <unknown>
+==1461593==    <inherited from parent>
+==1461593== 
+==1461593== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461593==    <inherited from parent>
+==1461593== 
+==1461593== 
+==1461593== HEAP SUMMARY:
+==1461593==     in use at exit: 208,267 bytes in 225 blocks
+==1461593==   total heap usage: 1,099 allocs, 874 frees, 251,363 bytes allocated
+==1461593== 
+==1461593== LEAK SUMMARY:
+==1461593==    definitely lost: 0 bytes in 0 blocks
+==1461593==    indirectly lost: 0 bytes in 0 blocks
+==1461593==      possibly lost: 0 bytes in 0 blocks
+==1461593==    still reachable: 0 bytes in 0 blocks
+==1461593==         suppressed: 208,267 bytes in 225 blocks
+==1461593== 
+==1461593== For lists of detected and suppressed errors, rerun with: -s
+==1461593== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1461587== 
+==1461587== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==1461587== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==1461587==    <inherited from parent>
+==1461587== 
+==1461587== Open AF_UNIX socket 41: <unknown>
+==1461587==    <inherited from parent>
+==1461587== 
+==1461587== Open file descriptor 40: /home/atam/.config/Code/logs/20250911T194033/ptyhost.log
+==1461587==    <inherited from parent>
+==1461587== 
+==1461587== 
+==1461587== HEAP SUMMARY:
+==1461587==     in use at exit: 208,267 bytes in 225 blocks
+==1461587==   total heap usage: 1,050 allocs, 825 frees, 249,810 bytes allocated
+==1461587== 
+==1461587== LEAK SUMMARY:
+==1461587==    definitely lost: 0 bytes in 0 blocks
+==1461587==    indirectly lost: 0 bytes in 0 blocks
+==1461587==      possibly lost: 0 bytes in 0 blocks
+==1461587==    still reachable: 0 bytes in 0 blocks
+==1461587==         suppressed: 208,267 bytes in 225 blocks
+==1461587== 
+==1461587== For lists of detected and suppressed errors, rerun with: -s
+==1461587== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+=============================
+
