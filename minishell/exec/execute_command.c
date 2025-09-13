@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:47 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 19:27:49 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/11 21:54:40 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <fd_gc.h>
 
 void	heredoc_sigint(int sig)
 {
 	(void)sig;
 	write(1, "\n", 1);
+	fd_gc_cleanup();
 	gc_cleanup();
 	_exit(130);
 }

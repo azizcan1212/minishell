@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:14:53 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 05:16:54 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/12 20:26:44 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 #include "gc.h"
-#include <string.h>
 
 void	reset_updated_flag(t_expansion *expansion)
 {
@@ -27,45 +26,17 @@ void	reset_updated_flag(t_expansion *expansion)
 	}
 }
 
-static char	*create_env_entry(char *key, char *value)
-{
-	char	*entry;
-	size_t	key_len;
-	size_t	value_len;
-
-	key_len = ft_strlen(key);
-	value_len = ft_strlen(value);
-	entry = gc_malloc(key_len + 1 + value_len + 1);
-	if (!entry)
-	{
-		perror("minishell: update_env_value malloc failed");
-		gc_cleanup();
-		exit(EXIT_FAILURE);
-	}
-	ft_strcpy(entry, key);
-	entry[key_len] = '=';
-	ft_strcpy(entry + key_len + 1, value);
-	return (entry);
-}
-
 int	update_env_value(char *key, char *value, char **envp)
 {
-	int		i;
-	char	*eq;
-	size_t	key_len;
+	int	i;
 
 	i = 0;
 	while (envp[i])
 	{
-		eq = ft_strchr(envp[i], '=');
-		if (eq)
+		if (key_matches(envp[i], key))
 		{
-			key_len = eq - envp[i];
-			if (ft_strlen(key) == key_len && !ft_strncmp(envp[i], key, key_len))
-			{
-				envp[i] = create_env_entry(key, value);
-				return (1);
-			}
+			envp[i] = create_env_entry(key, value);
+			return (1);
 		}
 		i++;
 	}

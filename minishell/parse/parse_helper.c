@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:51 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/10 03:44:59 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/13 01:48:13 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "gc.h"
 #include <stdlib.h>
 #include "libft.h"
+#include "fd_gc.h"
 
 t_command	*new_command(void)
 {
@@ -30,9 +31,12 @@ void	init_command_fields(t_command *cmd)
 {
 	cmd->cmd = NULL;
 	cmd->heredoc_list = NULL;
-	cmd->args = gc_malloc(sizeof(char *) * 100);
+	cmd->args = gc_calloc(100, sizeof(char *));
 	cmd->input_file = NULL;
 	cmd->output_file = NULL;
+	cmd->redir_files = NULL;
+	cmd->redir_types = NULL;
+	cmd->redir_count = 0;
 	cmd->heredoc_delim = NULL;
 	cmd->heredoc_fd = -1;
 	cmd->append = 0;
@@ -43,6 +47,8 @@ void	init_command_fields(t_command *cmd)
 int	token_is_pipe(t_token *tk)
 {
 	if (!tk || !tk->value)
+		return (0);
+	if (tk->type != META)
 		return (0);
 	return (!ft_strcmp(tk->value, "|"));
 }

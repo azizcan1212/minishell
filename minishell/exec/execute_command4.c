@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:44:26 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/10 08:14:00 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/12 19:35:15 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "fd_gc.h"
+
+void	child_sigint_handler(int sig)
+{
+	(void)sig;
+	_exit(130);
+}
 
 void	exec_child(t_command *cmd, char **envp)
 {
-	char	*path;
-
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	child_redirections(cmd);
-	if (cmd->cmd && !ft_strcmp(cmd->cmd, "exit"))
-		builtin_exit(cmd->args, cmd);
-	if (cmd->cmd && !ft_strcmp(cmd->cmd, "pwd"))
-		builtin_pwd_and_exit();
-	path = find_command_path(cmd->cmd, envp);
-	child_directory(cmd, path, envp);
+	child_setup_signals_and_redirs(cmd);
+	child_try_run_echo_env(cmd, envp);
+	child_try_run_export(cmd, envp);
+	child_try_run_unset_or_cd(cmd, envp);
+	child_finish_with_exit_pwd_or_exec(cmd, envp);
 }
 
-static void	ms_child_io_setup(int role, int i, int total, int *fds)
+void	ms_child_io_setup(int role, int i, int total, int *fds)
 {
 	if (total <= 1)
 		return ;
@@ -52,7 +53,7 @@ static void	ms_child_io_setup(int role, int i, int total, int *fds)
 	}
 }
 
-static int	fork_prev_children(t_command *first,
+int	fork_prev_children(t_command *first,
 	int total, int *fds, char **envp)
 {
 	int			i;
@@ -79,7 +80,7 @@ static int	fork_prev_children(t_command *first,
 	return (0);
 }
 
-static pid_t	spawn_pipeline(t_command *first,
+pid_t	spawn_pipeline(t_command *first,
 	int total, int *fds, char **envp)
 {
 	int			i;
@@ -103,33 +104,4 @@ static pid_t	spawn_pipeline(t_command *first,
 	if (fork_prev_children(first, total, fds, envp) < 0)
 		return (-1);
 	return (pid);
-}
-
-int	fork_and_exec(t_command *first_cmd, t_shell_val *shell, char **envp)
-{
-	int		total;
-	int		st;
-	int		*fds;
-	int		tmp;
-	pid_t	last;
-
-	total = count_cmds(first_cmd);
-	if (total <= 0)
-		return (0);
-	if (build_pipes(total, &fds) < 0)
-		return (shell->last_exit_status = 1, 1);
-	last = spawn_pipeline(first_cmd, total, fds, envp);
-	if (total > 1)
-		close_pipes(fds, 2 * (total - 1));
-	if (last < 0)
-		return (shell->last_exit_status = 1, 1);
-	if (waitpid(last, &st, 0) == -1)
-		shell->last_exit_status = 1;
-	else if (WIFEXITED(st))
-		shell->last_exit_status = WEXITSTATUS(st);
-	else if (WIFSIGNALED(st))
-		shell->last_exit_status = 128 + WTERMSIG(st);
-	while (waitpid(-1, &tmp, WNOHANG) > 0)
-		;
-	return (shell->last_exit_status);
 }

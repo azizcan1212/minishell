@@ -6,7 +6,7 @@
 /*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:16 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/10 05:34:40 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/12 07:32:29 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 #include "../libft/libft.h"
 #include "minishell.h"
 #include "gc.h"
-
-char	*ft_strndup(const char *s, unsigned int n)
-{
-	return (gc_strndup(s, n));
-}
 
 int	ft_isspace(char c)
 {
@@ -34,9 +29,9 @@ int	ft_isspace(char c)
 	);
 }
 
-unsigned int	ft_strlen_dollar(const char *s)
+int	ft_strlen_dollar(const char *s)
 {
-	unsigned int	len;
+	int	len;
 
 	if (!s)
 		return (0);

@@ -1,41 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fd_gc.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/12 06:39:44 by atam              #+#    #+#             */
+/*   Updated: 2025/09/12 20:19:37 by muharsla         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include "gc.h"
+#include "fd_gc.h"
 
-typedef struct s_fd_gc {
-    int *fds;
-    int count;
-    int capacity;
-} t_fd_gc;
-
-static t_fd_gc *get_fd_gc_instance(void)
+static t_fd_gc	*get_fd_gc_instance(void)
 {
-    static t_fd_gc instance = {NULL, 0, 0};
-    return &instance;
+	static t_fd_gc	instance = {NULL, 0, 0};
+
+	return (&instance);
 }
 
-void fd_gc_add(int fd)
+static void	copy_fds(int *new_fds, int *old_fds, int count)
 {
-    t_fd_gc *gc = get_fd_gc_instance();
-    if (gc->count == gc->capacity) {
-        int new_capacity = gc->capacity ? gc->capacity * 2 : 8;
-        int *new_fds = gc_malloc(sizeof(int) * new_capacity);
-        if (gc->fds) {
-            for (int i = 0; i < gc->count; i++)
-                new_fds[i] = gc->fds[i];
-        }
-        gc->fds = new_fds;
-        gc->capacity = new_capacity;
-    }
-    gc->fds[gc->count++] = fd;
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		new_fds[i] = old_fds[i];
+		i++;
+	}
 }
 
-void fd_gc_cleanup(void)
+static void	expand_fd_array(t_fd_gc *gc)
 {
-    t_fd_gc *gc = get_fd_gc_instance();
-    for (int i = 0; i < gc->count; i++)
-        close(gc->fds[i]);
-    gc->fds = NULL;
-    gc->count = 0;
-    gc->capacity = 0;
+	int	new_capacity;
+	int	*new_fds;
+
+	if (gc->capacity)
+		new_capacity = gc->capacity * 2;
+	else
+		new_capacity = 8;
+	new_fds = gc_malloc(sizeof(int) * new_capacity);
+	if (gc->fds)
+		copy_fds(new_fds, gc->fds, gc->count);
+	gc->fds = new_fds;
+	gc->capacity = new_capacity;
+}
+
+void	fd_gc_add(int fd)
+{
+	t_fd_gc	*gc;
+
+	gc = get_fd_gc_instance();
+	if (fd < 0)
+		return ;
+	if (gc->count == gc->capacity)
+		expand_fd_array(gc);
+	gc->fds[gc->count++] = fd;
+}
+
+void	fd_gc_cleanup(void)
+{
+	t_fd_gc	*gc;
+	int		i;
+
+	gc = get_fd_gc_instance();
+	i = 0;
+	while (i < gc->count)
+	{
+		if (gc->fds[i] >= 0)
+			close(gc->fds[i]);
+		i++;
+	}
+	gc->fds = NULL;
+	gc->count = 0;
+	gc->capacity = 0;
 }

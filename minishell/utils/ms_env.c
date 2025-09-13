@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azizcan <azizcan@student.42kocaeli.com.tr> +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 15:00:00 by azizcan           #+#    #+#             */
-/*   Updated: 2025/09/10 15:00:00 by azizcan          ###   ########.fr       */
+/*   Updated: 2025/09/13 01:48:00 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,62 +17,16 @@
 static t_shell_val	**get_shell_instance(void)
 {
 	static t_shell_val	*instance = NULL;
-	
+
 	return (&instance);
 }
 
 void	ms_setenv_init(t_shell_val *shell_val)
 {
 	t_shell_val	**instance;
-	
+
 	instance = get_shell_instance();
 	*instance = shell_val;
-}
-
-static t_expansion	*find_env_var(t_expansion *expansion, const char *name)
-{
-	t_expansion	*current;
-
-	current = expansion;
-	while (current)
-	{
-		if (current->key && !ft_strcmp(current->key, name))
-			return (current);
-		current = current->next;
-	}
-	return (NULL);
-}
-
-static int	update_existing_var(t_expansion *var, const char *value,
-	int overwrite, int export_flag)
-{
-	if (overwrite)
-	{
-		var->value = gc_strdup(value);
-		if (!var->value)
-			return (-1);
-		var->export = export_flag;
-	}
-	return (0);
-}
-
-static int	create_new_var(t_shell_val *shell, const char *name,
-	const char *value, int export_flag)
-{
-	t_expansion	*new_exp;
-	char		*key;
-	char		*val;
-
-	key = gc_strdup(name);
-	val = gc_strdup(value);
-	if (!key || !val)
-		return (-1);
-	new_exp = new_expansion(val, key);
-	if (!new_exp)
-		return (-1);
-	new_exp->export = export_flag;
-	add_expansion_back(&(shell->expansion), new_exp);
-	return (0);
 }
 
 int	ms_setenv(const char *name, const char *value, int overwrite)
@@ -120,67 +74,5 @@ char	*ms_getenv(const char *name)
 	found = find_env_var((*instance)->expansion, name);
 	if (found)
 		return (found->value);
-	return (getenv(name));
-}
-
-
-
-static int	count_exported_vars(t_expansion *expansion)
-{
-	t_expansion	*current;
-	int			count;
-
-	count = 0;
-	current = expansion;
-	while (current)
-	{
-		if (current->export == 1 && current->value)
-			count++;
-		current = current->next;
-	}
-	return (count);
-}
-
-static char	*create_env_string(t_expansion *exp)
-{
-	char	*temp;
-	char	*result;
-
-	temp = gc_strjoin(exp->key, "=");
-	if (!temp)
-		return (NULL);
-	result = gc_strjoin(temp, exp->value);
-	return (result);
-}
-
-static void	fill_envp_array(char **envp, t_expansion *expansion, int count)
-{
-	t_expansion	*current;
-	int			i;
-
-	i = 0;
-	current = expansion;
-	while (current && i < count)
-	{
-		if (current->export == 1 && current->value)
-		{
-			envp[i] = create_env_string(current);
-			i++;
-		}
-		current = current->next;
-	}
-	envp[i] = NULL;
-}
-
-char	**build_envp_from_expansion(t_expansion *expansion)
-{
-	char	**envp;
-	int		count;
-
-	count = count_exported_vars(expansion);
-	envp = gc_malloc(sizeof(char *) * (count + 1));
-	if (!envp)
-		return (NULL);
-	fill_envp_array(envp, expansion, count);
-	return (envp);
+	return (NULL);
 }

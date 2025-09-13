@@ -6,18 +6,26 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:46:32 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 19:15:29 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/12 19:14:09 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "fd_gc.h"
 
 void	check_direct_call(t_command *cur)
 {
 	if (is_directory(cur->cmd))
+	{
+		fd_gc_cleanup();
 		print_and_exit(cur->cmd, ": is a directory", 126);
+	}
 	if (access(cur->cmd, F_OK) == 0 && access(cur->cmd, X_OK) != 0)
+	{
+		fd_gc_cleanup();
 		print_and_exit(cur->cmd, ": Permission denied", 126);
+	}
+	fd_gc_cleanup();
 	print_and_exit(cur->cmd, ": No such file or directory", 127);
 }
 
@@ -45,46 +53,6 @@ int	handle_node_heredoc(t_command *node, t_shell_val *val)
 	else if (node->heredoc_delim != NULL)
 		node->heredoc_fd = get_heredoc_fd(node->heredoc_delim, val,
 				node->expandable_fd);
-	return (0);
-}
-
-int	open_input_check(t_command *h, t_shell_val *val)
-{
-	int	fd;
-
-	if (h->input_file == NULL)
-		return (0);
-	fd = open(h->input_file, O_RDONLY);
-	if (fd < 0)
-	{
-		perror(h->input_file);
-		val->last_exit_status = 1;
-		return (1);
-	}
-	close(fd);
-	return (0);
-}
-
-int	open_output_check(t_command *h, t_shell_val *val)
-{
-	int	fd;
-	int	flags;
-
-	if (h->output_file == NULL)
-		return (0);
-	flags = O_CREAT | O_WRONLY;
-	if (h->append != 0)
-		flags = flags | O_APPEND;
-	else
-		flags = flags | O_TRUNC;
-	fd = open(h->output_file, flags, 0644);
-	if (fd < 0)
-	{
-		perror(h->output_file);
-		val->last_exit_status = 1;
-		return (1);
-	}
-	close(fd);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:27:17 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 19:16:57 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 03:31:54 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ int	handle_builtin_commands(t_command *cmd, t_shell_val *val, char **envp)
 		return (-1);
 	if (save_std(&sv_in, &sv_out))
 		return (1);
-	if (!ft_strcmp(cmd->cmd, "exit"))
-	{
-		if (isatty(STDOUT_FILENO))
-			(void)!write(STDOUT_FILENO, "exit\n", 5);
-		close(sv_in);
-		close(sv_out);
-		builtin_exit(cmd->args, cmd);
-		return (0);
-	}
-	if (apply_in_parent(cmd) || apply_out_parent(cmd))
+    if (!ft_strcmp(cmd->cmd, "exit"))
+    {
+        if (isatty(STDOUT_FILENO))
+            (void)!write(STDOUT_FILENO, "exit\n", 5);
+        if (sv_in >= 0)
+            close(sv_in);
+        if (sv_out >= 0)
+            close(sv_out);
+        return (builtin_exit_parent(cmd->args, cmd, val));
+    }
+	if (apply_in_parent(cmd))
 		return (restore_std(sv_in, sv_out), val->last_exit_status = 1, 1);
 	st = exec_builtin_single(cmd, val, envp);
 	restore_std(sv_in, sv_out);
@@ -122,7 +123,7 @@ void	env_bootstrap_once(t_shell_val *val, char **envp)
 		e = make_exp_from_str(s);
 		if (!e)
 			return ;
-		e->export = 1; 
+		e->export = 1;
 		add_expansion_back(&val->expansion, e);
 		i++;
 	}

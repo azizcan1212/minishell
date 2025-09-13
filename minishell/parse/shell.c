@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:02:56 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/10 04:16:46 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/12 19:59:52 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "fd_gc.h"
 
 volatile sig_atomic_t	g_signal_num = 0;
 
@@ -33,7 +34,7 @@ void	sigquit_handler(int signum)
 
 void	setup_signal_handlers(void)
 {
-	signal(SIGQUIT, sigquit_handler);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
 }
 
@@ -54,11 +55,17 @@ void	process_pending_signal(t_shell_state *state)
 int	main(int ac, char **av, char **envp)
 {
 	t_shell_state	state;
+	int				exit_status;
 
 	(void)ac;
 	(void)av;
 	init_shell_environment(&state);
 	main_shell_loop(&state, envp);
+	exit_status = 0;
+	if (state.val)
+		exit_status = state.val->last_exit_status;
+	fd_gc_cleanup();
 	gc_cleanup();
-	return (0);
+	rl_clear_history();
+	return (exit_status);
 }

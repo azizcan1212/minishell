@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:38:57 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 06:57:48 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/13 02:32:23 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,3 +84,21 @@ void	handle_execution(t_shell_state *state, char **envp)
 	}
 }
 
+t_token	*split_unquoted_ws_tokens(t_token *head)
+{
+	t_token	*cur;
+	t_token	*next;
+
+	cur = head;
+	while (cur)
+	{
+		next = cur->next;
+		if (cur->type == WORD && cur->expandable_fd == 0
+			&& has_whitespace(cur->value))
+		{
+			split_token_in_place(cur);
+		}
+		cur = next;
+	}
+	return (head);
+}

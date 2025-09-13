@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:05:27 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 18:32:34 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 03:38:35 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ int	builtin_cd(char **args)
 {
 	char	*path;
 
-	if (args[2] || has_whitespace(args[1]))
+	if (args[2])
 	{
 		write(2, "cd: too many arguments\n", 23);
 		return (1);
 	}
 	if (!args[1])
 	{
-		path = getenv("HOME");
+		path = ms_getenv("HOME");
 		if (!path)
 		{
 			write(2, "cd: HOME not set\n", 17);
@@ -86,6 +86,7 @@ int	builtin_pwd(void)
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
+	gc_add_node(cwd,ft_strlen(cwd + 1));
 	if (!cwd)
 	{
 		perror("pwd");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 20:21:13 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 20:25:29 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/12 22:18:43 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,3 @@ int	create_new_var(t_shell_val *shell, const char *name,
 	add_expansion_back(&(shell->expansion), new_exp);
 	return (0);
 }
-
-/* moved envp builders to utils/ms_env_build.c */

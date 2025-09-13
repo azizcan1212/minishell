@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export_two.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:12:28 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 05:12:58 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/12 20:30:12 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,56 +31,25 @@ void	equal_dup_export(t_expansion *expansion, char *key, char *value)
 				gc_cleanup();
 				exit(EXIT_FAILURE);
 			}
-			return;  /* Bulunca değiştir ve çık */
+			return ;
 		}
 		current = current->next;
 	}
 }
 
-static int	handle_no_equal(char *arg, t_expansion **expansion)
+static int	process_export_arg(char **arg, int i, t_expansion **expansion)
 {
-	t_expansion	*n_expansion;
-	char		*key;
+	int	j;
 
-	key = gc_strdup(arg);
-	if (!key)
-		return (1);
-	if (!control_duplicate_export(*expansion, key))
+	if (!is_valid_export(arg[i]))
 	{
-		n_expansion = new_expansion(NULL, key);
-		if (!n_expansion)
-			return (1);
-		n_expansion->export = 1;
-		add_expansion_back(expansion, n_expansion);
-	}
-	return (0);
-}
-
-static int	process_export_equal(char *arg, t_expansion **expansion)
-{
-	int		j;
-	char	*key;
-
-	j = 0;
-	while (arg[j] && arg[j] != '=')
-		j++;
-	key = gc_substr(arg, 0, j);
-	if (!key)
+		print_invalid_identifier(arg[i]);
 		return (1);
-	if (!ft_strcmp(key, "_"))
-		return (0);
-	if (!control_duplicate_export(*expansion, key))
-		return (export_manage_equal(arg, expansion, &j));
-	else
-		equal_dup_export(*expansion, key, arg + j + 1);
-	return (0);
-}
-
-static int	process_export_no_equal(char *arg, t_expansion **expansion)
-{
-	if (!ft_strcmp(arg, "_"))
-		return (0);
-	return (handle_no_equal(arg, expansion));
+	}
+	j = 0;
+	if (check_include_equal(arg, &j, &i))
+		return (process_export_equal(arg[i], expansion));
+	return (process_export_no_equal(arg[i], expansion));
 }
 
 int	set_export(char **arg, t_expansion **expansion)
@@ -92,19 +61,7 @@ int	set_export(char **arg, t_expansion **expansion)
 	status = 0;
 	while (arg[i])
 	{
-		if (!is_valid_export(arg[i]))
-		{
-			write(2, "minishell: export: `", 20);
-			write(2, arg[i], ft_strlen(arg[i]));
-			write(2, "': not a valid identifier\n", 26);
-			status = 1;
-		}
-		else if (check_include_equal(arg, &(int){0}, &i))
-		{
-			if (process_export_equal(arg[i], expansion))
-				status = 1;
-		}
-		else if (process_export_no_equal(arg[i], expansion))
+		if (process_export_arg(arg, i, expansion))
 			status = 1;
 		i++;
 	}

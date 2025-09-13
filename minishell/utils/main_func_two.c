@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_func_two.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:25:06 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 07:35:42 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/13 02:33:07 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,85 +15,80 @@
 #include "gc.h"
 #include <stdio.h>
 
-static t_token	*find_invalid_token(t_token *head)
+static void	split_finish(t_split_ctx *c)
 {
-	t_token		*cur;
+	if (!c->last)
+		return ;
+	c->last->space_next_status = c->orig_space_next;
+	c->last->next = c->after;
+	if (c->after)
+		c->after->prev = c->last;
+}
 
-	cur = head;
-	while (cur)
+static int	split_take_next_piece(t_split_ctx *c, char **piece)
+{
+	while (c->str[c->i] && ft_isspace(c->str[c->i]))
+		c->i++;
+	c->start = c->i;
+	while (c->str[c->i] && !ft_isspace(c->str[c->i]))
+		c->i++;
+	if (c->i <= c->start)
 	{
-		if (cur->equal_status == INVALID)
-			return (cur);
-		cur = cur->next;
-	}
-	return (NULL);
-}
-
-t_token	*remove_tokens_before_invalid(t_token *head)
-{
-	t_token		*cur;
-	t_token		*invalid_token;
-
-	invalid_token = find_invalid_token(head);
-	if (!invalid_token)
-		return (head);
-	cur = head;
-	while (cur && cur != invalid_token)
-	{
-		cur = cur->next;
-	}
-	if (invalid_token)
-		invalid_token->prev = NULL;
-	return (invalid_token);
-}
-
-t_token	*remove_empty_tokens(t_token *head)
-{
-	t_token	*current;
-	t_token	*prev;
-
-	current = head;
-	prev = NULL;
-	while (current)
-	{
-		if ((!current->value && current->type == WORD)
-			|| (ft_strlen(current->value) == 0 && current->type == WORD))
-		{
-			if (prev)
-				prev->next = current->next;
-			else
-				head = current->next;
-			current = current->next;
-		}
-		else
-		{
-			prev = current;
-			current = current->next;
-		}
-	}
-	return (head);
-}
-
-int	is_export_command(t_token *head)
-{
-	if (head && head->value && !ft_strcmp(head->value, "export"))
-		return (1);
-	return (0);
-}
-
-int	process_commands(t_shell_state *state)
-{
-	expand_dollar(state->tokens, state->val);
-	state->token_check = check_tokens_is_null(state->tokens);
-	delete_dollars(state->tokens);
-	state->tokens = remove_empty_tokens(state->tokens);
-	state->tokens = merge_token(state->tokens);
-	if (!state->tokens)
+		*piece = NULL;
 		return (0);
-	if (state->equal_status == INVALID && !is_export_command(state->tokens))
-		state->tokens = remove_tokens_before_invalid(state->tokens);
-	state->cmds = parse_tokens_to_commands(state->tokens);
-	if (!state->cmds)
-		return (0);
-	return (1);
+	}
+	*piece = gc_substr(c->str, c->start, c->i - c->start);
+	return (*piece != NULL);
+}
+
+static void	split_append_piece(t_split_ctx *c, char *piece)
+{
+	t_token	*nt;
+
+	if (!c->wrote_first)
+	{
+		c->tok->value = piece;
+		c->tok->type = WORD;
+		c->tok->expandable_fd = 0;
+		c->tok->space_next_status = 1;
+		c->last = c->tok;
+		c->wrote_first = 1;
+		return ;
+	}
+	nt = new_token(piece);
+	if (!nt)
+		return ;
+	nt->type = WORD;
+	nt->space_next_status = 1;
+	nt->prev = c->last;
+	nt->next = NULL;
+	c->last->next = nt;
+	c->last = nt;
+}
+
+static void	split_step(t_split_ctx *c)
+{
+	char	*piece;
+
+	if (!split_take_next_piece(c, &piece) || !piece)
+		return ;
+	split_append_piece(c, piece);
+}
+
+void	split_token_in_place(t_token *tok)
+{
+	t_split_ctx	c;
+
+	if (!tok || !tok->value)
+		return ;
+	c.str = tok->value;
+	c.i = 0;
+	c.wrote_first = 0;
+	c.orig_space_next = tok->space_next_status;
+	c.after = tok->next;
+	c.last = tok;
+	c.tok = tok;
+	while (c.str[c.i])
+		split_step(&c);
+	split_finish(&c);
 }

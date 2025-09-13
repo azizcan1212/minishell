@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:00:33 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 05:00:34 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/12 20:19:11 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_gc_node	*gc_create_node(void *ptr, size_t size)
 		return (NULL);
 	node->ptr = ptr;
 	node->size = size;
-	node->marked = 0;
 	node->next = NULL;
 	return (node);
 }

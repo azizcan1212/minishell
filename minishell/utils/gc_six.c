@@ -13,7 +13,6 @@
 #include "gc.h"
 #include "libft.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 static size_t	get_num_length(int n)
 {
@@ -75,14 +74,4 @@ char	*gc_itoa(int n)
 	res[len] = '\0';
 	fill_number_string(res, n, len);
 	return (res);
-}
-
-void	gc_print_stats(void)
-{
-	t_gc	*gc;
-
-	gc = get_gc_instance();
-	printf("GC Stats:\n");
-	printf("  Total allocated: %zu bytes\n", gc->total_allocated);
-	printf("  Active allocations: %zu\n", gc->allocation_count);
 }

@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_func_two.c                                    :+:      :+:    :+:   */
+/*   main_func_three.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/10 05:25:06 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 07:35:42 by atam             ###   ########.fr       */
+/*   Created: 2025/09/13 02:30:10 by muharsla          #+#    #+#             */
+/*   Updated: 2025/09/13 02:31:03 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft/libft.h"
-#include "gc.h"
-#include <stdio.h>
+#include "../minishell.h"
 
 static t_token	*find_invalid_token(t_token *head)
 {
@@ -87,6 +84,7 @@ int	process_commands(t_shell_state *state)
 	state->token_check = check_tokens_is_null(state->tokens);
 	delete_dollars(state->tokens);
 	state->tokens = remove_empty_tokens(state->tokens);
+	state->tokens = split_unquoted_ws_tokens(state->tokens);
 	state->tokens = merge_token(state->tokens);
 	if (!state->tokens)
 		return (0);

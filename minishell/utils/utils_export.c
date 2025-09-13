@@ -6,7 +6,7 @@
 /*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:13:46 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 05:14:35 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/12 06:42:19 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int	is_valid_export(char *str)
 		if (!(ft_isalnum(str[k]) || str[k] == '_'))
 			return (0);
 		k++;
+	}
+	if (str[k] == '=' || str[k] == '\0')
+	{
+		k--;
+		if (!(ft_isalnum(str[k]) || str[k] == '_'))
+			return (0);
 	}
 	return (1);
 }

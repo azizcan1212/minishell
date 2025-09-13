@@ -6,7 +6,7 @@
 /*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:15:59 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 05:18:27 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/12 07:29:16 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	control_equal(t_token *head)
 	}
 }
 
-t_equal_status	get_equal_status(t_token *head)
+t_equal	get_equal_status(t_token *head)
 {
 	t_token	*cur;
 	int		valid_equal_found;

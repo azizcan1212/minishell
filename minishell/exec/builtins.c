@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:13:03 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 19:20:57 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/12 09:25:19 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,7 @@ static int	print_env_from_exp(t_expansion *exp)
 	return (0);
 }
 
-int	apply_out_parent(t_command *cmd)
-{
-	int	fd;
-	int	flags;
-
-	if (cmd->output_file == NULL)
-		return (0);
-	flags = O_CREAT | O_WRONLY;
-	if (cmd->append != 0)
-		flags = flags | O_APPEND;
-	else
-		flags = flags | O_TRUNC;
-	fd = open(cmd->output_file, flags, 0644);
-	if (fd < 0)
-	{
-		perror(cmd->output_file);
-		return (1);
-	}
-	if (dup2(fd, STDOUT_FILENO) < 0)
-	{
-		close(fd);
-		return (1);
-	}
-	close(fd);
-	return (0);
-}
+/* output redirection for parent-builtins is handled in apply_in_parent now */
 
 int	exec_builtin_single(t_command *cmd, t_shell_val *val, char **envp)
 {

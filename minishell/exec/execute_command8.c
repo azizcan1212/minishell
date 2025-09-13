@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 06:12:00 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 18:50:23 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 01:49:23 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,16 @@ int	fork_and_exec(t_command *first_cmd, t_shell_val *shell, char **envp)
 	int		*fds;
 	pid_t	last;
 	int		setup_result;
+	char	**child_envp;
 
 	total = count_cmds(first_cmd);
 	setup_result = setup_pipeline(total, &fds, shell);
 	if (setup_result <= 0)
 		return (setup_result);
-	last = spawn_pipeline(first_cmd, total, fds, envp);
+	child_envp = build_envp_from_expansion(shell->expansion);
+	if (!child_envp)
+		child_envp = envp;
+	last = spawn_pipeline(first_cmd, total, fds, child_envp);
 	if (total > 1)
 		close_pipes(fds, 2 * (total - 1));
 	if (last < 0)

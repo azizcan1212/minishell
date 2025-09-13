@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gc_last.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 04:54:55 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 05:02:20 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/12 20:19:54 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
 #include "libft.h"
 #include <stdlib.h>
-
-void	gc_collect(void)
-{
-	gc_sweep();
-}
 
 static void	reset_gc_instance(t_gc *gc)
 {
@@ -42,12 +37,4 @@ void	gc_cleanup(void)
 		free(temp);
 	}
 	reset_gc_instance(gc);
-}
-
-size_t	gc_get_allocated_memory(void)
-{
-	t_gc	*gc;
-
-	gc = get_gc_instance();
-	return (gc->total_allocated);
 }

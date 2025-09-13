@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 15:15:24 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 19:02:54 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/12 09:18:41 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include "minishell.h"
 #include "gc.h"
+#include "fd_gc.h"
 
 static void	put2(const char *s)
 {
@@ -59,15 +60,28 @@ int	redirect_input(const char *file)
 int	redirect_output(const char *file, int append)
 {
 	int	fd;
+	int	flags;
+	int	saved;
 
+	flags = O_CREAT | O_WRONLY;
 	if (append)
-		fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+		flags |= O_APPEND;
 	else
-		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd < 0)
+		flags |= O_TRUNC;
+	fd = open(file, flags, 0644);
+	if (fd == -1)
+	{
+		perror(file);
 		return (-1);
-	if (dup2(fd, 1) == -1)
-		return (close(fd), -1);
+	}
+	if (dup2(fd, STDOUT_FILENO) == -1)
+	{
+		saved = errno;
+		close(fd);
+		errno = saved;
+		perror("dup2");
+		return (-1);
+	}
 	close(fd);
 	return (0);
 }

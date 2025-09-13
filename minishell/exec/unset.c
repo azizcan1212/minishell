@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:00:00 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/11 12:15:54 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/12 05:54:02 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	remove_key(t_expansion **head, const char *key)
 	t_expansion	*next;
 
 	if (head == NULL || *head == NULL || key == NULL)
-		return;
+		return ;
 	prev = NULL;
 	cur = *head;
 	while (cur != NULL)
@@ -37,7 +37,7 @@ static void	remove_key(t_expansion **head, const char *key)
 				*head = next;
 			cur->next = NULL;
 			cur = next;
-			continue;
+			continue ;
 		}
 		prev = cur;
 		cur = next;

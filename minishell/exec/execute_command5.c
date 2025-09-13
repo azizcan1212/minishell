@@ -3,50 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command5.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:45:26 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/10 08:17:49 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/13 01:49:36 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "fd_gc.h"
+#include "gc.h"
+#include "libft.h"
 
 void	child_directory(t_command *cur, char *f, char **envp)
 {
-	int	err;
-
 	if (cur->cmd && cur->cmd[0] == '.' && cur->cmd[1] == '\0')
+	{
+		fd_gc_cleanup();
 		print_and_exit(".",
 			": filename argument required\n.: usage: . filename [arguments]",
 			2);
+	}
 	if (f)
 	{
-		if (is_directory(f))
-			print_and_exit(cur->cmd, ": is a directory", 126);
-		execve(f, cur->args, envp);
-		err = errno;
-		free(f);
-		handle_exec_error(cur, err);
+		handle_path_execution(cur, f, envp);
+		return ;
 	}
 	if (!cur->cmd || cur->cmd[0] == '\0')
-		print_and_exit("''", ": command not found", 127);
-	if (cur->cmd[0] == '.' || ft_strchr(cur->cmd, '/'))
-		check_direct_call(cur);
-	print_and_exit(cur->cmd, ": command not found", 127);
-}
-
-int	count_cmds(t_command *n)
-{
-	int	c;
-
-	c = 0;
-	while (n)
 	{
-		c++;
-		n = n->next;
+		fd_gc_cleanup();
+		print_and_exit("''", ": command not found", 127);
 	}
-	return (c);
+	if (cur->cmd[0] == '.' || ft_strchr(cur->cmd, '/'))
+	{
+		fd_gc_cleanup();
+		check_direct_call(cur);
+	}
+	fd_gc_cleanup();
+	print_and_exit(cur->cmd, ": command not found", 127);
 }
 
 int	build_pipes(int total, int **fds)
@@ -64,50 +58,36 @@ int	build_pipes(int total, int **fds)
 	{
 		if (pipe(&(*fds)[2 * i]) == -1)
 		{
-			close_pipes(*fds, 2 * i);
+			fd_gc_cleanup();
 			*fds = NULL;
 			return (-1);
 		}
+		fd_gc_add((*fds)[2 * i]);
+		fd_gc_add((*fds)[2 * i + 1]);
 		i++;
 	}
 	return (0);
 }
 
-void	child_redirections(t_command *cmd)
+int	count_cmds(t_command *n)
 {
-	if (cmd->heredoc_fd != -1)
+	int	c;
+
+	c = 0;
+	while (n)
 	{
-		if (dup2(cmd->heredoc_fd, 0) == -1)
-		{
-			gc_cleanup();
-			_exit(1);
-		}
-		close(cmd->heredoc_fd);
+		c++;
+		n = n->next;
 	}
-	if (cmd->input_file && redirect_input(cmd->input_file) < 0)
-	{
-		gc_cleanup();
-		_exit(1);
-	}
-	if (cmd->output_file && redirect_output(cmd->output_file, cmd->append) < 0)
-	{
-		gc_cleanup();
-		_exit(1);
-	}
+	return (c);
 }
 
 void	builtin_pwd_and_exit(void)
 {
-	char	*cwd;
+	int	st;
 
-	cwd = getcwd(NULL, 0);
-	if (cwd)
-	{
-		printf("%s\n", cwd);
-		free(cwd);
-		gc_cleanup();
-		exit(0);
-	}
+	st = builtin_pwd();
+	fd_gc_cleanup();
 	gc_cleanup();
-	exit(1);
+	exit(st);
 }
