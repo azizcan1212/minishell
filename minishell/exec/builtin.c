@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:05:27 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 03:38:35 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:52:04 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	builtin_pwd(void)
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
-	gc_add_node(cwd,ft_strlen(cwd + 1));
+	gc_add_node(cwd, ft_strlen(cwd + 1));
 	if (!cwd)
 	{
 		perror("pwd");
@@ -94,7 +94,7 @@ int	builtin_pwd(void)
 	}
 	write(1, cwd, ft_strlen(cwd));
 	write(1, "\n", 1);
-	free(cwd);
+	free_gc_node();
 	return (0);
 }
 

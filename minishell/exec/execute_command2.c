@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 15:15:24 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 09:18:41 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:51:45 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ void	handle_exec_error(t_command *cur, int err)
 {
 	if (err == EACCES)
 		print_and_exit(cur->cmd, ": Permission denied", 126);
-	if (err == ENOENT
-		&& (cur->cmd && (cur->cmd[0] == '.' || ft_strchr(cur->cmd, '/'))))
+	if (err == ENOENT && (cur->cmd && ft_strchr(cur->cmd, '/')))
 		print_and_exit(cur->cmd, ": No such file or directory", 127);
 	print_and_exit(cur->cmd, ": command not found", 127);
 }

@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:27:17 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 03:31:54 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:42:33 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ int	handle_builtin_commands(t_command *cmd, t_shell_val *val, char **envp)
 		return (-1);
 	if (save_std(&sv_in, &sv_out))
 		return (1);
-    if (!ft_strcmp(cmd->cmd, "exit"))
-    {
-        if (isatty(STDOUT_FILENO))
-            (void)!write(STDOUT_FILENO, "exit\n", 5);
-        if (sv_in >= 0)
-            close(sv_in);
-        if (sv_out >= 0)
-            close(sv_out);
-        return (builtin_exit_parent(cmd->args, cmd, val));
-    }
+	if (!ft_strcmp(cmd->cmd, "exit"))
+	{
+		if (isatty(STDOUT_FILENO))
+			(void)!write(STDOUT_FILENO, "exit\n", 5);
+		if (sv_in >= 0)
+			close(sv_in);
+		if (sv_out >= 0)
+			close(sv_out);
+		return (builtin_exit_parent(cmd->args, cmd, val));
+	}
 	if (apply_in_parent(cmd))
 		return (restore_std(sv_in, sv_out), val->last_exit_status = 1, 1);
 	st = exec_builtin_single(cmd, val, envp);
@@ -58,23 +58,6 @@ int	is_parent_builtin(const char *s)
 	if (!ft_strcmp(s, "exit"))
 		return (1);
 	return (0);
-}
-
-void	exp_append(t_expansion **head, t_expansion *node)
-{
-	t_expansion	*cur;
-
-	if (!node)
-		return ;
-	if (!*head)
-	{
-		*head = node;
-		return ;
-	}
-	cur = *head;
-	while (cur->next)
-		cur = cur->next;
-	cur->next = node;
 }
 
 t_expansion	*make_exp_from_str(const char *s)

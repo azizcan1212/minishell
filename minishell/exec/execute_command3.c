@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 15:18:12 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/06 17:00:34 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:42:01 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,6 @@ void	close_pipes(int *pipes, int count)
 		if (pipes[i] >= 0)
 			close(pipes[i]);
 		i++;
-	}
-}
-
-void	setup_child_io(int i, int n, int *pipes)
-{
-	int	rfd;
-	int	wfd;
-
-	rfd = -1;
-	wfd = -1;
-	if (i > 0)
-	{
-		rfd = pipes[2 * (i - 1)];
-		if (dup2(rfd, STDIN_FILENO) == -1)
-			_exit(1);
-	}
-	if (i < n - 1)
-	{
-		wfd = pipes[2 * i + 1];
-		if (dup2(wfd, STDOUT_FILENO) == -1)
-			_exit(1);
 	}
 }
 
@@ -71,19 +50,6 @@ static char	*expand_heredoc_line(char *line,
 			i++;
 	}
 	return (expanded_line);
-}
-
-int	should_stop_heredoc(char *line, const char *delim, int line_number)
-{
-	if (!line || !ft_strcmp(line, delim))
-	{
-		if (!line)
-			printf("minishell: warning: here-document at line %d "
-				"delimited by end-of-file (wanted `%s')\n",
-				line_number, delim);
-		return (1);
-	}
-	return (0);
 }
 
 void	process_heredoc_line(char *line,

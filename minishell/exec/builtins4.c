@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:32:50 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 04:50:57 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:21:46 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ int	builtin_exit(char **args, t_command *cmd)
 
 int	builtin_exit_parent(char **args, t_command *cmd, t_shell_val *val)
 {
-    int	def;
+	int	def;
 
-    if (args && args[1] && args[2] && is_numeric(args[1]))
-    {
-        (void)!write(2, "bash: exit: too many arguments\n", 31);
-        if (val)
-            val->last_exit_status = 1;
-        return (1);
-    }
-    def = 0;
-    if (val)
-        def = val->last_exit_status;
-    exit_core(args, cmd, def);
-    return (0);
+	if (args && args[1] && args[2] && is_numeric(args[1]))
+	{
+		(void)!write(2, "bash: exit: too many arguments\n", 31);
+		if (val)
+			val->last_exit_status = 1;
+		return (1);
+	}
+	def = 0;
+	if (val)
+		def = val->last_exit_status;
+	exit_core(args, cmd, def);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 06:47:28 by atam              #+#    #+#             */
-/*   Updated: 2025/09/13 02:33:16 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:43:27 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ typedef struct s_shell_state
 
 extern volatile sig_atomic_t	g_signal_num;
 
-/* Split context used by whitespace field-splitting after expansion */
 typedef struct s_split_ctx
 {
 	const char	*str;
@@ -122,7 +121,6 @@ typedef struct s_split_ctx
 }	t_split_ctx;
 
 void		signal_handler(int signum);
-void		sigquit_handler(int signum);
 void		child_sigint_handler(int sig);
 void		update_shlvl(void);
 t_token		*split_unquoted_ws_tokens(t_token *head);
@@ -141,7 +139,6 @@ int			is_parent_builtin(const char *s);
 int			exec_builtin_single(t_command *cmd, t_shell_val *val,
 				char **envp);
 int			bi_env_single(t_command *cmd, t_shell_val *val, char **envp);
-void		exp_append(t_expansion **head, t_expansion *node);
 void		env_bootstrap_once(t_shell_val *val, char **envp);
 t_expansion	*make_exp_from_str(const char *s);
 
@@ -149,12 +146,10 @@ int			execute_command(t_command *cmd, char **envp, t_shell_val *val);
 int			fork_and_exec(t_command *first_cmd, t_shell_val *shell,
 				char **envp);
 void		close_pipes(int *pipes, int count);
-void		setup_child_io(int i, int n, int *pipes);
 int			redirect_input(const char *file);
 int			redirect_output(const char *file, int append);
 void		child_directory(t_command *cur, char *f, char **envp);
 int			is_directory(const char *path);
-void		check_directory(t_command *cur, t_shell_val *val);
 void		child_redirections(t_command *cmd);
 
 void		child_setup_signals_and_redirs(t_command *cmd);
@@ -179,9 +174,6 @@ void		heredoc_child(int *p, const char *delim, t_shell_val *val,
 void		heredoc_sigint(int sig);
 void		read_heredoc_lines(int write_fd, const char *delim,
 				t_shell_val *val, int expandable_fd);
-
-int			should_stop_heredoc(char *line, const char *delim,
-				int line_number);
 void		process_heredoc_line(char *line, int write_fd, t_shell_val *val,
 				int expandable_fd);
 
@@ -267,8 +259,6 @@ int			key_matches(char *entry, char *key);
 
 int			is_token_invalid_before_equal(t_token *equal_token);
 void		control_equal(t_token *head);
-int			check_equal_status(t_token *head);
-
 int			is_valid_identifier(const char *s);
 int			is_numeric(const char *str);
 int			validate_syntax(t_token *tokens);

@@ -1,4 +1,3 @@
-# Minishell Makefile
 
 NAME = minishell
 CC = cc

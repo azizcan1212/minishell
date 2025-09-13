@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 04:54:55 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 20:19:54 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:54:13 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,32 @@ void	gc_cleanup(void)
 		free(temp);
 	}
 	reset_gc_instance(gc);
+}
+
+void	free_gc_node(void)
+{
+	t_gc		*gc;
+	t_gc_node	*prev;
+	t_gc_node	*node;
+
+	gc = get_gc_instance();
+	if (!gc->head)
+		return ;
+	prev = NULL;
+	node = gc->head;
+	while (node->next)
+	{
+		prev = node;
+		node = node->next;
+	}
+	if (prev)
+		prev->next = NULL;
+	else
+		gc->head = NULL;
+	if (gc->total_allocated >= node->size)
+		gc->total_allocated -= node->size;
+	if (gc->allocation_count > 0)
+		gc->allocation_count--;
+	free(node->ptr);
+	free(node);
 }

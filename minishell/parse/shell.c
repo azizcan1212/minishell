@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:02:56 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 19:59:52 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:40:41 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ void	signal_handler(int signum)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-}
-
-void	sigquit_handler(int signum)
-{
-	g_signal_num = signum;
 }
 
 void	setup_signal_handlers(void)

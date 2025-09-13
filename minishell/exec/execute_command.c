@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:47 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/11 21:54:40 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/13 05:43:36 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,29 +59,6 @@ int	is_directory(const char *path)
 	if (stat(path, &st) == -1)
 		return (0);
 	return (S_ISDIR(st.st_mode) != 0);
-}
-
-void	check_directory(t_command *cur, t_shell_val *val)
-{
-	if (cur->cmd[0] == '.' && cur->cmd[1] == '\0')
-	{
-		printf("minishell: .: filename argument required\n");
-		val->last_exit_status = 2;
-		return ;
-	}
-	if (cur->cmd[0] == '.' && cur->cmd[1] == '.' && cur->cmd[2] == '\0')
-	{
-		printf ("minishell: %s: Command not found\n", cur->cmd);
-		val->last_exit_status = 127;
-		return ;
-	}
-	if (access(cur->cmd, F_OK) != 0)
-	{
-		printf("minishell: %s: No such file or directory\n", cur->cmd);
-		val->last_exit_status = 127;
-		return ;
-	}
-	return ;
 }
 
 int	prepare_heredocs_all(t_command *head, t_shell_val *val)

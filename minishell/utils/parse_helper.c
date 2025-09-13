@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:15:59 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 07:29:16 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/13 05:42:59 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,4 @@ t_equal	get_equal_status(t_token *head)
 	if (valid_equal_found)
 		return (VALID);
 	return (NO_EQUAL);
-}
-
-int	check_equal_status(t_token *head)
-{
-	t_token	*cur;
-
-	cur = head;
-	while (cur)
-	{
-		if (cur->equal_status == INVALID)
-			return (1);
-		cur = cur->next;
-	}
-	return (0);
 }

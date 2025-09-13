@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 06:51:23 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 20:37:29 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:38:58 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void		gc_add_node(void *ptr, size_t size);
 t_gc_node	*find_gc_node(void *ptr);
 void		*gc_copy_and_free(t_gc_node *node, void *ptr, size_t new_size);
 void		gc_cleanup(void);
+void		free_gc_node(void);
 #endif

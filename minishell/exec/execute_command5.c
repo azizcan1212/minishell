@@ -6,7 +6,7 @@
 /*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:45:26 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 01:49:36 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/13 05:52:18 by muharsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	child_directory(t_command *cur, char *f, char **envp)
 		fd_gc_cleanup();
 		print_and_exit("''", ": command not found", 127);
 	}
-	if (cur->cmd[0] == '.' || ft_strchr(cur->cmd, '/'))
+	if (ft_strchr(cur->cmd, '/'))
 	{
 		fd_gc_cleanup();
 		check_direct_call(cur);
