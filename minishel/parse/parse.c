@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:01 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/06 17:09:42 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:56:11 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "minishell.h"
-#include "gc.h"
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdio.h>
-#include <unistd.h>
+#include <gc.h>
+#include <libft/libft.h>
 
 char	*value(const char **p)
 {

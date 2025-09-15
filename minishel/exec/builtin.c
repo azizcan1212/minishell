@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:05:27 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/14 15:16:28 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:41:38 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "minishell.h"
-#include "libft.h"
 #include "gc.h"
+#include <unistd.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include "libft/libft.h"
 
 static int	echo_parse_flags(char **args, int *newline)
 {
@@ -53,31 +55,18 @@ int	builtin_echo(char **args)
 	return (0);
 }
 
-int	builtin_cd(char **args)
+static int	print_pwd_from_env(void)
 {
-	char	*path;
+	char	*cwd;
 
-	if (args[2])
+	cwd = ms_getenv("PWD");
+	if (!cwd)
 	{
-		write(2, "cd: too many arguments\n", 23);
+		perror("pwd");
 		return (1);
 	}
-	if (!args[1])
-	{
-		path = ms_getenv("HOME");
-		if (!path)
-		{
-			write(2, "cd: HOME not set\n", 17);
-			return (1);
-		}
-	}
-	else
-		path = args[1];
-	if (chdir(path) == -1)
-	{
-		perror("cd");
-		return (1);
-	}
+	write(1, cwd, ft_strlen(cwd));
+	write(1, "\n", 1);
 	return (0);
 }
 
@@ -87,10 +76,7 @@ int	builtin_pwd(void)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-	{
-		perror("pwd");
-		return (1);
-	}
+		return (print_pwd_from_env());
 	gc_add_node(cwd, ft_strlen(cwd + 1));
 	write(1, cwd, ft_strlen(cwd));
 	write(1, "\n", 1);

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   def_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:44:45 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/10 04:20:32 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:53:10 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "minishell.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 const char	**def_metas(void)
 {

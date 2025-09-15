@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 13:40:29 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 17:52:31 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:52:27 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
 #include "gc.h"
+#include <unistd.h>
 
 int	count_exported_entries(t_expansion *expansion)
 {

@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 03:51:21 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 03:51:22 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:57:11 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "gc.h"
 #include "libft.h"
+#include "minishell.h"
+#include <unistd.h>
 
 int	is_meta(const char *s, int *len)
 {

@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 19:56:24 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 19:43:34 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:42:47 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/stat.h>
 
 int	save_std(int *sv_in, int *sv_out)
 {

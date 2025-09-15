@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:38:57 by atam              #+#    #+#             */
-/*   Updated: 2025/09/13 02:32:23 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:30:21 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "gc.h"
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <unistd.h>
 #include <stdio.h>
+#include "gc.h"
 
 char	*read_input_with_history(void)
 {

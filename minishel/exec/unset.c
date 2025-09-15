@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 15:00:00 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 05:54:02 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:52:53 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
-#include "gc.h"
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include "libft/libft.h"
 
 static void	remove_key(t_expansion **head, const char *key)
 {

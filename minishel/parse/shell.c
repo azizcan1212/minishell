@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:02:56 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 05:40:41 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:56:47 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <signal.h>
+#include <unistd.h>
 #include "fd_gc.h"
+#include "gc.h"
 
 volatile sig_atomic_t	g_signal_num = 0;
 

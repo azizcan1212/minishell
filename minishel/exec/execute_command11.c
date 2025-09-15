@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command11.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 19:22:55 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 19:42:49 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:51:29 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <fcntl.h>
 #include "fd_gc.h"
-#include "gc.h"
+#include <gc.h>
 
 static void	child_fail_exit(void)
 {

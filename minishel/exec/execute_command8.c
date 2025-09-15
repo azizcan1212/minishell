@@ -3,18 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command8.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 06:12:00 by atam              #+#    #+#             */
-/*   Updated: 2025/09/13 01:49:23 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:50:24 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "fd_gc.h"
 #include "gc.h"
-#include <signal.h>
+#include "fd_gc.h"
+#include <errno.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <signal.h>
 
 static int	setup_pipeline(int total, int **fds, t_shell_val *shell)
 {

@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   find_command_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:58:29 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/10 04:23:30 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:58:17 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
-#include "gc.h"
 #include <unistd.h>
-#include <stdlib.h>
+#include "gc.h"
+#include "libft/libft.h"
 
 char	*join_path_dir(const char *dir, const char *cmd)
 {

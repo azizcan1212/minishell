@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command12.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 19:36:30 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 19:30:15 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:52:08 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <unistd.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <stdio.h>
 #include "fd_gc.h"
-#include "gc.h"
+#include <gc.h>
+#include <signal.h>
+#include "libft/libft.h"
+
+extern int	g_signal_num;
 
 void	child_setup_signals_and_redirs(t_command *cmd)
 {

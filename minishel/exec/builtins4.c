@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   builtins4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:32:50 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 05:21:46 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:44:59 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "gc.h"
+#include <stdio.h>
+#include "libft/libft.h"
+#include <unistd.h>
 #include "fd_gc.h"
 
 static void	exit_with_msg(const char *pfx,

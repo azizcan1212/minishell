@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:13 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/10 05:00:52 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 18:03:15 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "../libft/libft.h"
 #include "gc.h"
 
 t_token	*new_token(char *val)

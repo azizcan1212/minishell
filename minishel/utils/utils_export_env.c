@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:14:53 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 20:26:44 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:03:58 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
-#include "gc.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 void	reset_updated_flag(t_expansion *expansion)
 {

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   gc_four.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 04:00:00 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 05:01:43 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:58:57 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
-#include "libft.h"
-#include <stdlib.h>
+#include "libft/libft.h"
 
 char	*gc_strdup(const char *s)
 {

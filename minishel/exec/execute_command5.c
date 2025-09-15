@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command5.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:45:26 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 05:52:18 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:49:09 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "fd_gc.h"
 #include "gc.h"
-#include "libft.h"
+#include "libft/libft.h"
+#include "fd_gc.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <sys/stat.h>
 
 void	child_directory(t_command *cur, char *f, char **envp)
 {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gc_six.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 04:00:00 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 04:59:23 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:59:28 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
-#include "libft.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 static size_t	get_num_length(int n)
 {

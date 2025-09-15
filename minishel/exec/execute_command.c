@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:47 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 05:43:36 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:45:19 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <fd_gc.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include "fd_gc.h"
+#include "gc.h"
+#include "libft/libft.h"
+#include <sys/stat.h>
+#include <readline/readline.h>
 
 void	heredoc_sigint(int sig)
 {

@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:50:11 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/09 17:51:04 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:52:39 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include "libft/libft.h"
+#include <stdio.h>
 
 void	copy_to_env_end(t_expansion *expansion, char **envp)
 {

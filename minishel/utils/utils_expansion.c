@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:15:24 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 05:15:47 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 18:03:25 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft/libft.h"
 #include "gc.h"
 
 t_shell_val	*new_shell_val(void)

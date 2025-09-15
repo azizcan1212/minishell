@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:13:03 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 09:25:19 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:08:33 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
-#include "gc.h"
+#include "libft/libft.h"
 #include <unistd.h>
-#include <fcntl.h>
-#include <stdio.h>
 
 static int	print_env_from_exp(t_expansion *exp)
 {
@@ -32,8 +29,6 @@ static int	print_env_from_exp(t_expansion *exp)
 	}
 	return (0);
 }
-
-/* output redirection for parent-builtins is handled in apply_in_parent now */
 
 int	exec_builtin_single(t_command *cmd, t_shell_val *val, char **envp)
 {

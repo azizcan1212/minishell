@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fd_gc.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 06:39:44 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 20:19:37 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:57:30 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "gc.h"
 #include "fd_gc.h"
+#include "gc.h"
+#include <unistd.h>
 
 static t_fd_gc	*get_fd_gc_instance(void)
 {

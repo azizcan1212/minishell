@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 15:15:24 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 05:51:45 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:35:35 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <errno.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdlib.h>
 #include "minishell.h"
 #include "gc.h"
-#include "fd_gc.h"
+#include <unistd.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include "libft/libft.h"
 
 static void	put2(const char *s)
 {

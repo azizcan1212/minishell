@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   gc_two.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 04:00:00 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 04:52:09 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 18:00:31 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
 #include "libft.h"
-#include <stdlib.h>
 
 t_gc_node	*find_gc_node(void *ptr)
 {

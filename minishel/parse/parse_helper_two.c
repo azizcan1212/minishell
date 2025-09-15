@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helper_two.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 03:45:38 by atam              #+#    #+#             */
-/*   Updated: 2025/09/14 13:41:13 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:55:19 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
 #include "gc.h"
-#include <sys/types.h>
+#include <stdlib.h>
 
 static void	redir_append(t_command *cmd, char *file, int type)
 {

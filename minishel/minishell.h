@@ -3,31 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 06:47:28 by atam              #+#    #+#             */
-/*   Updated: 2025/09/13 05:43:27 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:43:27 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <sys/stat.h>
 # include <sys/types.h>
-# include <dirent.h>
-# include <errno.h>
-# include <signal.h>
-# include <termios.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft.h"
-# include "gc.h"
 
 typedef enum e_token_type
 {
@@ -105,8 +91,6 @@ typedef struct s_shell_state
 	int				env_status;
 	t_equal			equal_status;
 }	t_shell_state;
-
-extern volatile sig_atomic_t	g_signal_num;
 
 typedef struct s_split_ctx
 {
@@ -314,5 +298,6 @@ pid_t		spawn_pipeline(t_command *first, int total, int *fds,
 void		handle_path_execution(t_command *cur, char *f, char **envp);
 t_equal		get_equal_status(t_token *head);
 int			ft_strlen_dollar(const char *s);
+int			update_env_after_cd(char *old_pwd, int old_pwd_allocated);
 
 #endif

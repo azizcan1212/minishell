@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:20:12 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 19:55:29 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:33:38 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
 
 static int	apply_parent_heredoc(t_command *cmd)
 {
@@ -53,7 +57,10 @@ static int	parent_dup_in(const char *file)
 	if (fd < 0)
 		return (perror(file), 1);
 	if (dup2(fd, STDIN_FILENO) < 0)
-		return (close(fd), 1);
+	{
+		close(fd);
+		return (1);
+	}
 	close(fd);
 	return (0);
 }
@@ -72,7 +79,10 @@ static int	parent_dup_out(const char *file, int type)
 	if (fd < 0)
 		return (perror(file), 1);
 	if (dup2(fd, STDOUT_FILENO) < 0)
-		return (close(fd), 1);
+	{
+		close(fd);
+		return (1);
+	}
 	close(fd);
 	return (0);
 }

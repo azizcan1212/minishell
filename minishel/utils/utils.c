@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:44:16 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 07:32:29 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 18:07:06 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "../libft/libft.h"
 #include "minishell.h"
+#include <stdlib.h>
+#include "libft.h"
 #include "gc.h"
 
 int	ft_isspace(char c)

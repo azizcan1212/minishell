@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export_env_helpers.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 20:22:38 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 20:30:08 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:03:38 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
 #include "gc.h"
+#include "libft/libft.h"
+#include <stdio.h>
 
 char	*create_env_entry(char *key, char *value)
 {

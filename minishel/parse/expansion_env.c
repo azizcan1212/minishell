@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 20:05:42 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 20:13:45 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:54:08 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
 #include "gc.h"
+#include <libft.h>
 
 int	set_env(t_token *new_token, t_expansion **expansion, int *i)
 {

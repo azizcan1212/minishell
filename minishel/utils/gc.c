@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:00:33 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 20:19:11 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:00:05 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
-#include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 t_gc	*get_gc_instance(void)
 {

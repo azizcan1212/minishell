@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   shell_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 04:22:20 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 06:35:57 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:56:29 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "fd_gc.h"
-#include <signal.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "gc.h"
+#include "libft.h"
 
 static int	get_shlvl(void)
 {

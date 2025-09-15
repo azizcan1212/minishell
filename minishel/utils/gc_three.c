@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gc_three.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 04:00:00 by atam              #+#    #+#             */
-/*   Updated: 2025/09/13 05:39:03 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:59:39 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
-#include "libft.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 static void	*handle_realloc_null(size_t new_size)
 {

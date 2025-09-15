@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export_two.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:12:28 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 20:30:12 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:04:31 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-#include "../libft/libft.h"
-#include "../gc.h"
+#include "minishell.h"
+#include "gc.h"
+#include "libft/libft.h"
+#include <stdio.h>
 
 void	equal_dup_export(t_expansion *expansion, char *key, char *value)
 {

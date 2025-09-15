@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helper_four.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 03:47:20 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 03:47:38 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:54:45 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
-#include "gc.h"
-#include <sys/types.h>
+#include <libft.h>
 
 void	process_one_token(t_token **tokens, t_command **cur,
 	t_command **head, int *argc)

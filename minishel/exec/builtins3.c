@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:27:17 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 05:42:33 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:44:06 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "gc.h"
+#include <unistd.h>
+#include <libft/libft.h>
 
 int	handle_builtin_commands(t_command *cmd, t_shell_val *val, char **envp)
 {

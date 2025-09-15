@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_to_command.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:54 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 20:00:34 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:55:46 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
+#include <signal.h>
 #include "fd_gc.h"
 
 t_command	*parse_tokens_to_commands(t_token *tokens)

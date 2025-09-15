@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_comman9.c                                  :+:      :+:    :+:   */
+/*   execute_command9.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 06:25:17 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 06:29:51 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:50:40 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <signal.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <signal.h>
 #include "fd_gc.h"
+#include <sys/wait.h>
 
 static int	setup_heredoc_pipe(int *p, const char *delim, t_shell_val *val,
 			int expandable_fd)

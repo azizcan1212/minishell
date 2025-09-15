@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:43:51 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 01:48:13 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:55:33 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "gc.h"
 #include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include "gc.h"
 #include "libft.h"
-#include "fd_gc.h"
 
 t_command	*new_command(void)
 {

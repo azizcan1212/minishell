@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command10.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 19:03:31 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 19:08:42 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:51:04 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
 #include "fd_gc.h"
 
 static int	open_input_gc(const char *file, t_shell_val *val)

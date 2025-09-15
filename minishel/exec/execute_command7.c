@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command7.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 19:12:17 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 18:50:41 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:50:00 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <signal.h>
-#include <unistd.h>
+#include "gc.h"
 #include "fd_gc.h"
+#include <unistd.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <signal.h>
 
 static int	run_empty_redirect_only(t_command *h, t_shell_val *val)
 {

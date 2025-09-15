@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main_func_three.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 02:30:10 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 02:31:03 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:02:04 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
+#include "libft/libft.h"
 
 static t_token	*find_invalid_token(t_token *head)
 {

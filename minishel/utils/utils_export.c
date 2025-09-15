@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:13:46 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 06:42:19 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 18:07:36 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-#include "../libft/libft.h"
-#include "../gc.h"
+#include "minishell.h"
+#include "gc.h"
+#include "libft/libft.h"
 
 int	check_include_equal(char **str, int *j, int *i)
 {

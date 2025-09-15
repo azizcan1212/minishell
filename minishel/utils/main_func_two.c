@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main_func_two.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 05:25:06 by atam              #+#    #+#             */
-/*   Updated: 2025/09/13 02:33:07 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:02:16 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft/libft.h"
 #include "gc.h"
-#include <stdio.h>
+#include "libft/libft.h"
 
 static void	split_finish(t_split_ctx *c)
 {

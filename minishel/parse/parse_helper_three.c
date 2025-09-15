@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helper_three.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 03:46:36 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 03:46:44 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:55:01 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
+#include <gc.h>
 #include "libft.h"
-#include "gc.h"
-#include <sys/types.h>
 
 void	handle_normal_token(t_token *tk, t_command *cmd, int *argc)
 {

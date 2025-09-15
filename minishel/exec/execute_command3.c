@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 15:18:12 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/13 05:42:01 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:48:21 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
 #include "gc.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include "libft/libft.h"
 
 void	close_pipes(int *pipes, int count)
 {

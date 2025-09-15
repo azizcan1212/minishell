@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 03:29:40 by atam              #+#    #+#             */
-/*   Updated: 2025/09/12 20:14:24 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:54:28 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "libft.h"
+#include <libft.h>
 #include "gc.h"
-#include <sys/types.h>
-
-/* moved to expansion_env.c: set_env, set_environment */
 
 char	*get_new_value(char *value, int i, t_shell_val *val)
 {

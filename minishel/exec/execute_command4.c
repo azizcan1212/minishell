@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:44:26 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 19:35:15 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:48:37 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "fd_gc.h"
+#include "gc.h"
+#include <unistd.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <stdio.h>
 
 void	child_sigint_handler(int sig)
 {

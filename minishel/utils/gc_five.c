@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   gc_five.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 04:00:00 by atam              #+#    #+#             */
-/*   Updated: 2025/09/10 04:53:27 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:58:29 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gc.h"
-#include "libft.h"
-#include <stdlib.h>
+#include "libft/libft.h"
 
 static void	copy_strings(char *joined, const char *s1, const char *s2)
 {

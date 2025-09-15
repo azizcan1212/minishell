@@ -61,6 +61,7 @@ SRCS = \
 	exec/builtins2.c \
 	exec/builtins3.c \
 	exec/builtins4.c \
+	exec/buildin2.c \
 	exec/builtins_utils.c \
 	exec/env.c \
 	exec/unset.c \

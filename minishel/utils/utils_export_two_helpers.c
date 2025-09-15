@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export_two_helpers.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muharsla <muharsla@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 20:22:14 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/12 20:23:21 by muharsla         ###   ########.fr       */
+/*   Updated: 2025/09/15 18:04:55 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-#include "../libft/libft.h"
-#include "../gc.h"
+#include "minishell.h"
+#include "gc.h"
+#include "libft/libft.h"
+#include <unistd.h>
 
 static int	handle_no_equal(char *arg, t_expansion **expansion)
 {

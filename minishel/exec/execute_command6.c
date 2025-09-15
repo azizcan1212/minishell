@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command6.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atam < atam@student.42kocaeli.com.tr>      +#+  +:+       +#+        */
+/*   By: atam <atam@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 18:46:32 by muharsla          #+#    #+#             */
-/*   Updated: 2025/09/14 13:52:29 by atam             ###   ########.fr       */
+/*   Updated: 2025/09/15 17:49:38 by atam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 #include "fd_gc.h"
 
 void	check_direct_call(t_command *cur)
